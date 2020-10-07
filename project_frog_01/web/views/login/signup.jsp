@@ -37,7 +37,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
             </div>
             <div class="last-area1">
                 <label>계속하면 TOYSPACE에 동의하는것으로 간주합니다.<a href=""> 이용약관</a> 그리고 <a href="">개인정보정책</a></label><br>
-                <label>이미 계정이 있으신가요? <a href="">로그인</a></label>               
+                <label>이미 계정이 있으신가요? <a href="<%=request.getContextPath() %>/login.do">로그인</a></label>               
             </div>
         </form>
     </section>

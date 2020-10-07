@@ -28,13 +28,13 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <label for="pw"></label>
             </div>
             <div class="caption">
-                <a href="">비밀번호를 잊으셨나요?</a>
+                <a href="<%=request.getContextPath() %>/searchpw.do">비밀번호를 잊으셨나요?</a>
             </div>
             <div class="btn-area">
                 <button onclick="">로그인</button> 
              </div>
             <div class="last-area">
-                <p>ToySpace는 처음이신가요?<a href=""> 지금 가입하기</a></p>
+                <p>ToySpace는 처음이신가요?<a href="<%=request.getContextPath() %>/signup.do"> 지금 가입하기</a></p>
             </div>
             <div class="simple-login">
                 <div class="sp-login" style="margin:50px ;">
