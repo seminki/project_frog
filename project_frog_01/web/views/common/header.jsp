@@ -26,7 +26,7 @@
 				</div>
 				<div class="header-middle-menu">
 					<div class="header-product-container header-menu-container">
-						<a href="" class="header-menu-title">PRODUCTS</a>
+						<a href="<%=request.getContextPath()%>/productlist.do" class="header-menu-title">PRODUCTS</a>
 						<ul class="uler">
 							<div class="header-gray-bar"></div>
 							<li class="header-product-list">
@@ -131,7 +131,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<%=request.getContextPath()%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
 								<div id="cart-amount">0</div>
 							</a>
