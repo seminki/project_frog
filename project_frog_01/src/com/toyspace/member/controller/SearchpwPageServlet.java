@@ -1,4 +1,4 @@
-package com.toyspace.admin.controller;
+package com.toyspace.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.toyspace.product.model.service.TagService;
-import com.toyspace.product.model.vo.Tags;
-
 /**
- * Servlet implementation class InsertTagServlet
+ * Servlet implementation class SearchpwPageServlet
  */
-@WebServlet("/admin/insertTag")
-public class InsertTagServlet extends HttpServlet {
+@WebServlet("/searchpw.do")
+public class SearchpwPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertTagServlet() {
+    public SearchpwPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +27,7 @@ public class InsertTagServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Tags t=new Tags();
-		t.setTagName(request.getParameter("tagName"));
-		
-		int result=new TagService().insertTag(t);
-		
-		String msg;
-		String loc=request.getContextPath()+"/admin/tagList";
-		
-		if(result>0) {
-			msg="태그등록 성공";
-	
-		} else {
-			msg="태그등록 실패";
-
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("/views/login/search-pw.jsp").forward(request, response);
 	}
 
 	/**
