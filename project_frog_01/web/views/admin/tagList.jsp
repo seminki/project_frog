@@ -55,19 +55,13 @@
       <h2>태그관리</h2>
       <div class="search-container">
         태그 조회:
-        <!--상품 ID에서 select로 나오게끔해서 조회하는게 더 나을 수도 ??   -->
-        <select class="searchType">
-          <option value="itemId">상품ID</option>
-          <option value="tagName">태그명</option>
-        </select>
         <div class="search-itemId">
           <form action>
-            <input type="hidden" name="searchType" value="itemId" />
             <input
               type="text"
               name="searchKeyword"
-              placeholder="상품ID"
-              size="10"
+              placeholder="태그명을 입력해주세요"
+              size="25"
               value=""
             />
             <button type="submit">검색</button>
@@ -75,36 +69,38 @@
         </div>
       </div>
       <hr />
-      <input type="button" onclick="fn_addTag();" value="태그추가" />
+      <input type="text" class="tag-add" />
+      <input type="button" onclick="" value="태그추가" />
       <hr />
 
       <table class="tbl-tag">
         <thead>
           <tr>
-            <th>상품ID</th>
             <th>태그No.</th>
             <th>태그명</th>
             <th>삭제하기</th>
+            <th>수정하기</th>
           </tr>
         </thead>
         <tbody>
           DB에서 받아온 데이터출력할것
 
           <tr>
-            <td>0001A</td>
             <td>1</td>
             <td>겨울</td>
             <td><input type="button" onclick="" value="삭제" /></td>
+            <td>
+              <input type="button" onclick="fn_changeTag();" value="수정" />
+            </td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <script>
-      function fn_addTag() {
-    	  /* 팝업창 열리는 화면전환 서블릿 구현해야함 */
-        const url = "<%=request.getContextPath()%>/views/admin/addTag.jsp";
-        const status = "width=400px,height=250px,top=200px,left=500px";
+      function fn_changeTag() {
+        const url = "<%=request.getContextPath()%>/admin/adminTagList%>";
+        const status = "width=400px,height=210px,top=200px,left=500px";
         open(url, "", status);
       }
     </script>
