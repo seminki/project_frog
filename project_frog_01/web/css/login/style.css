@@ -1,0 +1,144 @@
+@charset "UTF-8";
+*{
+    margin: 0; padding: 0;
+    
+}
+    /* 로그인창 */
+section{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+section h1{
+    text-align: center;
+}
+.logo1-area,.logo2-area{
+    text-align: center;
+}
+section #fun{
+    width: 50%;
+    height: 50%;
+}
+section .in-area h1{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+
+}
+section .in-area{width: 450px; position: relative;}
+section .in-area input{
+    text-align: center;
+    width: 100%;
+    padding: 20px 10px 10px;
+    margin: 15px;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 15px;
+    outline: none;
+}
+section .{
+    margin-top: 20px;
+    text-align: center;
+}
+section .btn-area button{
+    width: 60%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    border-style: dotted;
+    outline: 0;
+
+
+}
+section .caption{
+    margin-top: 10px;
+    text-align: right;
+}
+section .caption a{
+    font-size: 14px;
+    text-decoration: none;
+    color: blue;
+}
+section .last-area{
+    margin-top: 10px;
+    text-align: center;
+}
+.last-area a{
+    margin: 10px;
+    color: blue;
+    text-decoration: none;
+}
+    /* 회원가입창 */
+.logo-area1,.logo-area2{
+    text-align: center;
+    margin: 10px;
+}
+.si-area h1{text-align: center; margin: 15px;}
+.si-area input{
+    text-align: center;
+    width: 100%;
+    padding: 10px 10px 10px;
+    margin: 15px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.1{ 
+    margin: 20px;
+    text-align: center;
+
+}
+.1 button{
+    width: 20%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    border-style: dotted;
+    outline: 0;
+
+}
+.news{
+    margin: 20px;
+    -webkit-nbsp-mode: space;
+}
+
+.last-area1{  
+    margin: 30px;
+    text-align: center;
+    text-decoration: none;
+    
+    
+}
+.last-area1 a{
+    text-decoration: none;
+    color: blue;
+}
+
+/* 비밀번호찾기 */
+section h2{
+   text-align: center;
+   padding: 10px;
+}
+.input-area input{
+    text-align: left;
+    width: 100%;
+    padding: 5px 6px 7px;
+    margin-top: 70px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.pw-area>input{
+    text-align: left;
+    width: 100%;
+    padding: 5px 6px 7px;
+    margin-top: 50px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+. button{
+    margin: 30px;
+}
+.login-form{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10%;
+}

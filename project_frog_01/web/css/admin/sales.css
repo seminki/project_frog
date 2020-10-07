@@ -1,0 +1,31 @@
+:root {
+	--menu-black: #111111;
+	--menu-gray: #f3f2f7;
+	--font-gray: rgb(85, 85, 85);
+	--menu-white: #ffff;
+}
+.sales-container {
+	width: 100%;
+	min-height: 20em;
+}
+.top-button-container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+.scope-buttons {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+  border-top: var(--font-gray) dotted 1px;
+  border-bottom: var(--font-gray) dotted 1px;;
+  padding: 0.5em;
+}
+
+.sales-stat-container{
+  width: 100%;
+  min-height: 40em;
+}

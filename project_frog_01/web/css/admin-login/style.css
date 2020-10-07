@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+body{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.ad-login>h1{
+    font-size: 50px;
+}
+.ad-login{
+    text-align: center;
+}
+.in-area{ 
+    justify-content: center;
+    width: 450px; 
+    position: relative;
+    text-align: center;
+    font-size: 24px;
+}
+.in-area>input{
+    text-align: center;
+    width: 100%;
+    padding: 20px 10px 10px;
+    margin: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+.btn-area{
+    text-align: center;
+}
+.btn-area button{
+    width: 30%;
+    height: 40px;
+    background-color: white;
+    border-radius: 30px;
+    margin: 15px auto;
+    outline: 0;
+}
+.last-area{
+    text-align: right;
+}

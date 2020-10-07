@@ -1,0 +1,111 @@
+:root{
+  --menu-black: #111111;
+  --menu-gray: #f3f2f7;
+  --font-gray: rgb(85, 85, 85);
+  --menu-white: #ffff;
+  --chat-blue: #43a8e8;
+}
+
+section * {
+  margin:0;
+  padding:0;
+  text-decoration: none;
+  color: var(--menu-black);
+}
+section{
+  text-align: center;
+}
+.main-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 40em;
+}
+.main-container>*{
+  height: 90%;
+}
+
+.chat-list-container, .chat-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 45%;
+  border: var(--font-gray) 2px solid;
+}
+.chat-list-div{
+  height: 96%;
+  overflow: auto;
+}
+.chat-list, .chat-head, .chat-head>table{
+  width: 99%
+}
+.chat-head, .chat-top-container{
+  border-bottom: var(--font-gray) 2px dotted;
+}
+.chat-list>tr, .chat-head>table>tr{
+  display: flex;
+  justify-content: space-between;
+}
+.chat-list td{
+  cursor: pointer;
+  width:33%;
+}
+.chat-list-button-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 중간 화살표 */
+.arrow-container{
+  display: flex;
+  align-items: center;
+}
+.chat-content-container{
+  height: 92%;
+  overflow: auto;
+}
+.customer-message-container{
+  display: flex;
+  min-height: 2em;
+  height: fit-content;
+  justify-content: left;
+  align-items: center;
+}
+.customer-message-container>span{
+  margin-left: 3%;
+  padding: 5px;
+  background-color: var(--font-gray);
+  border-radius: 10px;
+  color: var(--menu-white);
+}
+.admin-message-container{
+  min-height: 2em;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.admin-message-container>span{
+  margin-right: 3%;
+  padding: 5px;
+  background-color: var(--chat-blue);
+  border-radius: 10px;
+  color: var(--menu-white);
+}
+.chat-input-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3em;
+  width: 98%;
+  border-top: var(--font-gray) 2px dotted;
+}
+#chat-input{
+  height: 2em;
+  width: 85%;
+}
+#chat-send-button{
+  height: 2em;
+}
+
+
