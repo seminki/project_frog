@@ -29,6 +29,21 @@ pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%>
 	.input-hidden-for-add {
 		display: none;
 	}
+	
+	.img-preview-container{
+		width:40em;
+		height:6em;
+		display:flex;
+		align-content:center;
+		
+	}
+	
+	.img-preview{
+		width:5em;
+		height:5em;
+		border: gray 2px dotted;
+		border-radius: 5px;
+	}
 </style>
 
 <section class="enroll-container">
@@ -75,6 +90,18 @@ pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%>
 				<td><input type="number" name="item_qt" required /><br /></td>
 			</tr>
 			<tr>
+			<th></th>
+				<td>
+					<div class=img-preview-container>
+					<img alt="" src="" class="img-preview">
+					<img alt="" src="" class="img-preview">
+					<img alt="" src="" class="img-preview">
+					<img alt="" src="" class="img-preview">
+					<img alt="" src="" class="img-preview">
+					</div>
+				</td>
+			</tr>
+			<tr>
 				<th>상품 메인사진</th>
 				<td><input type="file" name="upload-main" required /><br /></td>
 			</tr>
@@ -110,6 +137,38 @@ pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%>
 						rows="20"
 						cols="50"
 						placeholder="띄어쓰기는 &#60;br&#62;로 표시"
+						name="product-description"
+					></textarea>
+				</td>
+				
+				
+			</tr>
+			<tr>
+				<th>제조사</th>
+				<td>
+					<input type="text" name="manufacturer">
+				</td>
+			</tr>
+			<tr>
+				<th>제조국</th>
+				<td>
+					<input type="text" name="manufactured-country">
+				</td>
+			</tr>
+			<tr>
+				<th>권장 연령</th>
+				<td>
+					<input type="number" name="recommended-age" min="0">
+				</td>
+			</tr>
+			<tr>
+				<th>주의사항</th>
+				<td>
+					<textarea
+						rows="20"
+						cols="50"
+						placeholder="띄어쓰기는 &#60;br&#62;로 표시"
+						name="caution"
 					></textarea>
 				</td>
 			</tr>
