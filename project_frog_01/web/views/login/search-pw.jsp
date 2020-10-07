@@ -26,7 +26,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <button onclick="">비밀번호찾기</button>
             </div>
             <div class="last-area1">
-                <p>TOYSPACE는 처음이신가요? <a href="">가입하기</a></p>
+                <p>TOYSPACE는 처음이신가요? <a href="<%=request.getContextPath() %>/signup.do">가입하기</a></p>
             </div>
         </form>
     </section>
