@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.toyspace.product.model.vo.*, java.util.TreeSet" %>
+
+<%
+	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
+%>    
+    
+    
 <%@ include file="/views/common/admin_header.jsp"%>
     <style type="text/css">
       section.tagList-container {
@@ -77,6 +84,7 @@
       <table class="tbl-tag">
         <thead>
           <tr>
+          
             <th>태그No.</th>
             <th>태그명</th>
             <th>삭제하기</th>
@@ -84,23 +92,24 @@
           </tr>
         </thead>
         <tbody>
-          DB에서 받아온 데이터출력할것
-
+          <% if(tagsList!=null&&tagsList.size()!=0){
+        	  for(Tags t: tagsList){%>        
           <tr>
-            <td>1</td>
-            <td>겨울</td>
+            <td><%=t.getTagNo() %></td>
+            <td><%=t.getTagName() %></td>
             <td><input type="button" onclick="" value="삭제" /></td>
             <td>
               <input type="button" onclick="fn_changeTag();" value="수정" />
             </td>
           </tr>
+             <%} } %>
         </tbody>
       </table>
     </section>
 
     <script>
       function fn_changeTag() {
-        const url = "<%=request.getContextPath()%>/admin/adminTagList%>";
+        const url = "<%=request.getContextPath()%>/admin/editTag>";
         const status = "width=400px,height=210px,top=200px,left=500px";
         open(url, "", status);
       }
