@@ -40,4 +40,10 @@ public class TagService {
 		
 		return result;
 	}
+	public TreeSet<Tags> searchTagList(String keyword) {
+		Connection conn=getConnection();
+		TreeSet<Tags> tagsList =dao.searchTagList(conn,keyword);
+		close(conn);
+		return tagsList;
+	}
 }
