@@ -84,7 +84,7 @@
       <table class="tbl-tag">
         <thead>
           <tr>
-          <form id="tagForm">
+          
             <th>태그No.</th>
             <th>태그명</th>
             <th>삭제하기</th>
@@ -95,33 +95,27 @@
           <% if(tagsList!=null&&tagsList.size()!=0){
         	  for(Tags t: tagsList){%>        
           <tr>
+          	<form>
             <td><%=t.getTagNo() %></td>
-            <td><input id="tagName" value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
+            <td><input class="tagName" value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
             <td><input type="button" onclick="fn_deleteTag();" value="삭제" /></td>
             <td>
               <input type="button" onclick="fn_changeTag(event);" value="수정" />
+      
             </td>
+            </form>
           </tr>
              <%} } %>
         </tbody>
       </table>
-	</form>
+	
     </section>
 
     <script>
 	function fn_deleteTag(){
 		$("#tagForm").attr("action","<%=request.getContextPath()%>/admin/tagDelete").submit();
-	}
-    
-    
-      function fn_changeTag(e) {
-    	
-        const url = "<%=request.getContextPath()%>/admin/editTag";
-        const status = "width=400px,height=250px,top=200px,left=500px";
-        let windowObj=open(url, "", status);
-        	console.log($("#tagName").val());
-        windowObj.document.getElementById("childText").value=document.getElementById('tagName').value;
-      }
+	}  
+
     </script>
   </body>
 </html>
