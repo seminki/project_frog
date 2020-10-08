@@ -56,21 +56,22 @@
       <div class="search-container">
         태그 조회:
         <div class="search-itemId">
-          <form action>
+      
             <input
               type="text"
-              name="searchKeyword"
+              name="tag"
               placeholder="태그명을 입력해주세요"
               size="25"
-              value=""
             />
             <button type="submit">검색</button>
-          </form>
+        
         </div>
       </div>
       <hr />
-      <input type="text" class="tag-add" />
-      <input type="button" onclick="" value="태그추가" />
+      <form action="<%=request.getContextPath() %>/admin/insertTag" method="post">
+      <input type="text" class="tag-add" name="tagName" required />
+      <button type="submit">태그등록</button>
+      </form>
       <hr />
 
       <table class="tbl-tag">
