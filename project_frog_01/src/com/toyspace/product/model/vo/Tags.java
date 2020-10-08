@@ -1,6 +1,6 @@
 package com.toyspace.product.model.vo;
 
-public class Tags {
+public class Tags implements Comparable<Tags>{
 
 	private int tagNo;
 	private String tagName;
@@ -14,7 +14,13 @@ public class Tags {
 		this.tagNo = tagNo;
 		this.tagName = tagName;
 	}
-
+	
+	@Override
+	public int compareTo(Tags t) {
+		// TODO Auto-generated method stub
+		return this.tagNo-t.tagNo;
+	}
+	
 	public int getTagNo() {
 		return tagNo;
 	}
@@ -63,6 +69,7 @@ public class Tags {
 	public String toString() {
 		return "Tags [tagNo=" + tagNo + ", tagName=" + tagName + "]";
 	}
+
 	
 	
 	

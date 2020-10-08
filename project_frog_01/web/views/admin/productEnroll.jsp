@@ -250,6 +250,9 @@ pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%>
 
 	function removeInput(e) {
 		const removedInput = $(e.target).parent();
+		/* 인풋의 내용을 강제 변경시켜 프리뷰의 체인지 이벤트 강제하기 */
+		$(removedInput).children()[0].value="";
+		$($(removedInput).children()[0]).trigger("change");
 		removedInput.remove();
 	}
 	$(".img-file-input").each((i, v) => {

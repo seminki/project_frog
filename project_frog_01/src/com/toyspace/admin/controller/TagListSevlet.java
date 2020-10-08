@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class tagListSevlet
  */
 @WebServlet("/admin/tagList")
-public class tagListSevlet extends HttpServlet {
+public class TagListSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public tagListSevlet() {
+    public TagListSevlet() {
         super();
         // TODO Auto-generated constructor stub
     }
