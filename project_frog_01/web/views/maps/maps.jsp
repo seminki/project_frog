@@ -30,7 +30,17 @@
         /* width: max-content; */
         display: flex;
         width: 100%;
+       	justify-content: space-around;
         
+    }
+    .center-img>*{
+    width:30%;
+    
+    }
+    .center-img>div>img{
+    width:100%;
+    height:35vw;
+    
     }
 </style>
 </head>
@@ -41,9 +51,13 @@
 <div class="div-center">
     <h1>위치</h1>
     <div class="center-img">
-        <img src="<%=request.getContextPath()%>/image/map/bat.jpg" alt="" style=" height:500px;">
-        <div id="map" style="width:910px;height:500px;"></div>
-        <img src="<%=request.getContextPath()%>/image/map/joker.jpg" alt="" style=" height:500px; right: 40px;">
+    	<div class="section-img-container">
+        <img src="<%=request.getContextPath()%>/image/map/bat.jpg" alt="">
+    	</div>
+        <div id="map" style="width:30%;height:35vw;"></div>
+        <div class="section-img-container">
+        <img src="<%=request.getContextPath()%>/image/map/joker.jpg" alt="">
+        </div>
     </div>
     <h3>TOY SPACE</h3>
     <tr>
