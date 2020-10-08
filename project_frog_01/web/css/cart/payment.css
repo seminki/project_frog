@@ -1,0 +1,176 @@
+body{
+    width: 100%;
+    padding: 10px;
+    border-top: 2px solid rgba(217,217,217);
+}
+div{
+    padding: 10px;
+}
+.container{
+    display:flex;
+    justify-content: space-around;
+    width:70%;
+    margin: auto;
+
+}
+.left{
+    width:70%;
+    border-right: 2px solid  rgba(217,217,217);
+}
+.top{
+    border-left : 1px solid black;
+}
+ /* -----ToySpace logo---- */
+.logo img{
+    width: 300px;
+    height: 200px;
+    margin-top : 20px;
+}
+ /* -----Express checkout------ */
+.bottom fieldset{
+    width:93%;
+    border-radius: 5px;
+    border: 1px solid rgba(217,217,217);
+}
+/* --------또는-------- */
+.hr-sect {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: black;
+	font-size: 12px;
+	margin: 8px 0px;
+}
+.hr-sect::before,
+.hr-sect::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(217,217,217);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 16px;
+}
+ /* ----연락정보 로그인---- */
+.contact{
+    display:flex;
+    justify-content: space-between;
+}
+
+.Already button{
+    color:blue;
+    border:0;
+    background-color: white;
+}
+/* --------이메일--------- */
+.email input{
+    width:100%;
+    height: 50px;
+    border-radius:5px;
+    border:1px solid rgba(217,217,217);
+}
+/* -------이름, 성------ */
+.name{
+    display:flex;
+    justify-content: space-between;
+}
+.name input{
+    width:47%;
+    height: 50px;
+    border-radius:5px;
+    border:1px solid rgba(217,217,217);
+}
+/* -------회사, 주소, 아파트, 시티------- */
+.mid{
+    display:grid;
+}
+.mid input{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border:1px solid rgba(217,217,217);
+}
+/* ------국가,상태,우편번호------ */
+.btm{
+    display:flex;
+    justify-content: space-between;
+}
+.btm input{
+    width: 30%;
+    height: 50px;
+    border-radius: 5px;
+    border:1px solid rgba(217,217,217);
+}
+/* -------계속 배송 버튼------ */
+.Shipping button{
+    margin-top:20px;
+    float:right;
+    width: 130px;
+    height: 80px;
+    border-radius: 5px;
+    border:0;
+    font-weight: bolder;
+    color:white;
+    background-color:rgba(0,110,255);
+}
+.right{
+    margin-top: 40px;
+    margin-left: 50px;
+    width:30%;
+    /* background-color: rgba(250,250,250); */
+}
+/* -------오른쪽 이미지 부분------ */
+.right .tp{
+    display:flex;
+
+}
+
+.tp{
+    display:flex;
+    justify-content: space-between;
+}
+.tp img{
+    width: 70px;
+    height: 70px;
+}
+.tp h4{
+    margin-right: 10%;
+}
+/* -------이미지 아래 줄-------- */
+.right hr{
+    border:1px solid rgba(217,217,217);
+}
+/* -------할인 코드------- */
+.discount input{
+    width: 80%;
+    height: 50px;
+    margin-left: -15px;
+    border-radius: 5px;
+    border:1px solid rgba(217,217,217);
+}
+/* ----적용 버튼---- */
+.discount button{
+    width: 20%;
+    height: 50px;
+    border-radius: 10px;
+    border: 0;
+    font-weight: bolder;
+    background-color: rgba(200, 200, 200);
+    color:white;
+}
+/* -------소계, 달러------ */
+.Subtotal{
+    display:flex;
+    justify-content: space-between;
+}
+/* -------배송, 계산------- */
+.shipping{
+    display:flex;
+    justify-content: space-between;
+    margin-top: -40px;
+}
+/* -------합계, 돈------- */
+.sub{
+    display:flex;
+    justify-content: space-between;
+}
