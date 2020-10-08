@@ -37,7 +37,7 @@
           <tr>
             <th>새 태그명</th>
             <td>
-              <input type="text" name="newTag" id="tag" />
+              <input type="text" name="newTag" id="tag" required/>
             </td>
           </tr>
 

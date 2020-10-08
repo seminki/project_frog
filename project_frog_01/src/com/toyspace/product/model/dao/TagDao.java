@@ -63,4 +63,19 @@ public class TagDao {
 		return tagsList;
 	}
 
+	public int deleteTag(Connection conn, String tagName) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteTag"));
+			pstmt.setString(1, tagName);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

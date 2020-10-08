@@ -29,4 +29,15 @@ public class TagService {
 		close(conn);
 		return tagsList;
 	}
+
+// 태그 삭제
+	public int deleteTag(String tagName) {
+		Connection conn=getConnection();
+		int result=dao.deleteTag(conn,tagName);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		return result;
+	}
 }
