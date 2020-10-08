@@ -35,11 +35,13 @@ public class InsertProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		TreeSet<Tags> tagsList= new TagService().loadAllTags();
 		TreeSet<Category> categoryList= new CategoryService().loadAllCategories();
 		
 		request.setAttribute("tagsList", tagsList);
 		request.setAttribute("categoryList", categoryList);
+		
 		
 		request.getRequestDispatcher("/views/admin/productEnroll.jsp").forward(request, response);
 	}
