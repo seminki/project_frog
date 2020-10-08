@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+%> 
     
 <!DOCTYPE html>
 <html>
@@ -31,7 +34,7 @@
           <tr>
             <th>기존 태그명</th>
             <td>
-            	기존 태그명 불러올까 ?
+            	<input type="text" id="childText"/>
             </td>
           </tr>
           <tr>

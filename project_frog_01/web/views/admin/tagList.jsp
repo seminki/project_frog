@@ -62,16 +62,16 @@
       <h2>태그관리</h2>
       <div class="search-container">
         태그 조회:
-        <div class="search-itemId">
-      
+        <div class="search-tagName">
+      		<form action="<%=request.getContextPath() %>/admin/searchTag">
             <input
               type="text"
-              name="tag"
+              name="keyword"
               placeholder="태그명을 입력해주세요"
               size="25"
             />
             <button type="submit">검색</button>
-        
+        	</form>
         </div>
       </div>
       <hr />
@@ -96,10 +96,10 @@
         	  for(Tags t: tagsList){%>        
           <tr>
             <td><%=t.getTagNo() %></td>
-            <td><input value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
+            <td><input id="tagName" value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
             <td><input type="button" onclick="fn_deleteTag();" value="삭제" /></td>
             <td>
-              <input type="button" onclick="fn_changeTag();" value="수정" />
+              <input type="button" onclick="fn_changeTag(event);" value="수정" />
             </td>
           </tr>
              <%} } %>
@@ -114,10 +114,13 @@
 	}
     
     
-      function fn_changeTag() {
+      function fn_changeTag(e) {
+    	
         const url = "<%=request.getContextPath()%>/admin/editTag";
         const status = "width=400px,height=250px,top=200px,left=500px";
-        open(url, "", status);
+        let windowObj=open(url, "", status);
+        	console.log($("#tagName").val());
+        windowObj.document.getElementById("childText").value=document.getElementById('tagName').value;
       }
     </script>
   </body>
