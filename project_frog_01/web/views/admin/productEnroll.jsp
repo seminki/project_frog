@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%> 
+pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"%> 
+<%@ include file="/views/common/admin_header.jsp"%> 
+<%
+	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
+	TreeSet<Category> categoryList= (TreeSet<Category>)request.getAttribute("categoryList");
+%>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
 	section.enroll-container {
@@ -75,7 +80,13 @@ pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%>
 				<th>상품 카테고리</th>
 				<td>
 					<select name="category" id="category">
-						<option value="disney">디즈니</option>
+					<% 
+							if(categoryList!=null&&categoryList.size()!=0){
+							for(Category c : categoryList){ %>
+							
+								<option value="<%=c.getCategoryNo() %>"><%=c.getCategoryName() %></option>
+							
+							<%} }%>
 					</select>
 				</td>
 			</tr>
@@ -173,6 +184,14 @@ pageEncoding="UTF-8"%> <%@ include file="/views/common/admin_header.jsp"%>
 								<th>태그 번호</th>
 								<th>태그 명</th>
 							</tr>
+							<% 
+							if(tagsList!=null&&tagsList.size()!=0){
+							for(Tags t : tagsList){ %>
+							<tr>
+								<td><%=t.getTagNo() %></td>
+								<td><%=t.getTagName() %></td>
+							</tr>
+							<%} }%>
 						</table>
 					</div>
 				</td>
