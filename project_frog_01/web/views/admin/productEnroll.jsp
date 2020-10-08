@@ -67,7 +67,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 <section class="enroll-container">
 	<h2>상품등록</h2>
 	<div class="search-container">★★★★★</div>
-	<form action="" method="post">
+	<form action="<%=request.getContextPath() %>/admin/insertProductEnd" enctype="multipart/form-data" method="post">
 		<br />
 		<table>
 			<tr>
@@ -143,7 +143,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 				<td>
 					<input
 						type="file"
-						name="upload-main"
+						name="upload-file1"
 						required
 						class="img-file-input"
 					/><br />
@@ -153,7 +153,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 				<th>상품 추가사진</th>
 				<td>
 					<div>
-						<input type="file" name="upload-sub " class="img-file-input" />
+						<input type="file" name="upload-file2" class="img-file-input" />
 						<input
 							type="button"
 							class="file-add-button"
@@ -164,7 +164,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 				</td>
 				<td class="input-hidden-for-add">
 					<div>
-						<input type="file" name="upload-sub" class="img-file-input" />
+						<input type="file" name="upload-file" class="img-file-input" />
 						<input
 							type="button"
 							class="file-add-button"
@@ -246,11 +246,14 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value="등록" onclick="" />
-		<input type="reset" value="취소" />
+		<input type="submit" value="등록"/>
+		<input type="reset" value="취소" onclick="fn_goBack();"/>
 	</form>
 </section>
 <script>
+	function fn_goBack(){
+		location.href="<%=request.getContextPath() %>/admin/mainPage";
+	}
 	function inputAdd(e) {
 		const fileInputCont = $(e.target).parent().parent();
 		let fileInputCode = $(".input-hidden-for-add>div").clone();
@@ -261,6 +264,9 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 				.change((e) => {
 					fileIndexInsert(e, fileInputCont.children().length);
 				});
+			$($(fileInputCode).children()[0]).removeAttr("name")
+			.attr("name","upload-sub-file"+(fileInputCont.children().length+2));
+			console.log($($(fileInputCode).children()[0]));
 			fileInputCont.append(fileInputCode);
 		} else {
 			alert("등록할 수 있는 파일 수는 5개까지 입니다!");
