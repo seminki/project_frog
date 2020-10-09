@@ -1,137 +1,58 @@
 @charset "UTF-8";
-.productsheader{
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:flex-start; 
-}
-.h1{
-    display:block;
-    flex-grow:0.1;
-    flex-shrink:1;
-    box-sizing:border-box;
-    padding-bottom:8px;
-    padding-left:8px;
-    padding-right:8px;
-    padding-top:8px;
 
-}
-.h2{
-    display:block;
-    flex-grow:1;
-    flex-shrink:1;
-
-}
-.h2_1{
-    display:block;
-    flex-grow:1;
-    flex-shrink:1;
-}
-.h3{
-    display: flex;
-    flex-grow:1;
-    flex-shrink:1;
-    justify-content: space-around;
-    /* padding-right: 10%; */
-}
-.shop{
-    box-sizing:border-box;
-    color:rgb(17, 17, 17);
-    display:block;
-    font-feature-settings:normal;
-    font-size:15px;
-    font-variant-ligatures:none;
-    font-weight:100;
-    letter-spacing:normal;
-    margin-bottom:3.75px;
-    text-transform:uppercase;
-}
-.allp{
-    box-sizing:border-box;
-    color:rgb(17, 17, 17);
-    display:block;
-    font-family:Norms, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-feature-settings:normal;
-    font-variant-ligatures:none;
-    font-weight:800px;
-    margin-top:0px;
-    font-size: auto;
-}
-/* div{
-    border: black 1px solid;
-} */
-.himg{
-    background-size:50% 50%;
-    flex-grow:1;
-    flex-shrink:1;
-    min-height:180px;
-
-}
-.filter_con{
-    display:inline-flex;
-    max-width: 100%;
-    
-}
-.filter_box{
-    box-sizing:border-box;
-    color:rgb(17, 17, 17);
-    display:block;
-    font-feature-settings:normal;
-    font-size:15px;
-    font-variant-ligatures:none;
-    transform:matrix(1, 0, 0, 1, 0, 0);
-}
-.products{
-    /* 세로 */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    
-    justify-content: center;
-}
-.products_list{
-    background-attachment: scroll;
-    background-clip: border-box;
-    background-origin: padding-box;
-    background-size: auto;
-    display:flex;
-    /* flex-direction: row; */
-    flex-wrap: wrap;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-    background-color: rgba(240, 236, 236, 0.959);
-}
-.products_header{
-    display: flex;
-    justify-content: space-between;
-    
-}
-.center{
-text-align: center;
-}
-.products-list-item{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-right:5px ;
-    margin-left: 5px; 
-    background-color: rgb(255, 255, 255);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-.addtocart{
-    border-bottom-left-radius: 32px;
-    border-bottom-right-radius: 32px;
-    border-top-left-radius: 32px;
-    border-top-right-radius: 32px;
-    background-color: rgb(222, 239, 243);
-    font-size: 20px;
-}
-.addtocart_div{
-    text-align: center;
+ul li {
+	list-style: none;
 }
 
+.width33 {
+	width: 33%;
+}
+
+.products-list-item-a {
+	font-size: .9375rem;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.products-list-item {
+	font-size: .9375rem;
+	box-shadow: 3px 6px 9px 0 rgba(0, 0, 0, .1);
+	margin-right: 12px;
+	margin-left: 12px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background-color: white;
+	text-align: center;
+	max-width: 25%;
+}
+
+.shopify-image {
+	cursor: pointer;
+	width: 100%;
+	background-size: contain;
+	background-image:
+		url("https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410");
+}
+
+.addtocart {
+	text-transform: uppercase;
+	font-size: 1rem;
+	font-family: "Open Sans Condensed", sans-serif;
+	font-weight: 700;
+	border: 0;
+	line-height: 1;
+	padding: .75rem 1.25em;
+	border-radius: 2em;
+	position: relative;
+	margin: .33rem 0;
+	cursor: pointer;
+	margin-left: 16.8%;
+	display: block;
+}
+
+.products-list-item {
+	flex-grow: 1;
+	padding: 0 .5rem 2rem;
+}
