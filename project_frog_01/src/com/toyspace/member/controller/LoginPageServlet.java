@@ -31,6 +31,7 @@ public class LoginPageServlet extends HttpServlet {
 		//원래 주소 설정
 		String loc = request.getParameter("loc");
 		request.setAttribute("loc", loc);
+		request.setAttribute("client_id", "1048798785374-009dlj5qh83q83l0kg2n7lg3d4bo3q3f.apps.googleusercontent.com");
 		request.getRequestDispatcher("/views/login/login.jsp").forward(request, response);
 	}
 
