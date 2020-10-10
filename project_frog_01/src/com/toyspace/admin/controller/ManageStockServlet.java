@@ -27,7 +27,7 @@ public class ManageStockServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/admin/sto.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/stock.jsp").forward(request, response);
 	}
 
 	/**
