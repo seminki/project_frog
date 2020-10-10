@@ -1,6 +1,6 @@
 package com.toyspace.product.model.vo;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Product {
 	
@@ -15,7 +15,7 @@ public class Product {
 	private String manufacturedCountry;
 	private int recommendedAge;
 	private String caution;
-	private String[] productImageFilePaths= new String[5];
+	private List<String> productImageFilePaths;
 	private int likes;
 	
 	
@@ -26,7 +26,7 @@ public class Product {
 
 	public Product(int productId, int categoryNo, String categoryName, String productName, double productPrice,
 			int productStock, String productDescription, String manufacturer, String manufacturedCountry,
-			int recommendedAge, String caution, String[] productImageFilePaths, int likes) {
+			int recommendedAge, String caution, List<String> productImageFilePaths, int likes) {
 		super();
 		this.productId = productId;
 		this.categoryNo = categoryNo;
@@ -154,12 +154,12 @@ public class Product {
 	}
 
 
-	public String[] getProductImageFilePaths() {
+	public List<String> getProductImageFilePaths() {
 		return productImageFilePaths;
 	}
 
 
-	public void setProductImageFilePaths(String[] productImageFilePaths) {
+	public void setProductImageFilePaths(List<String> productImageFilePaths) {
 		this.productImageFilePaths = productImageFilePaths;
 	}
 
@@ -186,7 +186,7 @@ public class Product {
 		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
 		result = prime * result + ((productDescription == null) ? 0 : productDescription.hashCode());
 		result = prime * result + productId;
-		result = prime * result + Arrays.hashCode(productImageFilePaths);
+		result = prime * result + ((productImageFilePaths == null) ? 0 : productImageFilePaths.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(productPrice);
@@ -237,7 +237,10 @@ public class Product {
 			return false;
 		if (productId != other.productId)
 			return false;
-		if (!Arrays.equals(productImageFilePaths, other.productImageFilePaths))
+		if (productImageFilePaths == null) {
+			if (other.productImageFilePaths != null)
+				return false;
+		} else if (!productImageFilePaths.equals(other.productImageFilePaths))
 			return false;
 		if (productName == null) {
 			if (other.productName != null)
@@ -260,9 +263,9 @@ public class Product {
 				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productStock=" + productStock
 				+ ", productDescription=" + productDescription + ", manufacturer=" + manufacturer
 				+ ", manufacturedCountry=" + manufacturedCountry + ", recommendedAge=" + recommendedAge + ", caution="
-				+ caution + ", productImageFilePaths=" + Arrays.toString(productImageFilePaths) + ", likes=" + likes
-				+ "]";
+				+ caution + ", productImageFilePaths=" + productImageFilePaths + ", likes=" + likes + "]";
 	}
+
 
 	
 }

@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.toyspace.product.model.vo.*, java.util.TreeSet" %>
+
+<%
+	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
+%>    
+    
+    
 <%@ include file="/views/common/admin_header.jsp"%>
     <style type="text/css">
       section.tagList-container {
@@ -55,58 +62,60 @@
       <h2>태그관리</h2>
       <div class="search-container">
         태그 조회:
-        <!--상품 ID에서 select로 나오게끔해서 조회하는게 더 나을 수도 ??   -->
-        <select class="searchType">
-          <option value="itemId">상품ID</option>
-          <option value="tagName">태그명</option>
-        </select>
-        <div class="search-itemId">
-          <form action>
-            <input type="hidden" name="searchType" value="itemId" />
+        <div class="search-tagName">
+      		<form action="<%=request.getContextPath() %>/admin/searchTag">
             <input
               type="text"
-              name="searchKeyword"
-              placeholder="상품ID"
-              size="10"
-              value=""
+              name="keyword"
+              placeholder="태그명을 입력해주세요"
+              size="25"
             />
             <button type="submit">검색</button>
-          </form>
+        	</form>
         </div>
       </div>
       <hr />
-      <input type="button" onclick="fn_addTag();" value="태그추가" />
+      <form action="<%=request.getContextPath() %>/admin/insertTag" method="post">
+      <input type="text" class="tag-add" name="tagName" required />
+      <button type="submit">태그등록</button>
+      </form>
       <hr />
 
       <table class="tbl-tag">
         <thead>
           <tr>
-            <th>상품ID</th>
+          
             <th>태그No.</th>
             <th>태그명</th>
             <th>삭제하기</th>
+            <th>수정하기</th>
           </tr>
         </thead>
         <tbody>
-          DB에서 받아온 데이터출력할것
-
+          <% if(tagsList!=null&&tagsList.size()!=0){
+        	  for(Tags t: tagsList){%>        
           <tr>
-            <td>0001A</td>
-            <td>1</td>
-            <td>겨울</td>
-            <td><input type="button" onclick="" value="삭제" /></td>
+          	<form>
+            <td><%=t.getTagNo() %></td>
+            <td><input class="tagName" value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
+            <td><input type="button" onclick="fn_deleteTag();" value="삭제" /></td>
+            <td>
+              <input type="button" onclick="fn_changeTag(event);" value="수정" />
+      
+            </td>
+            </form>
           </tr>
+             <%} } %>
         </tbody>
       </table>
+	
     </section>
 
     <script>
-      function fn_addTag() {
-    	  /* 팝업창 열리는 화면전환 서블릿 구현해야함 */
-        const url = "<%=request.getContextPath()%>/views/admin/addTag.jsp";
-        const status = "width=400px,height=250px,top=200px,left=500px";
-        open(url, "", status);
-      }
+	function fn_deleteTag(){
+		$("#tagForm").attr("action","<%=request.getContextPath()%>/admin/tagDelete").submit();
+	}  
+
     </script>
   </body>
 </html>

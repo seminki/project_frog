@@ -12,7 +12,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 <body>
 <%@ include file="/views/common/header.jsp" %>
  <section>
-        <form action="">
+        <form action="<%=request.getContextPath()%>/emailform.do" method="get">
             <div class="logo-area1">
                 <img src="<%=request.getContextPath()%>/image/login/blacklogo-small.png">
             </div>
@@ -20,13 +20,13 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <p>비밀번호 재설정이 필요하신가요? 이메일주소를 입력해주세요.</p>
             
             <div class="input-area" >
-                <input type="email" id="find-pw" name="find-pw" placeholder="Email" autocomplete="off"  required>
+                <input type="email" id="email" name="email" placeholder="Email" autocomplete="off"  required>
             </div>
             <div class="btn-area">
-                <button onclick="">비밀번호찾기</button>
+                 <button type="submit">비밀번호찾기</button>
             </div>
             <div class="last-area1">
-                <p>TOYSPACE는 처음이신가요? <a href="">가입하기</a></p>
+                <p>TOYSPACE는 처음이신가요? <a href="<%=request.getContextPath() %>/signup.do">가입하기</a></p>
             </div>
         </form>
     </section>

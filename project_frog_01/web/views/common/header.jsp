@@ -13,6 +13,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 
+
 		<header>
 			<div class="header-container">
 				<div class="header-logo">
@@ -26,7 +27,7 @@
 				</div>
 				<div class="header-middle-menu">
 					<div class="header-product-container header-menu-container">
-						<a href="" class="header-menu-title">PRODUCTS</a>
+						<a href="<%=request.getContextPath()%>/productlist.do" class="header-menu-title">PRODUCTS</a>
 						<ul class="uler">
 							<div class="header-gray-bar"></div>
 							<li class="header-product-list">
@@ -131,7 +132,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="">
+							<a href="<%=request.getContextPath()%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
 								<div id="cart-amount">0</div>
 							</a>
@@ -155,7 +156,15 @@
 					<a href="#"><i class="fa fa-user-circle user2"></i></a>
 					<a href="#"><i class="fas fa-times side-x"></i></a>
 				</div>
-				<div class="side-bar-product side-bar-margin">PRODUCTS</div>
+						<style type="text/css">
+		a-color:link { color: black; text-decoration: none;}
+		a-color:visited { color: black; text-decoration: none;}
+		a-color:hover { color: black; text-decoration: underline;}
+		</style>
+		<!-- a태그  눌렀을때 마우스 올렸을때  평상시 색상 블랙 으로 변경  -->
+				<div class="side-bar-product side-bar-margin" >
+				<a  class="a-color" href="<%=request.getContextPath()%>/productlist.do" >PRODUCTS</a>
+				</div>
 				<div class="side-bar-product-cont side-bar-margin">
           <div class="side-bar-product-category">
             <a href="#">
