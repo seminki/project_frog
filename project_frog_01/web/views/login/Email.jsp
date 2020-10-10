@@ -18,6 +18,9 @@ href="<%=request.getContextPath() %>/css/login/style.css">
         </div>
             <h1>비밀번호 변경하기</h1>  
         <div class="pw-area">
+            <input type="text" name="username" id="username" placeholder="이름를 입력해주세요" required>
+        </div>
+        <div class="pw-area">
             <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요" required>
         </div>
         <div class="pw-area">
