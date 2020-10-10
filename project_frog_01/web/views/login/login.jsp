@@ -48,7 +48,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <div class="sp-login" style="margin:50px ;">
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     <div id="naverIdLogin"></div>
-                    <div class="kakao-container"><img id="kakao" name="kakao" src="<%=request.getContextPath() %>/image/login/kakao_login_medium_narrow.png">
+                    <div class="kakao-container">
                    </div>
                 </div>
             </div>
@@ -82,21 +82,34 @@ href="<%=request.getContextPath() %>/css/login/style.css">
    
 		/* 카카오 인증 초기화 */
   	 	Kakao.init('9bf121caabaa1ff4de5c5d96dfa03136');
-		$("#kakao").click(e=>{
-			Kakao.Auth.authorize({
-				redirectUri : "http://mightymosses.hopto.org:9090/project_frog_01/login.do"
-				
-			});
-			
-		})
-			getToken();
-	function getToken(){
-				const token = '<%=request.getParameter("code")%>';
-				if(token){
-					Kakao.Auth.setAccessToken(token);
-					console.log("안녕" +Kakao.Auth.getAccessToken());
-				}
-			}	
+  	 	Kakao.Auth.createLoginButton({
+            container: '.kakao-container',
+            success: function (authObj) {
+            	Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function(res) {
+                    	
+                      $.ajax({
+                    	  url: '<%=request.getContextPath()%>/member/kakaoSignIn',
+                    	  data: {"id" : res.id, "access_token": Kakao.Auth.getAccessToken(), "birthday" : res.kakao_account.birthday, "email": res.kakao_account.email,
+                    			 "nickname" :  res.kakao_account.profile.nickname, "profile_image_url": res.kakao_account.profile.profile_image_url
+                    	  },
+                    	  type: 'POST',
+                    	  success : ()=>console.log("성공!")
+                      })
+                    },
+                    fail: function(error) {
+                      alert(
+                        'login success, but failed to request user information: ' +
+                          JSON.stringify(error)
+                      )
+                    },
+                  })
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
 
    </script>
    

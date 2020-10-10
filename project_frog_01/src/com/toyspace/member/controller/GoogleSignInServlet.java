@@ -58,7 +58,7 @@ public class GoogleSignInServlet extends HttpServlet {
 //			정보 받아오기!
 			
 			String email = payload.getEmail();
-			
+			String id = payload.getUserId();
 //			멤버 객체 만들기
 			
 //			서비스 통해 dao - > 서버로 가서 이미 있는 아이디인지 확인하고
