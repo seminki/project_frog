@@ -46,4 +46,12 @@ public class TagService {
 		close(conn);
 		return tagsList;
 	}
+	public int editTag(Tags t) {
+		Connection conn=getConnection();
+		int result=dao.editTag(conn,t);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }
