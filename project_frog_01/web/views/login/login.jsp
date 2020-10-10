@@ -83,10 +83,21 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 		/* 카카오 인증 초기화 */
   	 	Kakao.init('9bf121caabaa1ff4de5c5d96dfa03136');
 		$("#kakao").click(e=>{
-			Kakao.Auth.authroize({
+			Kakao.Auth.authorize({
+				redirectUri : "http://mightymosses.hopto.org:9090/project_frog_01/login.do"
 				
 			});
+			
 		})
+			getToken();
+	function getToken(){
+				const token = '<%=request.getParameter("code")%>';
+				if(token){
+					Kakao.Auth.setAccessToken(token);
+					console.log("안녕" +Kakao.Auth.getAccessToken());
+				}
+			}	
+
    </script>
    
 </body>

@@ -225,7 +225,7 @@
 				<div class="side-bar-community side-bar-margin">COMMUNITY</div>
 				<div class="side-bar-about side-bar-margin">ABOUT</div>
 			</div>
-			<div class="bottom-support-ui animate__animated animate__bounceInUp animate__delay-1s">
+			<div class="bottom-support-ui animate__animated animate__delay-1s">
 				<i class="far fa-question-circle"></i> 지원
 			</div>
 			<div class="chatting-window animate__animated">
