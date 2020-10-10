@@ -25,7 +25,7 @@ public class TagDao {
 			e.printStackTrace();
 		}
 	}
-	
+//태그추가	
 	public int insertTag(Connection conn, Tags t) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -62,7 +62,7 @@ public class TagDao {
 		
 		return tagsList;
 	}
-
+//태그삭제
 	public int deleteTag(Connection conn, String tagName) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -76,6 +76,27 @@ public class TagDao {
 			close(pstmt);
 		}
 		return result;
+	}
+//태그찾기
+	public TreeSet<Tags> searchTagList(Connection conn, String keyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		TreeSet<Tags> tagsList= new TreeSet<Tags>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchTagList"));
+			pstmt.setString(1, "%"+keyword+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Tags t = new Tags(rs.getInt(1), rs.getNString(2));
+				tagsList.add(t);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return tagsList;
 	}
 
 }

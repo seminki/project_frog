@@ -62,16 +62,16 @@
       <h2>태그관리</h2>
       <div class="search-container">
         태그 조회:
-        <div class="search-itemId">
-      
+        <div class="search-tagName">
+      		<form action="<%=request.getContextPath() %>/admin/searchTag">
             <input
               type="text"
-              name="tag"
+              name="keyword"
               placeholder="태그명을 입력해주세요"
               size="25"
             />
             <button type="submit">검색</button>
-        
+        	</form>
         </div>
       </div>
       <hr />
@@ -84,7 +84,7 @@
       <table class="tbl-tag">
         <thead>
           <tr>
-          <form id="tagForm">
+          
             <th>태그No.</th>
             <th>태그명</th>
             <th>삭제하기</th>
@@ -95,30 +95,27 @@
           <% if(tagsList!=null&&tagsList.size()!=0){
         	  for(Tags t: tagsList){%>        
           <tr>
+          	<form>
             <td><%=t.getTagNo() %></td>
-            <td><input value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
+            <td><input class="tagName" value="<%=t.getTagName() %>" name="tagNick" readonly></input></td>
             <td><input type="button" onclick="fn_deleteTag();" value="삭제" /></td>
             <td>
-              <input type="button" onclick="fn_changeTag();" value="수정" />
+              <input type="button" onclick="fn_changeTag(event);" value="수정" />
+      
             </td>
+            </form>
           </tr>
              <%} } %>
         </tbody>
       </table>
-	</form>
+	
     </section>
 
     <script>
 	function fn_deleteTag(){
 		$("#tagForm").attr("action","<%=request.getContextPath()%>/admin/tagDelete").submit();
-	}
-    
-    
-      function fn_changeTag() {
-        const url = "<%=request.getContextPath()%>/admin/editTag";
-        const status = "width=400px,height=250px,top=200px,left=500px";
-        open(url, "", status);
-      }
+	}  
+
     </script>
   </body>
 </html>
