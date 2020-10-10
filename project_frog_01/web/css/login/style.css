@@ -36,7 +36,7 @@ section .in-area input{
     font-size: 15px;
     outline: none;
 }
-section .{
+section{
     margin-top: 20px;
     text-align: center;
 }
@@ -95,7 +95,7 @@ section .last-area{
     border-style: dotted;
     outline: 0;
 
-}
+} 
 .news{
     margin: 20px;
     -webkit-nbsp-mode: space;
@@ -134,11 +134,25 @@ section h2{
     font-size: 15px;
     border-radius: 5px;
 }
-. button{
+.button{
     margin: 30px;
 }
 .login-form{
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 10%;
+}
+
+#kakao{
+	width: 160px;
+	max-height: 36px;
+	cursor: pointer;
+}
+
+.sp-login{
+	width:100%;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	
 }
