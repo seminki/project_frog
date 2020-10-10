@@ -12,6 +12,12 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+		<style type="text/css">
+		a:link { color: black; text-decoration: none;}
+		a:visited { color: black; text-decoration: none;}
+		a:hover { color: black; text-decoration: underline;}
+		</style>
+		<!-- a태그  눌렀을때 마우스 올렸을때  평상시 색상 블랙 으로 변경  -->
 
 		<header>
 			<div class="header-container">
@@ -155,7 +161,9 @@
 					<a href="#"><i class="fa fa-user-circle user2"></i></a>
 					<a href="#"><i class="fas fa-times side-x"></i></a>
 				</div>
-				<div class="side-bar-product side-bar-margin">PRODUCTS</div>
+				<div class="side-bar-product side-bar-margin" >
+				<a href="<%=request.getContextPath()%>/productlist.do" >PRODUCTS</a>
+				</div>
 				<div class="side-bar-product-cont side-bar-margin">
           <div class="side-bar-product-category">
             <a href="#">

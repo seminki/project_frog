@@ -81,13 +81,23 @@
                         </div>
                         <div class="products_list" style="width: 100%; display:flex; flex-wrap: wrap; ">
                             <!-- 제품목록 db 에서 불러온 제품을 for문 으로 제한된 수량 배열-->
+                            <style type="text/css">
+							 a:link { color: black; text-decoration: none;}
+							 a:visited { color: black; text-decoration: none;}
+							 a:hover { color: black; text-decoration: underline;}
+							</style>
                             <style>
+
+
                                 .products-list-item-a{
                                     font-size: .9375rem;
                                     text-decoration: none;
                                     display: flex;
                                     flex-direction: column;
                                     height: 100%;
+                                    
+                                    
+                                    
                                 }
                                 .products-list-item{
                                     font-size: .9375rem;
@@ -144,7 +154,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">          
                                     <div class="">
                                         <div class="">
@@ -159,7 +169,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                  
                                     <div class="">
                                         <div class="">
@@ -174,7 +184,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -189,7 +199,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -204,7 +214,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -219,7 +229,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -234,7 +244,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -249,7 +259,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -264,7 +274,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -279,7 +289,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -294,7 +304,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -309,7 +319,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -324,7 +334,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
@@ -339,7 +349,7 @@
                                 </a>
                             </div>
                             <div class="products-list-item">
-                                <a class="" href="">
+                                <a class="products-list-item-a" href="">
                                     <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
                                     <div class="">
                                         <div class="">
