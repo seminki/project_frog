@@ -27,6 +27,10 @@ public class LoginPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//원래 주소 설정
+		String loc = request.getParameter("loc");
+		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/login/login.jsp").forward(request, response);
 	}
 
