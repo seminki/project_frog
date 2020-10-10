@@ -34,7 +34,7 @@ pageEncoding="UTF-8"%>
 			<ul>
 				<li><a href="">ABOUT TOYSPACE</a></li>
 				<li><a href="">회사 소개</a></li>
-				<li><a href="">위치</a></li>
+				<li><a href="<%=request.getContextPath()%>/map.do">위치</a></li>
 				<li><a href="">직업을 찾으십니까?</a></li>
 				<li><a href="">매장 현황</a></li>
 			</ul>
