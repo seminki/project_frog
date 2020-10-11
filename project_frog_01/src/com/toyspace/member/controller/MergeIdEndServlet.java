@@ -58,6 +58,10 @@ public class MergeIdEndServlet extends HttpServlet {
 		}
 		msg="SNS 정보를 "+m.getUserId()+"에 삽입 완료!";
 		loc=request.getContextPath();
+		
+		session.setAttribute("signedInMember", m);
+		session.removeAttribute("email-found-new-member");
+		session.removeAttribute("SNS-for-email-found-new-member");
 		request.getRequestDispatcher("/msg?msg="+msg+"&loc="+loc).forward(request, response);
 	}
 

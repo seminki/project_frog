@@ -45,10 +45,6 @@ public class KakaoSignInServlet extends HttpServlet {
 		MemberService ms = new MemberService();
 		Gson gson = new Gson();
 		
-		String msg ="";
-		String loc ="";
-		
-		
 		String id = request.getParameter("id");
 		String accessToken = request.getParameter("access_token");
 		String birthday = request.getParameter("birthday");
@@ -73,7 +69,7 @@ public class KakaoSignInServlet extends HttpServlet {
 		}
 		
 		SNSLogin sns = new SNSLogin();
-		sns.setLoginSourceNo(3);
+		sns.setLoginSourceNo(loginSource);
 		sns.setAccessToken(accessToken);
 		sns.setSnsId(id);
 		sns.setSnsName(nickname);
@@ -81,7 +77,7 @@ public class KakaoSignInServlet extends HttpServlet {
 		Member emailM=null; 
 		if(email!=null) emailM= ms.checkMemberThroughSNSEmail(email);
 		if(emailM!=null) {
-			session.setAttribute("email-found-new-member", m);
+			session.setAttribute("email-found-new-member", emailM);
 			session.setAttribute("SNS-for-email-found-new-member", sns);
 			gsonFlag=3;
 			gson.toJson(gsonFlag,response.getWriter());

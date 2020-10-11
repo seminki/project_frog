@@ -101,7 +101,7 @@ public class GoogleSignInServlet extends HttpServlet {
 			String name = familyName+" "+givenName;
 			
 			SNSLogin sns= new SNSLogin();
-			sns.setLoginSourceNo(1);
+			sns.setLoginSourceNo(loginSource);
 			sns.setAccessToken(idTokenString);
 			sns.setSnsId(id);
 			sns.setSnsName(name);

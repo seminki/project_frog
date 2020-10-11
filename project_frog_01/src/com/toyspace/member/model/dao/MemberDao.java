@@ -238,7 +238,7 @@ public class MemberDao {
 	}
 	
 	public boolean passwordCheck(Connection conn, int memberKey, String password) {
-		int result= -1;
+		int result= 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		

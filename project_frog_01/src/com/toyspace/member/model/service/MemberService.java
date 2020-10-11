@@ -86,9 +86,12 @@ public class MemberService {
 		sns.setMemberKey(m.getMemberKey());
 		
 		boolean result = dao.insertSNSInfo(conn, sns);
-		if(!result) rollback(conn);
-		else commit(conn);
+		insertLoginLog(conn, m, sns.getLoginSourceNo());
 		
+		
+		if(!result) rollback(conn);
+		else commit(conn); 
+			
 		close(conn);
 		
 		return result;
