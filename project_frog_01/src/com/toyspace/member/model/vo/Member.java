@@ -1,7 +1,7 @@
 package com.toyspace.member.model.vo;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import com.toyspace.order.coupon.model.vo.Coupon;
 

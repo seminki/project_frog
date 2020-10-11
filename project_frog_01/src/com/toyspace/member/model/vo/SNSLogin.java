@@ -1,6 +1,6 @@
 package com.toyspace.member.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class SNSLogin {
 	
@@ -61,10 +61,10 @@ public class SNSLogin {
 
 	public void setLoginSourceNo(int loginSourceNo) {
 		this.loginSourceNo = loginSourceNo;
-		switch(loginSourceNo) {
-		case 1: this.loginSourceDescription="google";
-		case 2: this.loginSourceDescription="naver";
-		case 3: this.loginSourceDescription="kakao";
+		switch(this.loginSourceNo) {
+		case 1: this.loginSourceDescription="google"; break;
+		case 2: this.loginSourceDescription="naver"; break;
+		case 3: this.loginSourceDescription="kakao"; break;
 		default: this.loginSourceDescription=null;
 		}
 	}

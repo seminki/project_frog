@@ -1,6 +1,6 @@
 package com.toyspace.member.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MemberLog {
 	

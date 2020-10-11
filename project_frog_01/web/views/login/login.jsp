@@ -68,13 +68,13 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 		xhr.addEventListener('load', function(e){
     		const result = JSON.parse(e.target.response);
     		switch(result){
-    		case 1: location.href = "<%=request.getContextPath()%>/member/mergeId"; break;
+    		case 3: location.href = "<%=request.getContextPath()%>/member/mergeId"; break;
     		/* 간편가입시 '추가 정보 기입하시겠습니까?' 등을 물어보는 서블릿으로 이동 */
     		case 2: location.href = "<%=request.getContextPath()%>/member/snsSignUp"; break;
-    		case 3: window.history.go(-1); break;
+    		case 1: window.history.go(-1); break;
     		}
     		
-})
+		})
 	 }
    
    

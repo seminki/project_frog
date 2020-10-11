@@ -46,11 +46,30 @@ public class MemberDao {
 		m.setUserProfilePicPath(rs.getNString("USER_PROFILE_PIC_PATH"));
 		m.setUserMileage(rs.getInt("USER_MILEAGE"));
 		m.setMemberLevelNo(rs.getInt("MEMBER_LEVEL_NO"));
-		m.setMemberLevelDescription(rs.getNString("MEMBER_LEVEL_DESCRIPTION"));
 		m.setModifiedDate(rs.getDate("MODIFIED_DATE"));
 		m.setUserProfilePicUrl(rs.getNString("USER_PROFILE_PIC_URL"));
 		
 		return m;
+	}
+	
+	public int memberKeySequenceNextValue(Connection conn) {
+		int nextValue=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberKeySequenceNextValue"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				nextValue=rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("멤버키 시퀀스 밸류 로드 실패");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return nextValue;
 	}
 	
 	public boolean insertLoginLog(Connection conn, int memberKey, int signInSource) {
@@ -71,25 +90,7 @@ public class MemberDao {
 		
 		return result==1;
 	}
-	public int memberKeySequenceNextValue(Connection conn) {
-		int nextValue=0;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("memberKeySequenceNextValue"));
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				nextValue=rs.getInt(1);
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("멤버키 시퀀스 밸류 로드 실패");
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return nextValue;
-	}
+	
 	
 ///////////////////////////////////////////////////////////////////////////////
 	
@@ -153,18 +154,22 @@ public class MemberDao {
 		return m;
 	}
 	
-	public boolean signUpThroughSNS(Connection conn, Member newMember) {
+	public boolean signUpThroughSNS(Connection conn, Member newMember, String loginSourceDescription) {
 		int result=0;
 		PreparedStatement pstmt = null;
 		
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("signUpThroughSNS"));
+			
 			pstmt.setInt(1, newMember.getMemberKey());
 //			아이디는 currentTimeMillis로 생성
-			pstmt.setString(2, newMember.getMemberLevelDescription()+"_"+System.currentTimeMillis());
+			pstmt.setString(2, loginSourceDescription+"_"+System.currentTimeMillis());
 			pstmt.setNString(3, newMember.getUserEmail());
 			pstmt.setNString(4, newMember.getUserName());
-			pstmt.setNString(5, newMember.getUserNickname());
+			
+			if(newMember.getUserNickname()!=null) pstmt.setNString(5, newMember.getUserNickname());
+			else pstmt.setNString(5, loginSourceDescription+"_"+System.currentTimeMillis());
+			
 			pstmt.setNString(6, newMember.getUserBirthday());
 			pstmt.setNString(7, newMember.getUserProfilePicUrl());
 			result = pstmt.executeUpdate();
@@ -181,6 +186,54 @@ public class MemberDao {
 	}
 	
 	public boolean insertSNSInfo(Connection conn, SNSLogin sns) {
+		int result =0;
+		PreparedStatement pstmt = null;
 		
+		try {
+			pstmt= conn.prepareStatement(prop.getProperty("insertSNSInfo"));
+			pstmt.setInt(1, sns.getMemberKey());
+			pstmt.setInt(2, sns.getLoginSourceNo());
+			pstmt.setNString(3, sns.getSnsId());
+			pstmt.setNString(4, sns.getSnsName());
+			pstmt.setString(5, sns.getSnsProfile());
+			pstmt.setString(6, sns.getAccessToken());
+			pstmt.setNString(7, sns.getRefreshToken());
+			pstmt.setDate(8, sns.getRefreshTokenValidDate());
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("MemberDao에서 SNS 로그인 정보 삽입에 실패!!");
+		} finally {
+			close(pstmt);
+		}
+		
+		return result==1;
+	}
+	
+	public Member loadMemberByMemberKey(Connection conn, int memberKey) {
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadMemberByMemberKey"));
+			pstmt.setInt(1, memberKey);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				m=memberConvention(rs);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			m=null;
+			System.out.println("멤버를 멤버키로 불러오기 실패!");
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return m;
 	}
 }
