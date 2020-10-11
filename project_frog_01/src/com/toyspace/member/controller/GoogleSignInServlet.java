@@ -15,6 +15,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.toyspace.member.model.service.MemberService;
+import com.toyspace.member.model.vo.Member;
 
 /**
  * Servlet implementation class GoogleSignInServlet
@@ -36,6 +38,8 @@ public class GoogleSignInServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		MemberService ms = new MemberService();
+		
 		String idTokenString = request.getParameter("id_token");
 		String clientId = request.getParameter("client_id");
 		
@@ -56,9 +60,18 @@ public class GoogleSignInServlet extends HttpServlet {
 		if (idToken!=null) {
 			payload = idToken.getPayload();
 //			정보 받아오기!
+
+			String id = payload.getSubject();
 			
-			String email = payload.getEmail();
-			String id = payload.getUserId();
+			//이 구글 유니크 아이디가 벌써 등록되어있는지 체크
+			
+			Member m = ms.checkMemberThroughSNSId(1, id);
+			
+//			m이 존재하면 그 아이디로 멤버를 불러와 세션 어트리뷰트에 담는다.
+			if(m!=null) {
+				request.getSession().setAttribute("signedInMember", m);
+				return;
+			}
 //			멤버 객체 만들기
 			
 //			서비스 통해 dao - > 서버로 가서 이미 있는 아이디인지 확인하고
