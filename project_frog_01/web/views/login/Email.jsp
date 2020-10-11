@@ -26,7 +26,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
         <div class="pw-area">
             <input type="password" name="password" id="password" placeholder="비밀번호를 재입력해주세요" required>
         </div>
-        <div class="btn-area">
+        <div class="btn-area3">
             <button onclick="">비밀번호변경</button>
         </div>
     </div>    
