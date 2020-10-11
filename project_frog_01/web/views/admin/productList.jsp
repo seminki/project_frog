@@ -75,7 +75,7 @@ pageEncoding="UTF-8" %>
       <table class="tbl-item">
         <thead>
           <tr>
-            <th><input type="checkbox" /> 전체선택</th>
+            <th><input type="checkbox" class="chkAll" onclick="chkAll();"name="chkAll" /> 전체선택</th>
             <th>상품ID</th>
             <th>카테고리</th>
             <th>상품명</th>
@@ -85,11 +85,11 @@ pageEncoding="UTF-8" %>
           </tr>
         </thead>
         <tbody>
-          <input type="button" value="선택 삭제" />
+          <input type="button" value="선택 삭제" onclick="location.href='<%=request.getContextPath() %>/admin/deleteProduct'"/>
         <%if(productsList!=null&&productsList.size()!=0){
         	for(Product p : productsList){ %>
           <tr>
-            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" value="check"/></td>
             <td><%=p.getProductId() %></td>
             <td><%=p.getCategoryName() %></td>
             <td><%=p.getProductName() %></td>
@@ -109,5 +109,11 @@ pageEncoding="UTF-8" %>
     </section>
 
     <script>
-  
+    function chkAll() {
+        if ($(".chkAll").is(':checked')) {
+            $("input[type=checkbox]").prop("checked", true);
+        } else {
+            $("input[type=checkbox]").prop("checked", false);
+        }
+    }
     </script>
