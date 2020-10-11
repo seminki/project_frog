@@ -1,4 +1,4 @@
-package com.toyspace.admin.controller;
+package com.toyspace.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditProductServlet
+ * Servlet implementation class SNSSignUpServlet
  */
-@WebServlet("/admin/editProduct")
-public class EditProductServlet extends HttpServlet {
+@WebServlet("/member/snsSignUp")
+public class SNSSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditProductServlet() {
+    public SNSSignUpServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class EditProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/views/login/sns_login/snsSignUp.jsp").forward(request, response);
 	}
 
 	/**

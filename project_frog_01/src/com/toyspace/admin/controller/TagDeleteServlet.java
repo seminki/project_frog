@@ -29,7 +29,7 @@ public class TagDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String tagName=request.getParameter("tagNick");
+		String tagName=request.getParameter("tagName");
 		int result=new TagService().deleteTag(tagName);
 		
 		

@@ -98,5 +98,20 @@ public class TagDao {
 		}
 		return tagsList;
 	}
+	public int editTag(Connection conn, Tags t) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("editTag"));
+			pstmt.setString(1, t.getTagName());
+			pstmt.setInt(2, t.getTagNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

@@ -31,7 +31,7 @@ public class InsertTagServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Tags t=new Tags();
-		t.setTagName(request.getParameter("tagName"));
+		t.setTagName(request.getParameter("newTag"));
 		
 		int result=new TagService().insertTag(t);
 		

@@ -132,5 +132,10 @@
     </section>
 	
 	<%@ include file="views/common/footer.jsp" %>
+	<script>
+	
+		$($(".bottom-support-ui")[0]).addClass("animate__bounceInUp");
+	
+	</script>
 </body>
 </html>

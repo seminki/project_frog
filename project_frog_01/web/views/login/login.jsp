@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% String clientId = "1048798785374-009dlj5qh83q83l0kg2n7lg3d4bo3q3f.apps.googleusercontent.com"; %>
+    <% String clientId = (String)request.getAttribute("client_id"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +9,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" 
 href="<%=request.getContextPath() %>/css/login/style.css">
+<!-- 구글 로그인 api 로드 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <meta name="google-signin-client_id" content="<%=clientId%>">
+<!-- 네이버 로그인 api 로드 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<!-- 카카오 로그인 api 로드 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
@@ -42,9 +46,10 @@ href="<%=request.getContextPath() %>/css/login/style.css">
             </div>
             <div class="simple-login">
                 <div class="sp-login" style="margin:50px ;">
-                    <div id="naverIdLogin"></div>
-                    <input type="image" id="kakao" name="kakao" src="<%=request.getContextPath() %>/image/login/kakao.png">
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <div id="naverIdLogin"></div>
+                    <div class="kakao-container">
+                   </div>
                 </div>
             </div>
    </section>
@@ -52,28 +57,72 @@ href="<%=request.getContextPath() %>/css/login/style.css">
    
   	
    <script>
-   const naverLogin = new naver.LoginWithNaverId(
-			{
-				clientId: "ZsYfto7388DFNUATk2ze",
-				callbackUrl: "http://mightymosses.hopto.org:9090/project_frog_01/",
-				isPopup: false, /* 팝업을 통한 연동처리 여부 */
-				loginButton: {color: "green", type: 3, height: 40} /* 로그인 버튼의 타입을 지정 */
-			}
-		);
-		
-		/* 설정정보를 초기화하고 연동을 준비 */
-		naverLogin.init();
-   
-   
    function onSignIn(googleUser) {
 	   let id_token = googleUser.getAuthResponse().id_token;
 	   let xhr = new XMLHttpRequest();
 	   xhr.open('POST', 'http://mightymosses.hopto.org:9090/project_frog_01/member/googleSignIn');
 	   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	   xhr.send('id_token=' + id_token + "&client_id=<%=clientId%>");
-	   
+		/* 어디로 보낼지 설정하기 */   
+		/* 로그인 객체는 세션에 담아짐 */
+		xhr.addEventListener('load', function(e){
+    		const result = JSON.parse(e.target.response);
+    		switch(result){
+    		case 3: location.href = "<%=request.getContextPath()%>/member/mergeId"; break;
+    		/* 간편가입시 '추가 정보 기입하시겠습니까?' 등을 물어보는 서블릿으로 이동 */
+    		case 2: location.href = "<%=request.getContextPath()%>/member/snsSignUp"; break;
+    		case 1: window.history.go(-1); break;
+    		}
+    		
+		})
 	 }
-   	
+   
+   
+   const naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "ZsYfto7388DFNUATk2ze",
+				callbackUrl: "http://mightymosses.hopto.org:9090/project_frog_01/",
+				isPopup: false, /* 팝업을 통한 연동처리 여부 */
+				loginButton: {color: "green", type: 3, height: 36} /* 로그인 버튼의 타입을 지정 */
+			}
+		);
+		
+		/* 설정정보를 초기화하고 연동을 준비 */
+		naverLogin.init();
+   
+		/* 카카오 인증 초기화 */
+  	 	Kakao.init('9bf121caabaa1ff4de5c5d96dfa03136');
+  	 	Kakao.Auth.createLoginButton({
+            container: '.kakao-container',
+            success: function (authObj) {
+            	Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function(res) {
+                    	
+                      $.ajax({
+                    	  url: '<%=request.getContextPath()%>/member/kakaoSignIn',
+                    	  data: {"id" : res.id, "access_token": Kakao.Auth.getAccessToken(), "birthday" : res.kakao_account.birthday, "email": res.kakao_account.email,
+                    			 "nickname" :  res.kakao_account.profile.nickname, "profile_image_url": res.kakao_account.profile.profile_image_url
+                    	  },
+                    	  type: 'POST',
+                    	  success : (data)=>{
+                    		 
+                    	  }
+                      })
+                    },
+                    fail: function(error) {
+                      alert(
+                        'login success, but failed to request user information: ' +
+                          JSON.stringify(error)
+                      )
+                    },
+                  })
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+
    </script>
    
 </body>
