@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
     <% String clientId = (String)request.getAttribute("client_id"); %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,13 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
+<script>
+	<% if(session.getAttribute("signedInMember")!=null){%>
+		alert("잘못된 접근입니다. 이미 로그인되어있습니다.");
+		window.history.go(-1);
+	<%}%>
+
+</script>
 <section class ="login-form">
            <div class="logo1-area">
                 <img src="<%=request.getContextPath()%>/image/login/blacklogo-small.png" alt="">

@@ -14,7 +14,13 @@
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
+<script>
+	<% if(session.getAttribute("signedInMember")!=null){%>
+		alert("잘못된 접근입니다. 이미 로그인되어있습니다.");
+		window.history.go(-1);
+	<%}%>
 
+</script>
 <section>
 이미 그 이메일로 된거 있는데?
 니 아이디는 이러하니까
