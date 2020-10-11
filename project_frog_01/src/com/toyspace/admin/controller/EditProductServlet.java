@@ -1,23 +1,27 @@
 package com.toyspace.admin.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.toyspace.product.model.service.ProductService;
+import com.toyspace.product.model.vo.Product;
+
 /**
  * Servlet implementation class EditProduct
  */
 @WebServlet("/admin/editProduct")
-public class EditProduct extends HttpServlet {
+public class EditProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditProduct() {
+    public EditProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,6 +31,12 @@ public class EditProduct extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String productId=request.getParameter("productId");
+		
+		Product p=new ProductService().productInfo(productId);
+		
+		request.setAttribute("product", p);
+		
 		request.getRequestDispatcher("/views/admin/productEdit.jsp").forward(request, response);
 	}
 

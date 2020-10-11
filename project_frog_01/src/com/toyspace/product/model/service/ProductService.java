@@ -6,6 +6,7 @@ import static com.toyspace.common.JDBCTemplate.getConnection;
 import static com.toyspace.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.toyspace.product.model.dao.ProductDao;
@@ -49,6 +50,20 @@ public class ProductService {
 		close(conn);
 		
 		return result;
+	}
+//상품리스트 (관리자:상품관리페이지)
+	public ArrayList<Product> loadAllproducts() {
+		Connection conn=getConnection();
+		ArrayList<Product> productsList=dao.loadAllProducts(conn);
+		close(conn);
+		return productsList;
+	}
+//상품정보 불러오기(관리자:상품수정페이지용)
+	public Product productInfo(String productId) {
+		Connection conn=getConnection();
+		Product p=dao.productInfo(conn,productId);
+		close(conn);
+		return p;
 	}
 	
 }

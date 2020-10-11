@@ -2,6 +2,8 @@
 pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"%> 
 
 <%
+	Product p=(Product)request.getAttribute("product");
+
 	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
 	TreeSet<Category> categoryList= (TreeSet<Category>)request.getAttribute("categoryList");
 %>
@@ -73,7 +75,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품ID</th>
             <td>
-              <input type="text" placeholder="" name="item_id" readonly /><br />
+              <input type="text" placeholder="" name="item_id" value=<%=p.getProductId() %> readonly /><br />
             </td>
           </tr>
           <tr>
@@ -83,6 +85,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
                 type="text"
                 placeholder=""
                 name="item_name"
+                value=<%=p.getProductName() %>
                 required
               /><br />
             </td>
@@ -90,7 +93,14 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품 카테고리</th>
             <td>
-              <select name="category" id="category"></select>
+              <select name="category" id="category">
+              	<option>디즈니</option>
+              	<option>스타워즈</option>
+              	<option>왕좌의게임</option>
+              	<option>포켓몬스터</option>
+              	<option>마블</option>
+              	
+              </select>
             </td>
           </tr>
           <tr>
@@ -101,13 +111,14 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
                 placeholder="0원이상"
                 name="item_price"
                 min="0"
+                value=<%=p.getProductPrice() %>
                 required
               /><br />
             </td>
           </tr>
           <tr>
             <th>상품 개수</th>
-            <td><input type="number" name="item_qt" required /><br /></td>
+            <td><input type="number" name="item_qt" value=<%=p.getProductStock() %> required /><br /></td>
           </tr>
           <tr>
             <th></th>
@@ -199,25 +210,25 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
                 cols="50"
                 placeholder="띄어쓰기는 &#60;br&#62;로 표시"
                 name="product-description"
-              ></textarea>
+                ><%=p.getProductDescription() %></textarea>
             </td>
           </tr>
           <tr>
             <th>제조사</th>
             <td>
-              <input type="text" name="manufacturer" />
+              <input type="text" name="manufacturer" value=<%=p.getManufacturer() %>/>
             </td>
           </tr>
           <tr>
             <th>제조국</th>
             <td>
-              <input type="text" name="manufactured-country" />
+              <input type="text" name="manufactured-country" value=<%=p.getManufacturedCountry() %> />
             </td>
           </tr>
           <tr>
             <th>권장 연령</th>
             <td>
-              <input type="number" name="recommended-age" min="0" />
+              <input type="number" name="recommended-age" min="0" value="<%=p.getRecommendedAge() %>"/>
             </td>
           </tr>
           <tr>
@@ -228,7 +239,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
                 cols="50"
                 placeholder="띄어쓰기는 &#60;br&#62;로 표시"
                 name="caution"
-              ></textarea>
+              ><%=p.getCaution() %></textarea>
             </td>
           </tr>
         </table>
