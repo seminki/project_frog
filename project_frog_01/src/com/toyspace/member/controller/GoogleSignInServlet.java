@@ -41,6 +41,14 @@ public class GoogleSignInServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+//		gsonFlag의 용도: 응답페이지에 int로 플래그를 보내줌 
+//		1:이미 가입된 사람인 경우
+//		2:가입되어있지만 연동이 안되어있는 경우로 판단되는 경우
+//		3:가입되어있지 않은 경우
+		int gsonFlag = -1;
+		
+		
 		MemberService ms = new MemberService();
 		HttpSession session = request.getSession();
 		Gson gson = new Gson();
@@ -77,6 +85,8 @@ public class GoogleSignInServlet extends HttpServlet {
 //			있으면 멤버 불러 세션에 담아줌 (어차피 로그인 상태는 이 세션에 따라다니니까!)
 			if(m!=null) {
 				session.setAttribute("signedInMember", m);
+				gsonFlag=1;
+				gson.toJson(gsonFlag,response.getWriter());
 				return;
 			}
 //			구글 페이로드에서 더 많은 정보 받아오기
@@ -99,7 +109,8 @@ public class GoogleSignInServlet extends HttpServlet {
 			if(emailM!=null) {
 				session.setAttribute("email-found-new-member", m);
 				session.setAttribute("SNS-for-email-found-new-member", sns);
-				gson.toJson(1,response.getWriter());
+				gsonFlag=3;
+				gson.toJson(gsonFlag,response.getWriter());
 				return;
 			}
 			
@@ -115,6 +126,8 @@ public class GoogleSignInServlet extends HttpServlet {
 			
 			session.setAttribute("signedInMember", signInMember);
 			
+			gsonFlag=2;
+			gson.toJson(gsonFlag,response.getWriter());
 		} else {
 			System.out.println("Invalid ID Token!!");
 		}

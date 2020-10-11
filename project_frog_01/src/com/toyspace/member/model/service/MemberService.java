@@ -45,7 +45,8 @@ public class MemberService {
 		int memberKey = dao.memberKeySequenceNextValue(conn);
 //		memberKeySequenceNextValue를 통해 생성된 멤버키를 newMember에 넣어줌!
 		newMember.setMemberKey(memberKey);
-		boolean result = dao.signUpThroughSNS(conn, newMember);
+
+		boolean result = dao.signUpThroughSNS(conn, newMember, sns.getLoginSourceDescription());
 		if(!result) {
 			rollback(conn);
 			System.out.println("멤버 저장에 실패했습니다");
@@ -65,6 +66,8 @@ public class MemberService {
 		commit(conn);
 		
 		Member m = dao.loadMemberByMemberKey(conn, memberKey);
+		insertLoginLog(conn, m, sns.getLoginSourceNo());
+		close(conn);
 		
 		return m;
 	}
