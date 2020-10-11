@@ -22,7 +22,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
             <div class="input-area" >
                 <input type="email" id="email" name="email" placeholder="Email" autocomplete="off"  required>
             </div>
-            <div class="btn-area">
+            <div class="btn-area2">
                  <button type="submit">비밀번호찾기</button>
             </div>
             <div class="last-area1">
