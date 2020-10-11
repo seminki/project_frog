@@ -35,7 +35,7 @@ public class Member {
 	public Member(int memberKey, String userId, String userEmail, String password, String userGender, String userName,
 			String userNickname, int userAge, String userBirthday, String userAddress, String userPhone,
 			Date userSignUpDate, String userProfilePicPath, int userMileage, String recoveryPassword, int memberLevelNo,
-			String memberLevelDescription, Date modifiedDate, ArrayList<Coupon> ownedCoupons,
+			Date modifiedDate, ArrayList<Coupon> ownedCoupons,
 			String userProfilePicUrl) {
 		super();
 		this.memberKey = memberKey;
@@ -54,10 +54,17 @@ public class Member {
 		this.userMileage = userMileage;
 		this.recoveryPassword = recoveryPassword;
 		this.memberLevelNo = memberLevelNo;
-		this.memberLevelDescription = memberLevelDescription;
 		this.modifiedDate = modifiedDate;
 		this.ownedCoupons = ownedCoupons;
 		this.userProfilePicUrl = userProfilePicUrl;
+		
+		switch(memberLevelNo) {
+		case 1: this.memberLevelDescription = "회원"; break;
+		case 2: this.memberLevelDescription = "단골"; break;
+		case 3: this.memberLevelDescription = "VIP"; break;
+		case 0: this.memberLevelDescription = "관리자"; break;
+		default : this.memberLevelDescription = null;
+		}
 	}
 
 	public int getMemberKey() {
@@ -186,15 +193,20 @@ public class Member {
 
 	public void setMemberLevelNo(int memberLevelNo) {
 		this.memberLevelNo = memberLevelNo;
+		switch(memberLevelNo) {
+		case 1: this.memberLevelDescription = "회원"; break;
+		case 2: this.memberLevelDescription = "단골"; break;
+		case 3: this.memberLevelDescription = "VIP"; break;
+		case 0: this.memberLevelDescription = "관리자"; break;
+		default : this.memberLevelDescription = null ;
+		}
 	}
 
 	public String getMemberLevelDescription() {
 		return memberLevelDescription;
 	}
 
-	public void setMemberLevelDescription(String memberLevelDescription) {
-		this.memberLevelDescription = memberLevelDescription;
-	}
+
 
 	public Date getModifiedDate() {
 		return modifiedDate;

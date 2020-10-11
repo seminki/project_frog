@@ -9,6 +9,7 @@ import java.util.Properties;
 import static com.toyspace.common.JDBCTemplate.*;
 
 import com.toyspace.member.model.vo.Member;
+import com.toyspace.member.model.vo.SNSLogin;
 
 public class MemberDao {
  
@@ -23,11 +24,80 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
+////////////////////////////////////////////////////////////////////////////
+//////////////////////////공용부////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+//	간단하게 이것만 while문 안에 넣어주면 멤버를 받아올 수 있음!
+	public Member memberConvention(ResultSet rs) throws Exception{
+		Member m =new Member();
+		
+		m.setMemberKey(rs.getInt("MEMBER_KEY"));
+		m.setUserId(rs.getString("USER_ID"));
+		m.setUserEmail(rs.getNString("USER_EMAIL"));
+		m.setPassword(rs.getString("USER_PASSWORD"));
+		m.setUserGender(rs.getString("USER_GENDER"));
+		m.setUserName(rs.getNString("USER_NAME"));
+		m.setUserNickname(rs.getNString("USER_NICKNAME"));
+		m.setUserAge(rs.getInt("USER_AGE"));
+		m.setUserBirthday(rs.getNString("USER_BIRTHDAY"));
+		m.setUserAddress(rs.getNString("USER_ADDRESS"));
+		m.setUserPhone(rs.getNString("USER_PHONE"));
+		m.setUserSignUpDate(rs.getDate("USER_SIGN_UP_DATE"));
+		m.setUserProfilePicPath(rs.getNString("USER_PROFILE_PIC_PATH"));
+		m.setUserMileage(rs.getInt("USER_MILEAGE"));
+		m.setMemberLevelNo(rs.getInt("MEMBER_LEVEL_NO"));
+		m.setMemberLevelDescription(rs.getNString("MEMBER_LEVEL_DESCRIPTION"));
+		m.setModifiedDate(rs.getDate("MODIFIED_DATE"));
+		m.setUserProfilePicUrl(rs.getNString("USER_PROFILE_PIC_URL"));
+		
+		return m;
+	}
+	
+	public boolean insertLoginLog(Connection conn, int memberKey, int signInSource) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertLoginLog"));
+			pstmt.setInt(1, memberKey);
+			pstmt.setInt(2, signInSource);
+			result = pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("MemberDao에서 로그인 로그 생성 실패");
+		} finally {
+			close(pstmt);
+		}
+		
+		return result==1;
+	}
+	public int memberKeySequenceNextValue(Connection conn) {
+		int nextValue=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberKeySequenceNextValue"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				nextValue=rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("멤버키 시퀀스 밸류 로드 실패");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return nextValue;
+	}
+	
+///////////////////////////////////////////////////////////////////////////////
 	
 	public Member checkMemberThroughSNSId(Connection conn, int signInSource, String id) {
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		int rsSize=0;
 		
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("checkMemberThroughSNSId"));
@@ -35,27 +105,8 @@ public class MemberDao {
 			pstmt.setNString(2, id);
 			rs=pstmt.executeQuery();
 			
-			int rsSize=0;
 			while(rs.next()) {
-				m = new Member();
-				m.setMemberKey(rs.getInt("MEMBER_KEY"));
-				m.setUserId(rs.getString("USER_ID"));
-				m.setUserEmail(rs.getNString("USER_EMAIL"));
-				m.setPassword(rs.getString("USER_PASSWORD"));
-				m.setUserGender(rs.getString("USER_GENDER"));
-				m.setUserName(rs.getNString("USER_NAME"));
-				m.setUserNickname(rs.getNString("USER_NICKNAME"));
-				m.setUserAge(rs.getInt("USER_AGE"));
-				m.setUserBirthday(rs.getNString("USER_BIRTHDAY"));
-				m.setUserAddress(rs.getNString("USER_ADDRESS"));
-				m.setUserPhone(rs.getNString("USER_PHONE"));
-				m.setUserSignUpDate(rs.getDate("USER_SIGN_UP_DATE"));
-				m.setUserProfilePicPath(rs.getNString("USER_PROFILE_PIC_PATH"));
-				m.setUserMileage(rs.getInt("USER_MILEAGE"));
-				m.setMemberLevelNo(rs.getInt("MEMBER_LEVEL_NO"));
-				m.setMemberLevelDescription(rs.getNString("MEMBER_LEVEL_DESCRIPTION"));
-				m.setModifiedDate(rs.getDate("MODIFIED_DATE"));
-				m.setUserProfilePicUrl(rs.getNString("USER_PROFILE_PIC_URL"));
+				m = memberConvention(rs);
 				rsSize++;
 			}
 			if(rsSize!=1) m = null;
@@ -64,11 +115,72 @@ public class MemberDao {
 			// TODO: handle exception
 			e.printStackTrace();
 			m = null;
+			if(rsSize>1) System.out.println("조회된 회원이 한명 이상입니다!!");
+			
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		
 		return m;
+	}
+	
+	public Member checkMemberThroughSNSEmail(Connection conn, String email) {
+		Member m =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int rsSize=0;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("checkMemberThroughSNSEmail"));
+			pstmt.setNString(1, email);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				m = memberConvention(rs);
+				rsSize++;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			m = null;
+			if(rsSize>1) System.out.println("조회된 회원이 한명 이상입니다!!");
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public boolean signUpThroughSNS(Connection conn, Member newMember) {
+		int result=0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("signUpThroughSNS"));
+			pstmt.setInt(1, newMember.getMemberKey());
+//			아이디는 currentTimeMillis로 생성
+			pstmt.setString(2, newMember.getMemberLevelDescription()+"_"+System.currentTimeMillis());
+			pstmt.setNString(3, newMember.getUserEmail());
+			pstmt.setNString(4, newMember.getUserName());
+			pstmt.setNString(5, newMember.getUserNickname());
+			pstmt.setNString(6, newMember.getUserBirthday());
+			pstmt.setNString(7, newMember.getUserProfilePicUrl());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("MemberDao에서 SNS를 통한 회원가입에 실패!");
+		} finally {
+			close(pstmt);
+		}
+
+		return result==1;
+	}
+	
+	public boolean insertSNSInfo(Connection conn, SNSLogin sns) {
+		
 	}
 }

@@ -21,13 +21,12 @@ public class SNSLogin {
 	}
 
 
-	public SNSLogin(int memberKey, int loginSourceNo, String loginSourceDescription, String snsId, String snsName,
+	public SNSLogin(int memberKey, int loginSourceNo, String snsId, String snsName,
 			String snsProfile, Date snsConnectDate, String accessToken, String refreshToken,
 			Date refreshTokenValidDate) {
 		super();
 		this.memberKey = memberKey;
 		this.loginSourceNo = loginSourceNo;
-		this.loginSourceDescription = loginSourceDescription;
 		this.snsId = snsId;
 		this.snsName = snsName;
 		this.snsProfile = snsProfile;
@@ -35,6 +34,13 @@ public class SNSLogin {
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
 		this.refreshTokenValidDate = refreshTokenValidDate;
+		
+		switch(loginSourceNo) {
+		case 1: this.loginSourceDescription="google"; break;
+		case 2: this.loginSourceDescription="naver"; break;
+		case 3: this.loginSourceDescription="kakao"; break;
+		default: this.loginSourceDescription=null;
+		}
 	}
 
 
@@ -55,16 +61,17 @@ public class SNSLogin {
 
 	public void setLoginSourceNo(int loginSourceNo) {
 		this.loginSourceNo = loginSourceNo;
+		switch(loginSourceNo) {
+		case 1: this.loginSourceDescription="google";
+		case 2: this.loginSourceDescription="naver";
+		case 3: this.loginSourceDescription="kakao";
+		default: this.loginSourceDescription=null;
+		}
 	}
 
 
 	public String getLoginSourceDescription() {
 		return loginSourceDescription;
-	}
-
-
-	public void setLoginSourceDescription(String loginSourceDescription) {
-		this.loginSourceDescription = loginSourceDescription;
 	}
 
 
