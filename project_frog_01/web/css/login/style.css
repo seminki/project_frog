@@ -82,20 +82,31 @@ section .last-area{
     font-size: 15px;
     border-radius: 5px;
 }
-.1{ 
+.btn-area{ 
     margin: 20px;
     text-align: center;
 
 }
-.1 button{
+.btn-area{
     width: 20%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    outline: 0;
+} 
+.btn-area1{
+	 margin: 20px;
+    text-align: center;
+}
+.btn-area1 button{
+	 width: 20%;
     height: 40px;
     border-radius: 50px;
     background-color: white;
     border-style: dotted;
     outline: 0;
+}
 
-} 
 .news{
     margin: 20px;
     -webkit-nbsp-mode: space;
@@ -134,8 +145,17 @@ section h2{
     font-size: 15px;
     border-radius: 5px;
 }
-.button{
-    margin: 30px;
+.btn-area2{
+	margin: 30px;
+}
+.btn-area2 button{
+    
+     width: 40%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    border-style: dotted;
+    outline: 0;
 }
 .login-form{
 	display: flex;
@@ -155,4 +175,16 @@ section h2{
 	flex-direction: row;
 	justify-content: space-around;
 	
+}
+/* 비밀번호변경 */
+.btn-area3{
+	margin: 30px;
+}
+.btn-area3 button{
+	width: 40%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    border-style: dotted;
+    outline: 0;
 }

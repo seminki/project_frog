@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%String contextPath = request.getContextPath(); %>
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script
 			src="https://kit.fontawesome.com/8f9d453cdc.js"
 			crossorigin="anonymous"
 		></script>
-		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/commonStyle.css" />
-		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/headerStyle.css" />
+		<link rel="stylesheet" href="<%=contextPath%>/css/common/commonStyle.css" />
+		<link rel="stylesheet" href="<%=contextPath%>/css/common/headerStyle.css" />
 		<link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -17,9 +17,9 @@
 		<header>
 			<div class="header-container">
 				<div class="header-logo">
-					<a href="<%=request.getContextPath()%>">
+					<a href="<%=contextPath%>">
 						<img
-							src="<%=request.getContextPath()%>/image/common/blacklogo.png"
+							src="<%=contextPath%>/image/common/blacklogo.png"
 							alt="logo"
 							class="header-logo-image"
 						/>
@@ -27,14 +27,14 @@
 				</div>
 				<div class="header-middle-menu">
 					<div class="header-product-container header-menu-container">
-						<a href="<%=request.getContextPath()%>/productlist.do" class="header-menu-title">PRODUCTS</a>
+						<a href="<%=contextPath%>/productlist.do" class="header-menu-title">PRODUCTS</a>
 						<ul class="uler">
 							<div class="header-gray-bar"></div>
 							<li class="header-product-list">
 								<div>
 									<div class="header-product-img">
 										<img
-											src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
+											src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
 											class="header-menu-image"
 											alt=""
 										/>
@@ -46,7 +46,7 @@
 								<div>
 									<div class="header-product-img">
 										<img
-											src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
+											src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
 											class="header-menu-image"
 											alt=""
 										/>
@@ -58,7 +58,7 @@
 								<div>
 									<div class="header-product-img">
 										<img
-											src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
+											src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
 											class="header-menu-image"
 											alt=""
 										/>
@@ -70,7 +70,7 @@
 								<div>
 									<div class="header-product-img">
 										<img
-											src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
+											src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
 											class="header-menu-image"
 											alt=""
 										/>
@@ -82,7 +82,7 @@
 								<div>
 									<div class="header-product-img">
 										<img
-											src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
+											src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
 											class="header-menu-image"
 											alt=""
 										/>
@@ -94,7 +94,7 @@
 								<div>
 									<div class="header-product-img">
 										<img
-											src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
+											src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png"
 											class="header-menu-image"
 											alt=""
 										/>
@@ -122,7 +122,7 @@
 							</a>
 						</li>
 						<li class="user-li">
-							<a href="<%=request.getContextPath()%>/login.do">
+							<a href="<%=contextPath%>/login.do">
 								<i class="fas fa-user-astronaut user"></i>
 							</a>
 						</li>
@@ -132,7 +132,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="<%=request.getContextPath()%>/cart.do">
+							<a href="<%=contextPath%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
 								<div id="cart-amount">0</div>
 							</a>
@@ -163,13 +163,13 @@
 		</style>
 		<!-- a태그  눌렀을때 마우스 올렸을때  평상시 색상 블랙 으로 변경  -->
 				<div class="side-bar-product side-bar-margin" >
-				<a  class="a-color" href="<%=request.getContextPath()%>/productlist.do" >PRODUCTS</a>
+				<a  class="a-color" href="<%=contextPath%>/productlist.do" >PRODUCTS</a>
 				</div>
 				<div class="side-bar-product-cont side-bar-margin">
           <div class="side-bar-product-category">
             <a href="#">
               <div class="side-bar-img-cont">
-                <img src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
+                <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
               <span>Heroes</span>
             </a>
@@ -178,7 +178,7 @@
           <div class="side-bar-product-category">
             <a href="#">
               <div class="side-bar-img-cont">
-                <img src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
+                <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
               <span>Heroes</span>
             </a>
@@ -187,7 +187,7 @@
           <div class="side-bar-product-category">
             <a href="#">
               <div class="side-bar-img-cont">
-                <img src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
+                <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
               <span>Heroes</span>
             </a>
@@ -196,7 +196,7 @@
           <div class="side-bar-product-category">
             <a href="#">
               <div class="side-bar-img-cont">
-                <img src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
+                <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
               <span>Heroes</span>
             </a>
@@ -205,7 +205,7 @@
           <div class="side-bar-product-category">
             <a href="#">
               <div class="side-bar-img-cont">
-                <img src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
+                <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
               <span>Heroes</span>
             </a>
@@ -214,7 +214,7 @@
           <div class="side-bar-product-category">
             <a href="#">
               <div class="side-bar-img-cont">
-                <img src="<%=request.getContextPath()%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
+                <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
               <span>Heroes</span>
             </a>
@@ -241,7 +241,7 @@
 				</div>
 			</div>
 		</header>
-	<script src="<%=request.getContextPath()%>/js/common/headerScript.js"></script>
+	<script src="<%=contextPath%>/js/common/headerScript.js"></script>
 <script>
 
 </script>

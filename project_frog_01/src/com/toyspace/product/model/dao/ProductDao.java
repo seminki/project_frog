@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -124,5 +126,68 @@ public class ProductDao {
 		}
 		
 		return result.length==tagList.size();
+	}
+	//상품리스트 (관리자:상품관리페이지)
+	public ArrayList<Product> loadAllProducts(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Product> productsList=new ArrayList<Product>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("loadAllProducts"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Product p=new Product();
+				p.setProductId(rs.getInt("product_id"));
+				p.setCategoryNo(rs.getInt("category_no"));
+				p.setCategoryName(rs.getString("category_name"));
+				p.setProductName(rs.getString("product_name"));
+				p.setProductPrice(rs.getDouble("product_price"));
+				p.setProductStock(rs.getInt("product_stock"));
+				p.setProductDescription(rs.getString("product_description"));
+				p.setManufacturer(rs.getString("manufacturer"));
+				p.setManufacturedCountry(rs.getString("manufactured_country"));
+				p.setRecommendedAge(rs.getInt("recommended_age"));
+				p.setCaution(rs.getString("caution"));
+				
+				productsList.add(p);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productsList;
+	}
+////상품정보 불러오기(관리자:상품수정페이지용)
+	public Product productInfo(Connection conn, String productId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Product p=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("productInfo"));
+			pstmt.setString(1, productId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				p=new Product();
+				p.setCategoryNo(rs.getInt("category_no"));
+				p.setProductName(rs.getString("product_name"));
+				p.setProductPrice(rs.getDouble("product_price"));
+				p.setProductStock(rs.getInt("product_stock"));
+				p.setProductDescription(rs.getString("product_description"));
+				p.setManufacturer(rs.getString("manufacturer"));
+				p.setManufacturedCountry(rs.getString("manufactured_country"));
+				p.setRecommendedAge(rs.getInt("recommended_age"));
+				p.setCaution(rs.getString("caution"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return p;
 	}
 }
