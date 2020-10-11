@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%String contextPath = request.getContextPath(); %>
+    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member"%>
+<%String contextPath = request.getContextPath(); 
+Member signedInMember=(Member)(session.getAttribute("signedInMember"));
+
+%>
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script
 			src="https://kit.fontawesome.com/8f9d453cdc.js"
@@ -122,7 +125,11 @@
 							</a>
 						</li>
 						<li class="user-li">
+							<% if(signedInMember==null){ %>
 							<a href="<%=contextPath%>/login.do">
+							<%} else { %>
+							<a href="<%=contextPath%>/member/myPage">
+							<%} %>
 								<i class="fas fa-user-astronaut user"></i>
 							</a>
 						</li>
@@ -153,7 +160,12 @@
 			</div>
 			<div class="side-bar">
 				<div class="side-bar-top-cont side-bar-margin">
-					<a href="#"><i class="fa fa-user-circle user2"></i></a>
+					<% if(signedInMember==null){ %>
+							<a href="<%=contextPath%>/login.do">
+							<%} else { %>
+							<a href="<%=contextPath%>/member/myPage">
+							<%} %>
+					<i class="fa fa-user-circle user2"></i></a>
 					<a href="#"><i class="fas fa-times side-x"></i></a>
 				</div>
 						<style type="text/css">

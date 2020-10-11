@@ -77,8 +77,9 @@ public class GoogleSignInServlet extends HttpServlet {
 			String id = payload.getSubject();
 			
 			//이 구글 유니크 아이디가 벌써 등록되어있는지 체크
-			
-			Member m = ms.checkMemberThroughSNSId(1, id);
+//			로그인 소스 1은 구글 2는 네이버 3은 카카오
+			int loginSource =1;
+			Member m = ms.checkMemberThroughSNSId(loginSource, id);
 			
 //			m이 존재하면 그 아이디로 멤버를 불러와 세션 어트리뷰트에 담는다.
 //			서비스 통해 dao - > 서버로 가서 이미 있는 아이디인지 확인하고

@@ -75,10 +75,10 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 		xhr.addEventListener('load', function(e){
     		const result = JSON.parse(e.target.response);
     		switch(result){
-    		case 3: location.href = "<%=request.getContextPath()%>/member/mergeId"; break;
+    		case 3: alert("기존에 가입된 아이디를 발견하였습니다"); location.href = "<%=request.getContextPath()%>/member/mergeId"; break;
     		/* 간편가입시 '추가 정보 기입하시겠습니까?' 등을 물어보는 서블릿으로 이동 */
-    		case 2: location.href = "<%=request.getContextPath()%>/member/snsSignUp"; break;
-    		case 1: window.history.go(-1); break;
+    		case 2: alert("기존에 가입된 이력이 없습니다. 간편 가입되었습니다."); location.href = "<%=request.getContextPath()%>/member/snsSignUp"; break;
+    		case 1: alert("구글을 통해 간편로그인을 하셨습니다."); location.href = "<%=request.getContextPath()%>"; break;
     		}
     		
 		})
@@ -113,7 +113,13 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                     	  },
                     	  type: 'POST',
                     	  success : (data)=>{
-                    		 
+                    		const result = JSON.parse(data);
+                      		switch(result){
+                      		case 3: alert("기존에 가입된 아이디를 발견하였습니다"); location.href = "<%=request.getContextPath()%>/member/mergeId"; break;
+                      		/* 간편가입시 '추가 정보 기입하시겠습니까?' 등을 물어보는 서블릿으로 이동 */
+                      		case 2: alert("기존에 가입된 이력이 없습니다. 간편 가입되었습니다."); location.href = "<%=request.getContextPath()%>/member/snsSignUp"; break;
+                      		case 1: alert("카카오를 통해 간편로그인을 하셨습니다."); location.href = "<%=request.getContextPath()%>"; break;
+                      		}
                     	  }
                       })
                     },
