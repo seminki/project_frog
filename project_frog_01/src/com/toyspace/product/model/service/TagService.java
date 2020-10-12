@@ -3,9 +3,11 @@ package com.toyspace.product.model.service;
 import static com.toyspace.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 import com.toyspace.product.model.dao.TagDao;
+import com.toyspace.product.model.vo.Product;
 import com.toyspace.product.model.vo.Tags;
 
 public class TagService {
@@ -31,9 +33,9 @@ public class TagService {
 	}
 
 // 태그 삭제
-	public int deleteTag(String tagName) {
+	public int deleteTag(int tagNo) {
 		Connection conn=getConnection();
-		int result=dao.deleteTag(conn,tagName);
+		int result=dao.deleteTag(conn,tagNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

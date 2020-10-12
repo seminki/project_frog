@@ -8,9 +8,11 @@ import static com.toyspace.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import com.toyspace.product.model.dao.ProductDao;
 import com.toyspace.product.model.vo.Product;
+import com.toyspace.product.model.vo.Tags;
 
 public class ProductService {
 
@@ -94,6 +96,26 @@ public class ProductService {
 		commit(conn);
 		close(conn);
 		return result;
+	}
+	
+	public boolean removeProduct(String[] productIds) {
+		Connection conn = getConnection();
+		boolean result = dao.removeProduct(conn, productIds);
+		
+		if(!result) rollback(conn);
+		else commit(conn);
+		
+		close(conn);
+		return result;
+		
+	}
+	
+	public ArrayList<Product> searchProductList(String searchKeyword){
+		
+		Connection conn=getConnection();
+		ArrayList<Product> productsList =dao.searchProductList(conn,searchKeyword);
+		close(conn);
+		return productsList;
 	}
 	
 }
