@@ -107,12 +107,15 @@ Product p=(Product)request.getAttribute("product");
         <div class="review-container">
             <div class="review-title"><h2>리뷰</h2></div>
             <div class="review-content">
-             <div class="comment-box">
-                <form action="">
-                <textarea name="" id="" cols="120" rows="4" style="resize:none"></textarea>
-             </div>   
-            <button class="review-btn">리뷰 남기기</button>
-            </form>
+             	<div class="comment-box">
+                	<form action="">
+                		<input type="hidden" name="commentLevel" value="1"> 
+						<input type="hidden" name="commentWriter" value="">
+						<input type="hidden" name="CommentRef" value="0">
+                	<textarea name="commentContent" id="" cols="120" rows="4" style="resize:none"></textarea>
+            	 </div>   
+            <button type="submit" class="review-btn">리뷰 남기기</button>
+           		 </form>
             </div>
         </div>
         <hr>
