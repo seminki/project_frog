@@ -75,7 +75,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품ID</th>
             <td>
-              <input type="text" placeholder="" name="item_id" value=<%=p.getProductId() %> readonly /><br />
+              <input type="text" placeholder="" name="productId" value="<%=p.getProductId()%>" readonly /><br />
             </td>
           </tr>
           <tr>
@@ -124,7 +124,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
             <th></th>
             <td>
               <div class="img-preview-container">
-                <img alt="" src="" class="img-preview" />
+                <img alt="" src="<%=p.getProductImageFilePaths()%>" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
