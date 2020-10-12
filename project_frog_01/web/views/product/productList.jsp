@@ -5,8 +5,16 @@
 ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("productsList");
 
 %>
-
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Document</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" />
+    
+    </head>
+   <body>
 <%@ include file="/views/common/header.jsp" %>
     <style>
         div{
@@ -140,10 +148,11 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
          <%if(productsList!=null&&productsList.size()!=0){
         	for(Product p : productsList){ %>
                             <div class="products-list-item">
-                                <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail">
+                                <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail?productId=<%=p.getProductId() %>">
                                     <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/Disney_Rapunzel.png" alt="Wall-E" style="">          
                                     <div class="">
                                         <div class="">
+                                        	<p hidden><%=p.getProductId() %></p>               	
                                             <div class=""><%=p.getCategoryName() %></div>
                                             <strong class=""><%=p.getProductName() %></strong>
                                             <div class=""><%=p.getProductPrice() %>원</div>
