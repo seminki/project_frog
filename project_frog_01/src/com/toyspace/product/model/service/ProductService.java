@@ -66,5 +66,14 @@ public class ProductService {
 		close(conn);
 		return p;
 	}
+//상품수정
+	public int updateProduct(Product p) {
+		Connection conn=getConnection();
+		int result=dao.updateProduct(conn,p);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 }

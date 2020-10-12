@@ -98,16 +98,16 @@
         </thead>
         <tbody>
           <% if(tagsList!=null&&tagsList.size()!=0){
-        	  for(Tags t: tagsList){%>        
+        	  for(Tags t: tagsList){%>      
           <tr>
-          	<form class="tagForm">
+        <form class="tagForm">
             <td><input type="text" class="tag-no" value="<%=t.getTagNo() %>" name="tagNo" readonly></td>
             <td><input type="text"  value="<%=t.getTagName() %>" name="tagName" required></input></td>
             <td><input type="button" onclick="location.href='<%=request.getContextPath()%>/admin/tagDelete?tagName=<%=t.getTagName()%>'" value="삭제" /></td>
             <td>
               <input type="button" onclick="fn_changeTag();" value="수정" />
+          </form>  
             </td>
-            </form>
           </tr>
              <%} } %>
         </tbody>
@@ -116,7 +116,7 @@
     </section>
 
     <script>
-	function fn_changeTag(){
+ 	function fn_changeTag(){
 		$(".tagForm").attr("action","<%=request.getContextPath()%>/admin/editTag").submit();
 	}  
 

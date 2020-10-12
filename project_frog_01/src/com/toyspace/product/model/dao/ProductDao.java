@@ -149,6 +149,7 @@ public class ProductDao {
 				p.setRecommendedAge(rs.getInt("recommended_age"));
 				p.setCaution(rs.getString("caution"));
 				
+				
 				productsList.add(p);
 				
 			}
@@ -192,6 +193,7 @@ public class ProductDao {
 		
 		return p;
 	}
+//이미지 파일 불러오기
 	public ArrayList<String> loadImageFilePaths(Connection conn, String productId){
 		
 		ArrayList<String> imageFilePaths = new ArrayList<String>(); 
@@ -213,6 +215,29 @@ public class ProductDao {
 		}
 		
 		return imageFilePaths;
+	}
+	public int updateProduct(Connection conn, Product p) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateProduct"));
+			pstmt.setString(1, p.getProductName());
+			pstmt.setDouble(2,p.getProductPrice());
+			pstmt.setInt(3, p.getProductStock());
+			pstmt.setString(4, p.getProductDescription());
+			pstmt.setString(5, p.getManufacturer());
+			pstmt.setString(6, p.getManufacturedCountry());
+			pstmt.setInt(7, p.getRecommendedAge());
+			pstmt.setString(8, p.getCaution());
+			pstmt.setInt(9, p.getCategoryNo());
+			pstmt.setInt(10, p.getProductId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

@@ -40,12 +40,14 @@ public class TagService {
 		
 		return result;
 	}
+//키워드로 태그 찾기
 	public TreeSet<Tags> searchTagList(String keyword) {
 		Connection conn=getConnection();
 		TreeSet<Tags> tagsList =dao.searchTagList(conn,keyword);
 		close(conn);
 		return tagsList;
 	}
+//태그수정
 	public int editTag(Tags t) {
 		Connection conn=getConnection();
 		int result=dao.editTag(conn,t);
@@ -54,6 +56,7 @@ public class TagService {
 		close(conn);
 		return result;
 	}
+//상품의 태그 가져오기
 	public TreeSet<Tags> itemTags(String productId) {
 		Connection conn=getConnection();
 		TreeSet<Tags> tagsList =dao.itemTags(conn,productId);
