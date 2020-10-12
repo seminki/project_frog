@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% String clientId = (String)request.getAttribute("client_id"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<!-- 구글 로그인 api 로드 -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="<%=clientId%>">
+<!-- 네이버 로그인 api 로드 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<!-- 카카오 로그인 api 로드 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <style>
 .text_center{
@@ -74,7 +83,9 @@ th{
     margin: 10px;
     margin-top: 50px;
 }
-
+.hide{
+	display:none;
+}
 </style>
 <body>
 <%@ include file="/views/common/header.jsp" %>
@@ -207,9 +218,28 @@ th{
                     <button onclick="" value="">뒤로</button>
                 </div>
                 
-                
+             <div class="g-signin2 hide" data-onsuccess="onSignIn"></div>  
             </div>
+            
+            <button id="logout-btn">로그아웃</button>
         </section>
 <%@ include file="/views/common/footer.jsp" %>
+
+<script>
+	let googleFlag;
+	function onSignIn(googleUser) {
+		googleFlag = googleUser.isSignedIn();
+		let id_token = googleUser.getAuthResponse().id_token;
+	}
+	
+	$("#logout-btn").click((e)=>{
+		if(googleFlag){
+			gapi.auth2.getAuthInstance().signOut();
+		}
+			location.href = '<%=contextPath%>/member/logout';
+	})
+
+
+</script>
 </body>
 </html>

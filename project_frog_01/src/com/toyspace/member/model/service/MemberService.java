@@ -71,4 +71,29 @@ public class MemberService {
 		
 		return m;
 	}
+	
+	public boolean passwordCheck(int memberKey, String password) {
+		Connection conn = getConnection();
+		boolean result = dao.passwordCheck(conn, memberKey, password);
+		close(conn);
+		return result;
+	}
+	
+	public boolean insertSNSInfoToExistingMember(Member m, SNSLogin sns) {
+		
+		Connection conn = getConnection();
+		
+		sns.setMemberKey(m.getMemberKey());
+		
+		boolean result = dao.insertSNSInfo(conn, sns);
+		insertLoginLog(conn, m, sns.getLoginSourceNo());
+		
+		
+		if(!result) rollback(conn);
+		else commit(conn); 
+			
+		close(conn);
+		
+		return result;
+	}
 }

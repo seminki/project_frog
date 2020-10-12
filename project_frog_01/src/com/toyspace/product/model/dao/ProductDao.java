@@ -192,4 +192,27 @@ public class ProductDao {
 		
 		return p;
 	}
+	public ArrayList<String> loadImageFilePaths(Connection conn, String productId){
+		
+		ArrayList<String> imageFilePaths = new ArrayList<String>(); 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("loadImageFilePaths"));
+			pstmt.setNString(1, productId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				imageFilePaths.add(rs.getString("IMAGE_ROUTE"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return imageFilePaths;
+	}
+	
 }

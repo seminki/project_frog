@@ -3,18 +3,29 @@
     <% Member m = (Member)session.getAttribute("email-found-new-member");
      String id = m.getUserId();
      /* replacedId는 보안상의 이유로 id 뒷자리를 숨겨놓고 있는 것임 */
-     String replacedId = id.substring(0, id.length()-3)+"***";
+     System.out.println(m);
+     String replacedId="";
+     if(id!=null){
+     	replacedId = id.substring(0, id.length()-3)+"***";
+     }
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <script src='http://code.jquery.com/jquery-3.5.1.min.js'></script>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
+<script>
+	<% if(session.getAttribute("signedInMember")!=null){%>
+		alert("잘못된 접근입니다. 이미 로그인되어있습니다.");
+		location.href=
+	<%}%>
 
+</script>
 <section>
 이미 그 이메일로 된거 있는데?
 니 아이디는 이러하니까

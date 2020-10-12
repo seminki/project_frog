@@ -236,4 +236,28 @@ public class MemberDao {
 		
 		return m;
 	}
+	
+	public boolean passwordCheck(Connection conn, int memberKey, String password) {
+		int result= 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("passwordCheck"));
+			pstmt.setInt(1, memberKey);
+			pstmt.setNString(2, password);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result++;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("passwordCheck : 패스워드가 일치하지 않습니다");
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result ==1;
+	}
 }

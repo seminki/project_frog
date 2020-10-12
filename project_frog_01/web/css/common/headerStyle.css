@@ -10,6 +10,7 @@
 	--font-gray: rgb(85, 85, 85);
 }
 
+
 .header-container {
 	height: var(--header-menu-height);
 	width: 100%;
