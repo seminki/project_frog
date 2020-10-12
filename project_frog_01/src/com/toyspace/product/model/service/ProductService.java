@@ -62,6 +62,7 @@ public class ProductService {
 	public Product productInfo(String productId) {
 		Connection conn=getConnection();
 		Product p=dao.productInfo(conn,productId);
+		p.setProductImageFilePaths(dao.loadImageFilePaths(conn, productId));
 		close(conn);
 		return p;
 	}
