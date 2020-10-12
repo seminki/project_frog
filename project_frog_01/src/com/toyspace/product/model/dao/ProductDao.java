@@ -58,7 +58,6 @@ public class ProductDao {
 		Product p=new Product();
 		p.setProductId(rs.getInt("product_id"));
 		p.setCategoryNo(rs.getInt("category_no"));
-		p.setCategoryName(rs.getString("category_name"));
 		p.setProductName(rs.getString("product_name"));
 		p.setProductPrice(rs.getDouble("product_price"));
 		p.setProductStock(rs.getInt("product_stock"));
@@ -162,7 +161,7 @@ public class ProductDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Product p=productConvention(rs);
-				
+				p.setCategoryName(rs.getString("category_name"));
 				
 				productsList.add(p);
 				
