@@ -1,6 +1,12 @@
+<%@page import="java.util.TreeMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member"%>
-    <% Member m = (Member)session.getAttribute("signedInMember"); %>
+    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member, com.toyspace.product.model.vo.Product, java.util.TreeMap"%>
+    <% Member m = (Member)session.getAttribute("signedInMember"); 
+    
+	@SuppressWarnings("unchecked")
+	TreeMap<Product, Integer> buyingItems = (TreeMap<Product, Integer>)request.getAttribute("boughtItems");
+    
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,13 +117,19 @@
 		    buyer_tel: "010-4242-4242",
 		    buyer_addr: "서울특별시 강남구 신사동",
 		    buyer_postcode: "01181",
-		    m_redirect_url : 'http://mightymosses.hopto.org:9090/payments/complete'
+		    
 		  }, function (rsp) { // callback
 		    if (rsp.success) {
 		        console.log("성공");
+		        <%	
+		        TreeMap<Product, Integer> boughtItems = new TreeMap<Product, Integer>();
+		        boughtItems.put(new Product(), 1);
+		        	session.setAttribute("boughtItems", boughtItems); 
+		        	
+		        %>
 		        $.ajax({
-		        	url: 'http://mightymosses.hopto.org:9090/project_frog_01/order/complete',
-		        	method: "POST",
+		        	url: 'http://mightymosses.hopto.org:9090/project_frog_01/order/process',
+		        	type: "POST",
 		        	data:{
 		        		"imp_uid" : rsp.imp_uid,
 		        		"merchant_uid" : rsp.merchant_uid,
@@ -125,6 +137,11 @@
 		        	}
 		        }).done(function (data) {
 		        	/* 서버 결제 api성공시 로직! */
+		        	const result = JSON.parse(data);
+		        	switch(result){
+		        	case 0 : alert("결제 위변조가 발생하였습니다. 서버관리자에게 보고됩니다."); location.href = "<%=contextPath%>"; break;
+		        	case 1 : location.href = "<%=contextPath%>/order/complete"; break;
+		        	}
 		        })
 		    } else {
 		        console.log("실패");

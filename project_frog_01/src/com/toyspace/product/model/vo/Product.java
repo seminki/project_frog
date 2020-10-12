@@ -2,7 +2,7 @@ package com.toyspace.product.model.vo;
 
 import java.util.List;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	
 	private int productId;
 	private int categoryNo;
@@ -21,6 +21,13 @@ public class Product {
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	@Override
+	public int compareTo(Product o) {
+		// TODO Auto-generated method stub
+		return this.productId-o.productId;
 	}
 
 
