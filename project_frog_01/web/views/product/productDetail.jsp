@@ -108,16 +108,62 @@ Product p=(Product)request.getAttribute("product");
             <div class="review-title"><h2>리뷰</h2></div>
             <div class="review-content">
              	<div class="comment-box">
-                	<form action="">
+                	<form action="<%=request.getContextPath() %>/comment/commentWrite" method="get">
                 		<input type="hidden" name="commentLevel" value="1"> 
 						<input type="hidden" name="commentWriter" value="">
 						<input type="hidden" name="CommentRef" value="0">
                 	<textarea name="commentContent" id="" cols="120" rows="4" style="resize:none"></textarea>
             	 </div>   
-            <button type="submit" class="review-btn">리뷰 남기기</button>
+            <button type=submit class="review-btn">리뷰 남기기</button>
            		 </form>
             </div>
         </div>
+             <table class="tbl-comment">
+   	
+		   			<tr class="level1">
+		   				<td>
+		   					<sub class="comment-writer"></sub>
+		   					<sub class="comment-date"></sub>
+		   					<br>
+	
+		   				</td>
+		   				<td>
+		   					<button class="btn-reply" value="">답글</button>
+		   				</td>
+		   			</tr>
+
+   					<tr class="level2">
+	   				<td>
+	   					<sub></sub>
+	   					<sub></sub>
+	   					<br>
+	   				</td>
+	   				<td>
+	   					
+	   				</td>
+	   			</tr>
+  
+   		</table>
+		<script>
+	<%-- 	$(".btn-reply").click(e => {
+				<%if(loginMember!=null){%>
+					let tr=$("<tr>");
+					let form=$("div.comment-editor>form").clone();
+					console.log(form);
+					form.find("textarea").attr("rows","1");
+					form.find("[name=boardCommentLevel]").val("2");
+					form.find("[name=boardCommentRef]").val(e.target.value);
+					form.find("[type=submit]").addClass("btn-insert2");
+					let td=$("<td>").attr("colspan","2");
+					td.append(form);
+					tr.append(td);
+					tr.find("td").css("display","none");
+					$(e.target).parents("tr").after(tr.children("td").slideDown(800));
+					$(e.target).off("click"); //클릭 이벤트 제거하기 !! 
+					
+				<%}%>
+			}); --%> 
+		</script>
         <hr>
         <div class="recommend-container">
             <div class="rec-container">
