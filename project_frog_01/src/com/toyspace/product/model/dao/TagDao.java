@@ -113,5 +113,28 @@ public class TagDao {
 		}
 		return result;
 	}
+//상품의 태그 가져오기 
+	public TreeSet<Tags> itemTags(Connection conn, String productId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		TreeSet<Tags> tagsList= new TreeSet<Tags>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("itemTags"));
+			pstmt.setString(1, productId);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Tags t = new Tags();
+				t.setTagNo(rs.getInt("tag_no"));
+				t.setTagName(rs.getString("tag_name"));
+				tagsList.add(t);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return tagsList;
+	}
 
 }

@@ -41,8 +41,11 @@ public class EditProductServlet extends HttpServlet {
 		
 		TreeSet<Tags> tagsList= new TagService().loadAllTags();
 		
+		TreeSet<Tags> itemTags= new TagService().itemTags(productId);
+		
 		request.setAttribute("product", p);
 		request.setAttribute("tagsList", tagsList);
+		request.setAttribute("itemTags",itemTags);
 		
 		request.getRequestDispatcher("/views/admin/productEdit.jsp").forward(request, response);
 	}

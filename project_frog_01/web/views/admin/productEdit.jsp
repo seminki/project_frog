@@ -5,7 +5,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 	Product p=(Product)request.getAttribute("product");
 
 	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
-	TreeSet<Category> categoryList= (TreeSet<Category>)request.getAttribute("categoryList");
+	TreeSet<Tags> itemTags= (TreeSet<Tags>)request.getAttribute("itemTags");
 %>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <style>
@@ -197,10 +197,10 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품 태그 번호</th>
             <td>
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
+              <% if(itemTags!=null&&itemTags.size()!=0){ for(Tags t :
+                  itemTags){ %>
+              <input type="text" name="item_tag" required size="5" value="<%=t.getTagName() %>" />
+            <%} } %>
             </td>
           </tr>
           <tr>

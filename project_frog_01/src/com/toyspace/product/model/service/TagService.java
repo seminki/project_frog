@@ -54,4 +54,10 @@ public class TagService {
 		close(conn);
 		return result;
 	}
+	public TreeSet<Tags> itemTags(String productId) {
+		Connection conn=getConnection();
+		TreeSet<Tags> tagsList =dao.itemTags(conn,productId);
+		close(conn);
+		return tagsList;
+	}
 }
