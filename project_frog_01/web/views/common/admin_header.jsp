@@ -111,7 +111,6 @@ Admin admin = (Admin)session.getAttribute("loggedInAdmin");%>
             <li><a href="<%=request.getContextPath()%>/admin/manageOrder">주문관리</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/insertProduct">상품등록</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/productList">상품관리</a></li>
-            <li><a href="<%=request.getContextPath()%>/admin/manageStock">재고관리</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/sales">매출현황</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/tagList">태그등록</a></li>
             <li><a href="<%=request.getContextPath()%>/admin/manageChat">채팅관리</a></li>

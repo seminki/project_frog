@@ -12,7 +12,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 <body>
 	<%@ include file="/views/common/header.jsp" %>
  <section>
-        <form action="<%=request.getContextPath()%>/signup.do" method="post">
+        <form action="<%=request.getContextPath()%>/signupEnd.do" method="post">
             <div class="logo-area1">
                 <img src="<%=request.getContextPath()%>/image/login/blacklogo-small.png" alt="toyspace">
             </div>
@@ -23,12 +23,12 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 
             <div class="si-area">
             	<h1>SIGN UP</h1>
-                	<input type="text" id="USER_ID" name="USER_ID" autocomplete="off" placeholder="아이디를 입력해주세요" required><br>
-                	<input type="password" id="USER_PASSWORD" name="USER_PASSWORD" autocomplete="off" placeholder="비밀번호를 입력해주세요" required><br>
+                	<input type="text" id="userId" name="userId" autocomplete="off" placeholder="아이디를 입력해주세요" required><br>
+                	<input type="password" id="userPassword" name="userPassword" autocomplete="off" placeholder="비밀번호를 입력해주세요" required><br>
                 	<!-- <input type="password" id="re_pw" name="pw" autocomplete="off" placeholder="비밀번호를 다시 입력해주세요" required><br> -->
-                	<input type="text" id="USER_NAME" name="USER_NAME" autocomplete="off" placeholder="아름를 입력해주세요" required><br>
-                	<input type="text" id="USER_NICKNAME" name="USER_NICKNAME" autocomplete="off" placeholder="닉네임을 입력해주세요" required><br>
-                	<input type="email" id="USER_EMAIL" name="USER_EMAIL" autocomplete="off" placeholder="이메일을 입력해주세요" required><br>
+                	<input type="text" id="userName" name="userName" autocomplete="off" placeholder="아름를 입력해주세요" required><br>
+                	<input type="text" id="userNickname" name="userNickname" autocomplete="off" placeholder="닉네임을 입력해주세요" required><br>
+                	<input type="email" id="userEmail" name="userEmail" autocomplete="off" placeholder="이메일을 입력해주세요" required><br>
             </div>
             <div class="news">
                 <input type="checkbox"><label>TOYSPACE의 최근 소식을 볼수 있습니다. <br> 
