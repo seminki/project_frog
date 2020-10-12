@@ -37,7 +37,8 @@ public class EditProductEndServlet extends HttpServlet {
 		p.setProductId(Integer.parseInt(request.getParameter("productId")));
 		p.setProductName(request.getParameter("item_name"));
 		p.setCategoryNo(Integer.parseInt(request.getParameter("category")));
-		System.out.println(request.getParameter("category"));
+		String[] tagsArr=request.getParameterValues("item_tag");
+		
 		p.setProductPrice(Double.parseDouble(request.getParameter("item_price")));
 		p.setProductStock(Integer.parseInt(request.getParameter("item_qt")));
 		p.setProductDescription(request.getParameter("product-description"));
@@ -46,11 +47,11 @@ public class EditProductEndServlet extends HttpServlet {
 		p.setRecommendedAge(Integer.parseInt(request.getParameter("recommended-age")));
 		p.setCaution(request.getParameter("caution"));
 		
-		int result=new ProductService().updateProduct(p);
+		boolean result=new ProductService().updateProduct(p, tagsArr);
 		String msg;
-		String loc=request.getContextPath()+"/admin/productList";
+		String loc=request.getContextPath()+"/views/admin/productEditEnd.jsp";
 		
-		if(result>0) {
+		if(result) {
 			msg="상품수정 성공";
 			
 	
@@ -62,7 +63,6 @@ public class EditProductEndServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
-		
 		
 	}
 

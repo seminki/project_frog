@@ -71,7 +71,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
     <section class="enroll-container">
       <h2>상품수정</h2>
       <div class="search-container">☆☆☆☆☆</div>
-      <form action="<%=request.getContextPath() %>/admin/editProductEnd" enctype="multipart/form-data" method="get">
+      <form action="<%=request.getContextPath() %>/admin/editProductEnd" method="post">
         <br />
         <table>
           <tr>
@@ -176,6 +176,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
               </div>
             </td>
           </tr>
+          --%>
           <tr>
             <th>상품 태그 목록</th>
             <td>
@@ -199,12 +200,20 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품 태그 번호</th>
             <td>
-              <% if(itemTags!=null&&itemTags.size()!=0){ for(Tags t :
-                  itemTags){ %>
-              <input type="text" name="item_tag" required size="5" value="<%=t.getTagName() %>" />
-            <%} } %>
+              <% 
+              	int i =0;
+              if(itemTags!=null&&itemTags.size()!=0){ 
+            	  for(Tags t : itemTags){ %>
+              <input type="text" name="item_tag" required size="5" value="<%=t.getTagNo() %>" />
+            <%
+            	i++;
+            	  } } 
+           	for(;i<4;i++){ %>
+           		<input type="text" name="item_tag" required size="5"/>
+           	<%}
+            %>
             </td>
-          </tr> --%>
+          </tr> 
           <tr>
             <th>상품 설명</th>
             <td>
