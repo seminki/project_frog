@@ -260,4 +260,40 @@ public class MemberDao {
 		}
 		return result ==1;
 	}
+			////////////////////////////////////////////////////////////////////////////////
+			/////////////////////////////회원가입//////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////
+
+	public int insertMember(Connection conn,Member m) {
+	      PreparedStatement pstmt = null;
+	      int result=0;
+	      
+	      try {
+	         pstmt=conn.prepareStatement(prop.getProperty("insertMember"));         
+	         pstmt.setInt(1,m.getMemberKey());
+	         pstmt.setString(2, m.getUserId());
+	         pstmt.setString(3,m.getUserEmail());
+	         pstmt.setString(4,m.getPassword());      
+	         pstmt.setString(5,m.getUserGender());               
+	         pstmt.setString(6,m.getUserName());
+	         pstmt.setString(7,m.getUserNickname());
+	         pstmt.setInt(8,m.getUserAge());
+	         pstmt.setString(9,m.getUserBirthday());
+	         pstmt.setString(10,m.getUserAddress());
+	         pstmt.setString(11,m.getUserPhone());
+	         pstmt.setString(12,m.getUserProfilePicPath());
+	         pstmt.setString(13,m.getRecoveryPassword());
+	         pstmt.setInt(14,m.getMemberLevelNo());      
+	         result=pstmt.executeUpdate();
+
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         System.out.println("dao 레벨에서 멤버 인서트에 실패!");
+	      }finally {
+	         close(pstmt);
+	      }
+	      
+	      return result;
+	   }
+	
 }

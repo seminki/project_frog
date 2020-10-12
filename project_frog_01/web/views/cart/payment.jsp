@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member"%>
+    <% Member m = (Member)session.getAttribute("signedInMember"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
- <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+ <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <section class="container">
         <div class="left">
             <div class="logo">
@@ -59,7 +60,7 @@
                         <input type="text" placeholder="상태">
                         <input type="text" placeholder="우편 번호">
                     </div>
-                    <button id="checkout-btn">계속 배송</button>
+                    <button id="checkout-btn" onclick="requestPay();">계속 배송</button>
                 </div>
             </div>
         </div>
@@ -95,28 +96,41 @@
 <%@ include file="/views/common/footer.jsp" %>
 <script>
 	/* 아임포트 API 초기화-가맹점 식별코드 삽입*/
+	const IMP = window.IMP;
 	IMP.init("imp71956162");
 
-	$("#checkout-btn").click((e)=>{
+	function requestPay(){
 		IMP.request_pay({ // param
 		    pg: "html5_inicis",
 		    pay_method: "card",
-		    merchant_uid: new Date().getTime(),
+		    merchant_uid: <%=m.getMemberKey()%>+new Date().getTime(),
 		    name: "노르웨이 회전 의자 외 3",
-		    amount: 64900,
+		    amount: 1000,
 		    buyer_email: "gildong@gmail.com",
 		    buyer_name: "홍길동",
 		    buyer_tel: "010-4242-4242",
 		    buyer_addr: "서울특별시 강남구 신사동",
-		    buyer_postcode: "01181"
+		    buyer_postcode: "01181",
+		    m_redirect_url : 'http://mightymosses.hopto.org:9090/payments/complete'
 		  }, function (rsp) { // callback
 		    if (rsp.success) {
 		        console.log("성공");
+		        $.ajax({
+		        	url: 'http://mightymosses.hopto.org:9090/project_frog_01/order/complete',
+		        	method: "POST",
+		        	data:{
+		        		"imp_uid" : rsp.imp_uid,
+		        		"merchant_uid" : rsp.merchant_uid,
+		        		"member_key" : <%=m.getMemberKey()%>
+		        	}
+		        }).done(function (data) {
+		        	/* 서버 결제 api성공시 로직! */
+		        })
 		    } else {
 		        console.log("실패");
 		    }
-		  });
-	})
+		  })
+	}
 
 </script>
 </body>

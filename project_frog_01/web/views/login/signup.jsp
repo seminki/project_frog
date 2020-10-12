@@ -12,7 +12,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 <body>
 	<%@ include file="/views/common/header.jsp" %>
  <section>
-        <form class="qwe">
+        <form action="<%=request.getContextPath()%>/signupEnd.do" method="post">
             <div class="logo-area1">
                 <img src="<%=request.getContextPath()%>/image/login/blacklogo-small.png" alt="toyspace">
             </div>
@@ -23,18 +23,19 @@ href="<%=request.getContextPath() %>/css/login/style.css">
 
             <div class="si-area">
             	<h1>SIGN UP</h1>
-                	<input type="text" id="id" name="id" autocomplete="off" placeholder="아이디를 입력해주세요" required><br>
-                	<input type="password" id="pw" name="pw" autocomplete="off" placeholder="비밀번호를 입력해주세요" required><br>
-                	<input type="text" id="name" name="name" autocomplete="off" placeholder="아름를 입력해주세요" required><br>
-                	<input type="text" id="nickname" name="nickname" autocomplete="off" placeholder="닉네임을 입력해주세요" required><br>
-                	<input type="email" id="email" name="email" autocomplete="off" placeholder="이메일을 입력해주세요" required><br>
+                	<input type="text" id="userId" name="userId" autocomplete="off" placeholder="아이디를 입력해주세요" required><br>
+                	<input type="password" id="userPassword" name="userPassword" autocomplete="off" placeholder="비밀번호를 입력해주세요" required><br>
+                	<!-- <input type="password" id="re_pw" name="pw" autocomplete="off" placeholder="비밀번호를 다시 입력해주세요" required><br> -->
+                	<input type="text" id="userName" name="userName" autocomplete="off" placeholder="아름를 입력해주세요" required><br>
+                	<input type="text" id="userNickname" name="userNickname" autocomplete="off" placeholder="닉네임을 입력해주세요" required><br>
+                	<input type="email" id="userEmail" name="userEmail" autocomplete="off" placeholder="이메일을 입력해주세요" required><br>
             </div>
             <div class="news">
                 <input type="checkbox"><label>TOYSPACE의 최근 소식을 볼수 있습니다. <br> 
                     	최근 소식을 볼려면 체크해주세요.</label>
             </div>
             <div class="btn-area1">
-                <button>가입하기</button>
+                <button type="submit">가입하기</button>
             </div>
             <div class="last-area1">
                 <label>계속하면 TOYSPACE에 동의하는것으로 간주합니다.<a href=""> 이용약관</a> 그리고 <a href="">개인정보정책</a></label><br>
