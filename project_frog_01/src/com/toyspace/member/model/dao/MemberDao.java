@@ -288,9 +288,12 @@ public class MemberDao {
 
 	      }catch(Exception e) {
 	         e.printStackTrace();
+	         System.out.println("dao 레벨에서 멤버 인서트에 실패!");
 	      }finally {
 	         close(pstmt);
-	      }return result;
+	      }
+	      
+	      return result;
 	   }
 	
 }
