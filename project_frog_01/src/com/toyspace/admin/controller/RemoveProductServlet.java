@@ -7,21 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import com.toyspace.product.model.service.TagService;
-import com.toyspace.product.model.vo.Tags;
+import com.toyspace.product.model.service.ProductService;
 
 /**
- * Servlet implementation class EditTagServlet
+ * Servlet implementation class RemoveProductServlet
  */
-@WebServlet("/admin/editTag")
-public class EditTagServlet extends HttpServlet {
+@WebServlet("/admin/removeProduct")
+public class RemoveProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditTagServlet() {
+    public RemoveProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +28,23 @@ public class EditTagServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Tags t=new Tags();
-		t.setTagName(request.getParameter("tagName"));
-		t.setTagNo(Integer.parseInt(request.getParameter("tagNo")));
+		// TODO Auto-generated method stub
+		String[] productIds= request.getParameterValues("productIds-removed");
 		
-		int result=new TagService().editTag(t);
+		boolean result = new ProductService().removeProduct(productIds);
 		
-		String msg;
-		String loc=request.getContextPath()+"/admin/tagList";
+		String loc = request.getContextPath()+"/admin/productList";
+		String msg = "";
 		
-		if(result>0) {
-			msg="태그수정 성공";
-	
+		if(!result) {
+			msg="상품 제거에 실패했습니다.";
 		} else {
-			msg="태그등록 실패";
-
+			msg = "상품 제거에 성공했습니다.";
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
 		
+		request.getRequestDispatcher("/msg?msg="+msg+"&loc="+loc).forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

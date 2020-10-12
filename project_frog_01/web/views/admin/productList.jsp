@@ -59,7 +59,7 @@ pageEncoding="UTF-8" %>
       <div class="search-container">
         상품 조회:
         <div class="search-itemId">
-          <form action>
+          <form action="<%=request.getContextPath() %>/admin/searchProduct" method="post">
             <input
               type="text"
               name="searchKeyword"
@@ -71,7 +71,7 @@ pageEncoding="UTF-8" %>
           </form>
         </div>
       </div>
-
+<form action="<%=request.getContextPath()%>/admin/removeProduct" method="post">
       <table class="tbl-item">
         <thead>
           <tr>
@@ -85,11 +85,11 @@ pageEncoding="UTF-8" %>
           </tr>
         </thead>
         <tbody>
-          <input type="button" value="선택 삭제" onclick="location.href='<%=request.getContextPath() %>/admin/deleteProduct'"/>
+          <button type="submit" onclick="return confirmRemoving();">선택 삭제</button>
         <%if(productsList!=null&&productsList.size()!=0){
         	for(Product p : productsList){ %>
           <tr>
-            <td><input type="checkbox" value="check"/></td>
+            <td><input type="checkbox" value="<%=p.getProductId()%>" name="productIds-removed"/></td>
             <td><%=p.getProductId() %></td>
             <td><%=p.getCategoryName() %></td>
             <td><%=p.getProductName() %></td>
@@ -106,6 +106,7 @@ pageEncoding="UTF-8" %>
           <%}} %>
         </tbody>
       </table>
+      </form>
     </section>
 
     <script>
@@ -116,4 +117,9 @@ pageEncoding="UTF-8" %>
             $("input[type=checkbox]").prop("checked", false);
         }
     }
+    function confirmRemoving(){
+    	
+    	return confirm("정말로 상품을 삭제하시겠습니까?");
+    }
+   
     </script>

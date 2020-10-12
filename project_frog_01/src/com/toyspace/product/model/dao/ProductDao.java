@@ -9,10 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.TreeSet;
 
 import com.toyspace.product.model.vo.Product;
+import com.toyspace.product.model.vo.Tags;
 
 public class ProductDao {
 
@@ -27,6 +30,8 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 	}
+	//////////////////////////////////////////////////////////////
+	//////////////////공용////////////////////////////////////////
 	public int nextSeq(Connection conn) {
 		
 		PreparedStatement pstmt = null;
@@ -48,6 +53,26 @@ public class ProductDao {
 		}
 		return productId;
 	}
+	
+	public Product productConvention(ResultSet rs) throws SQLException{
+		Product p=new Product();
+		p.setProductId(rs.getInt("product_id"));
+		p.setCategoryNo(rs.getInt("category_no"));
+		p.setCategoryName(rs.getString("category_name"));
+		p.setProductName(rs.getString("product_name"));
+		p.setProductPrice(rs.getDouble("product_price"));
+		p.setProductStock(rs.getInt("product_stock"));
+		p.setProductDescription(rs.getString("product_description"));
+		p.setManufacturer(rs.getString("manufacturer"));
+		p.setManufacturedCountry(rs.getString("manufactured_country"));
+		p.setRecommendedAge(rs.getInt("recommended_age"));
+		p.setCaution(rs.getString("caution"));
+		
+		return p;
+	}
+	
+	
+	////////////////////////////////////////////////////////////////
 	public boolean insertProduct(Connection conn, int productId, Product insertion) {
 		
 		PreparedStatement pstmt = null;
@@ -136,18 +161,7 @@ public class ProductDao {
 			pstmt=conn.prepareStatement(prop.getProperty("loadAllProducts"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Product p=new Product();
-				p.setProductId(rs.getInt("product_id"));
-				p.setCategoryNo(rs.getInt("category_no"));
-				p.setCategoryName(rs.getString("category_name"));
-				p.setProductName(rs.getString("product_name"));
-				p.setProductPrice(rs.getDouble("product_price"));
-				p.setProductStock(rs.getInt("product_stock"));
-				p.setProductDescription(rs.getString("product_description"));
-				p.setManufacturer(rs.getString("manufacturer"));
-				p.setManufacturedCountry(rs.getString("manufactured_country"));
-				p.setRecommendedAge(rs.getInt("recommended_age"));
-				p.setCaution(rs.getString("caution"));
+				Product p=productConvention(rs);
 				
 				
 				productsList.add(p);
@@ -171,17 +185,7 @@ public class ProductDao {
 			pstmt.setString(1, productId);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				p=new Product();
-				p.setProductId(rs.getInt("product_id"));
-				p.setCategoryNo(rs.getInt("category_no"));
-				p.setProductName(rs.getString("product_name"));
-				p.setProductPrice(rs.getDouble("product_price"));
-				p.setProductStock(rs.getInt("product_stock"));
-				p.setProductDescription(rs.getString("product_description"));
-				p.setManufacturer(rs.getString("manufacturer"));
-				p.setManufacturedCountry(rs.getString("manufactured_country"));
-				p.setRecommendedAge(rs.getInt("recommended_age"));
-				p.setCaution(rs.getString("caution"));
+				p=productConvention(rs);
 				
 			}
 		}catch(SQLException e) {
@@ -281,4 +285,49 @@ public class ProductDao {
 		
 		return result.length==tagsArr.length;
 	}
+	
+	public boolean removeProduct(Connection conn, String[] productIds) {
+		PreparedStatement pstmt = null;
+		int[] result = new int[0];
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("removeProduct"));
+			for(String v : productIds) {
+				pstmt.setInt(1, Integer.parseInt(v));
+				pstmt.addBatch();
+				pstmt.clearParameters();
+			}
+			result = pstmt.executeBatch();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result.length==productIds.length;
+	}
+	
+	public ArrayList<Product> searchProductList(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Product> productsList= new ArrayList<Product>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchProductList"));
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Product p = productConvention(rs);
+				
+				productsList.add(p);
+			}
+			Collections.sort(productsList);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productsList;
+	}
+	
+	
 }

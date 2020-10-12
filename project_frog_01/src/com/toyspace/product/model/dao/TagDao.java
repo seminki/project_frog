@@ -63,12 +63,12 @@ public class TagDao {
 		return tagsList;
 	}
 //태그삭제
-	public int deleteTag(Connection conn, String tagName) {
+	public int deleteTag(Connection conn, int tagNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("deleteTag"));
-			pstmt.setString(1, tagName);
+			pstmt.setInt(1, tagNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
