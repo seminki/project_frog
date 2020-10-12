@@ -171,6 +171,7 @@ public class ProductDao {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				p=new Product();
+				p.setProductId(rs.getInt("product_id"));
 				p.setCategoryNo(rs.getInt("category_no"));
 				p.setProductName(rs.getString("product_name"));
 				p.setProductPrice(rs.getDouble("product_price"));
@@ -180,6 +181,7 @@ public class ProductDao {
 				p.setManufacturedCountry(rs.getString("manufactured_country"));
 				p.setRecommendedAge(rs.getInt("recommended_age"));
 				p.setCaution(rs.getString("caution"));
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

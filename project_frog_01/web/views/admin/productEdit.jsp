@@ -5,7 +5,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 	Product p=(Product)request.getAttribute("product");
 
 	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
-	TreeSet<Category> categoryList= (TreeSet<Category>)request.getAttribute("categoryList");
+	TreeSet<Tags> itemTags= (TreeSet<Tags>)request.getAttribute("itemTags");
 %>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <style>
@@ -75,7 +75,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품ID</th>
             <td>
-              <input type="text" placeholder="" name="item_id" value=<%=p.getProductId() %> readonly /><br />
+              <input type="text" placeholder="" name="productId" value="<%=p.getProductId()%>" readonly /><br />
             </td>
           </tr>
           <tr>
@@ -124,8 +124,9 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
             <th></th>
             <td>
               <div class="img-preview-container">
-                <img alt="" src="" class="img-preview" />
-                <img alt="" src="" class="img-preview" />
+              <%for(int i=0;i<p.getProductImageFilePaths().size();i++){ %>
+                <img alt="" src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(i) %>" class="img-preview" /> 
+                <%} %>
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
@@ -196,10 +197,10 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품 태그 번호</th>
             <td>
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
+              <% if(itemTags!=null&&itemTags.size()!=0){ for(Tags t :
+                  itemTags){ %>
+              <input type="text" name="item_tag" required size="5" value="<%=t.getTagName() %>" />
+            <%} } %>
             </td>
           </tr>
           <tr>
@@ -244,7 +245,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           </tr>
         </table>
         <input type="submit" value="수정" />
-        <input type="reset" value="취소" onclick="fn_goBack();" />
+        <input type="reset" value="취소" onclick="self.close();" />
       </form>
     </section>
 </body>
