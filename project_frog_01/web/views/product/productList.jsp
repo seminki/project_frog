@@ -1,21 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.toyspace.product.model.vo.*, java.util.ArrayList" %>
+<%
+ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("productsList");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Document</title>
-    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
-    <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/product/productListStyle.css" /> --%>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" />
+    
+    </head>
+   <body>
+<%@ include file="/views/common/header.jsp" %>
     <style>
         div{
             /* border: 1px black solid; */
         }
     </style>
-</head>
-<body>
-	<%@ include file="/views/common/header.jsp" %>
+
+<section>
     <div style="margin: auto;
     margin-left:100px;
     margin-right:100px;
@@ -110,15 +117,12 @@
                                     text-align: center;
                                     max-width: 25%;
                                 }
-                            </style>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <style>
+
                                         .shopify-image{
                                         cursor: pointer;
                                         width: 100%;
                                         background-size: contain;
-                                        background-image: url("https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410");
+                                        /*background-image: url("https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410"); */
                                         }
                                         .addtocart{
                                             text-transform: uppercase;
@@ -140,27 +144,18 @@
                                             padding: 0 .5rem 2rem;
                                         }
                                     </style>
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);"> 
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+
+         <%if(productsList!=null&&productsList.size()!=0){
+        	for(Product p : productsList){ %>
                             <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">          
+                                <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail?productId=<%=p.getProductId() %>">
+                                    <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/Disney_Rapunzel.png" alt="Wall-E" style="">          
                                     <div class="">
                                         <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
+                                        	<p hidden><%=p.getProductId() %></p>               	
+                                            <div class=""><%=p.getCategoryName() %></div>
+                                            <strong class=""><%=p.getProductName() %></strong>
+                                            <div class=""><%=p.getProductPrice() %>원</div>
                                         </div>
                                         <div class="addtocart_div">
                                             <button class="addtocart">Add To Cart</button>
@@ -168,201 +163,8 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                  
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="products-list-item">
-                                <a class="products-list-item-a" href="">
-                                    <img class="shopify-image " src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wall-E" style="background-image: url(&quot;https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410&quot;);">                                     
-                                    <div class="">
-                                        <div class="">
-                                            <div class="">Pop!</div>
-                                            <strong class="">Yelena Belova - Black Widow</strong>
-                                            <div class="">US$11</div>
-                                        </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                            <%}} %>
+                         
                         </div>
                     </div>
                     <div style="margin: auto;">
@@ -402,5 +204,5 @@
         </div>
     </div>
 	<%@ include file="/views/common/footer.jsp" %>
-</body>
+</section>
 </html>
