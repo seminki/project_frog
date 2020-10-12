@@ -276,14 +276,7 @@ public class MemberDao {
 	         pstmt.setString(4,m.getPassword());      
 	         pstmt.setString(5,m.getUserGender());               
 	         pstmt.setString(6,m.getUserName());
-	         pstmt.setString(7,m.getUserNickname());
-	         pstmt.setInt(8,m.getUserAge());
-	         pstmt.setString(9,m.getUserBirthday());
-	         pstmt.setString(10,m.getUserAddress());
-	         pstmt.setString(11,m.getUserPhone());
-	         pstmt.setString(12,m.getUserProfilePicPath());
-	         pstmt.setString(13,m.getRecoveryPassword());
-	         pstmt.setInt(14,m.getMemberLevelNo());      
+	         pstmt.setString(7,m.getUserNickname());    
 	         result=pstmt.executeUpdate();
 
 	      }catch(Exception e) {

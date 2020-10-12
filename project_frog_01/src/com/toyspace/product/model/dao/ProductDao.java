@@ -216,7 +216,7 @@ public class ProductDao {
 		
 		return imageFilePaths;
 	}
-	public int updateProduct(Connection conn, Product p) {
+	public boolean updateProduct(Connection conn, Product p) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
@@ -237,7 +237,48 @@ public class ProductDao {
 		}finally {
 			close(pstmt);
 		}
-		return result;
+		return result==1;
 	}
 	
+	public boolean removeProductTags(Connection conn, int productId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("removeProductTags"));
+			pstmt.setInt(1, productId);
+			result=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+			result=0;
+		} finally {
+			close(pstmt);
+		}
+		
+		return result!=0;
+	}
+	
+	public boolean updateProductTags(Connection conn, int productId, String[] tagsArr) {
+		
+		PreparedStatement pstmt = null;
+		int[] result = new int[0];
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateProductTags"));
+			for(String v : tagsArr) {
+				pstmt.setInt(1, productId);
+				pstmt.setInt(2, Integer.parseInt(v));
+				pstmt.addBatch();
+				pstmt.clearParameters();
+			}
+			result = pstmt.executeBatch();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result.length==tagsArr.length;
+	}
 }

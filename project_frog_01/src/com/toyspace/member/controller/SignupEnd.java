@@ -38,9 +38,20 @@ public class SignupEnd extends HttpServlet {
 		String userNickname =request.getParameter("userNickname");
 		String userEmail = request.getParameter("userEmail");
 	
-		Member m = new Member(0, userId,userEmail,userPassword,null,userName, userNickname, 0, null, null, null, null, null, 0, null, 0, null, null, null);
+		String loc = "";
+		String msg = "";
+		
+		Member m = new Member(0, userId,userEmail,userPassword,"X", userName, userNickname, 0, null, null, null, null, null, 0, null, 0, null, null, null);
 		
 		int result = new MemberService().insertMember(m);
+		if(result!=1) {
+			msg = "회원가입에 실패하였습니다.";
+			loc =request.getContextPath();
+		} else { 
+			msg = "회원가입에 성공하였습니다!";
+			loc = request.getContextPath()+"/member/signUpCelebrate";
+		}
+		request.getRequestDispatcher("/msg?loc="+loc+"&msg="+msg).forward(request, response);
 	}
 
 	/**

@@ -10,6 +10,12 @@
 href="<%=request.getContextPath() %>/css/admin-login/style.css">
 </head>
 <body>
+<script> 
+	<%if(session.getAttribute("loggedInAdmin")!=null){%>
+		
+		location.href = '<%=request.getContextPath() %>/msg?loc=<%=request.getContextPath()%>/admin/mainPage&msg=이미 관리자로 로그인 되어 있습니다.'
+	<% } %>
+</script>
  <section>
         <div class=ad-login>
             <img src="<%=request.getContextPath() %>/image/admin/white-logo.png">

@@ -67,11 +67,31 @@ public class ProductService {
 		return p;
 	}
 //상품수정
-	public int updateProduct(Product p) {
+	public boolean updateProduct(Product p, String[] tagsArr) {
 		Connection conn=getConnection();
-		int result=dao.updateProduct(conn,p);
-		if(result>0) commit(conn);
-		else rollback(conn);
+		int productId = p.getProductId();
+		boolean result=dao.updateProduct(conn,p);
+		if(!result) {
+			rollback(conn);
+			System.out.println("상품 업데이트 실패!");
+			close(conn);
+			return result;
+		}
+		result = dao.removeProductTags(conn, productId);
+		if(!result) {
+			rollback(conn);
+			System.out.println("상품의 태그들 삭제 실패!");
+			close(conn);
+			return result;
+		}
+		result = dao.updateProductTags(conn, productId,tagsArr);
+		if(!result) {
+			rollback(conn);
+			System.out.println("상품의 태그들 업데이트 실패!");
+			close(conn);
+			return result;
+		}
+		commit(conn);
 		close(conn);
 		return result;
 	}
