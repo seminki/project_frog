@@ -124,8 +124,9 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
             <th></th>
             <td>
               <div class="img-preview-container">
-                <img alt="" src="<%=p.getProductImageFilePaths()%>" class="img-preview" />
-                <img alt="" src="" class="img-preview" />
+              <%for(int i=0;i<p.getProductImageFilePaths().size();i++){ %>
+                <img alt="" src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(i) %>" class="img-preview" /> 
+                <%} %>
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
@@ -244,7 +245,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           </tr>
         </table>
         <input type="submit" value="수정" />
-        <input type="reset" value="취소" onclick="fn_goBack();" />
+        <input type="reset" value="취소" onclick="self.close();" />
       </form>
     </section>
 </body>
