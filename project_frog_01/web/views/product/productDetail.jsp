@@ -9,7 +9,7 @@ Product p=(Product)request.getAttribute("product");
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <%@ include file="/views/common/favicon.jsp" %>
-    <title>Document</title>
+<title>TOY SPACE - Where All Toys' Dream Comes True</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" />
     
     </head>

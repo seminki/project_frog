@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css" 
 href="<%=request.getContextPath() %>/css/admin-login/style.css">
+<title>TOY SPACE 관리자 페이지</title>
+<%@ include file="/views/common/favicon.jsp"%>
 </head>
 <body>
 <script> 

@@ -8,7 +8,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <%@ include file="/views/common/favicon.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TOY SPACE - Where All Toys' Dream Comes True</title>
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>

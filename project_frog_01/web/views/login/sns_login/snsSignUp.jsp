@@ -7,7 +7,7 @@
 <script src='http://code.jquery.com/jquery-3.5.1.min.js'></script>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<title>Insert title here</title>
+<title>TOY SPACE - Where All Toys' Dream Comes True</title>
 <%@ include file="/views/common/favicon.jsp" %>
 </head>
 <body>

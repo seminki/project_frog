@@ -7,7 +7,7 @@
 <script src='http://code.jquery.com/jquery-3.5.1.min.js'></script>
 <%@ include file="/views/common/favicon.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TOY SPACE - Where All Toys' Dream Comes True</title>
 </head>
 <body>
 	404
