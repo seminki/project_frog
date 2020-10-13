@@ -16,12 +16,11 @@
       <div class="main-container">
         <div class="text-main">
           <div class="text-container">
-            <div>A WORLD OF IMAGINATION</div>
-            <h1 class="fall">FALL IN LOVE WITH WETMORE FOREST</h1>
+            <div>TOY SPACE</div>
+            <h1 class="fall">Where All Toys' Dream Comes True</h1>
             <div class="text-shop">
               <p>
-                Save 30% on the loveable monsters of Wetmore Forest. Fun for the
-                whole family with games, books, puzzles and more!
+                장난감들이 당신을 기다리고 있어요! 30% 할인 기간 동안 입양하시면, 배송비는 무료입니다!
               </p>
               <a class="shop1-btn" href="">Shop Collection</a>
             </div>
@@ -40,9 +39,9 @@
         <div class="main2-1">
           <div class="main2-container">
             <div class="main2-text">
-              <h1>PIXAR ALIENS REMIX</h1>
+              <h1>DISNEY COLLECTION</h1>
               <div class="main2-shop">
-                <p>OUT OF THIS WORLD CUTE</p>
+                <p>훌륭한 디덕이라면 놓칠 수 없죠!</p>
                 <a class="shop2-btn" href="">SHOP COLLECTION</a>
               </div>
             </div>
@@ -51,9 +50,9 @@
         <div class="main2-2">
           <div class="main2-container">
             <div class="main2-text">
-              <h1>ALICE COOPER</h1>
+              <h1>THE GAME OF THRONES</h1>
               <div class="main2-shop">
-                <p>THE ARCHITECT OF SHOCK-ROCK</p>
+                <p>왕좌의 게임 팬이라구요? 결말이 마음에 안들었나요? 새로운 결말을 만들어보세요!</p>
                 <a class="shop2-btn" href="">SHOP COLLECTION</a>
               </div>
             </div>
@@ -64,7 +63,7 @@
 
       <div class="main3-container">
         <header>
-          <h2 class="new-item">NEW NEW NEW HARRY POTTER!</h2>
+          <h2 class="new-item">NEW NEW NEW STAR WARS!</h2>
         </header>
         <div class="main3-pic-text">
           <div class="item1">
