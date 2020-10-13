@@ -35,9 +35,7 @@ public class AdminEditServlet extends HttpServlet {
 		a.setAdminPassword(request.getParameter("adminPw"));
 		a.setNickname(request.getParameter("adminNic"));
 		a.setAdminName(request.getParameter("adminName"));
-		System.out.println("됨1");
 		a.setAdminLevel(Integer.parseInt(request.getParameter("adminLevel")));
-		System.out.println("됨1");
 		
 		boolean result=new AdminService().editAdmin(a);
 		
