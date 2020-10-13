@@ -354,4 +354,29 @@ public class ProductDao {
 		}
 		return productsList;
 	}
+//메인에서 제품검색
+	public ArrayList<Product> searchByKeyword(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Product> productsList= new ArrayList<Product>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("searchByKeyword"));
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			pstmt.setString(2, "%"+searchKeyword+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Product p = productConvention(rs);
+				
+				productsList.add(p);
+			}
+			Collections.sort(productsList);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productsList;
+	}
+	
 }

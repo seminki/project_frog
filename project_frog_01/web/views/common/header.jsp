@@ -176,9 +176,18 @@ else{
 			<div class="gray-scale"></div>
 			<div class="search-bar-input">
 				<i class="fas fa-search search-input-icon"></i>
-				<input type="text" id="search-input" />
+				<form action="<%=contextPath%>/productSearch.do" method="post" name="formname">
+				<input type="text" id="search-input" name="searchKeyword" onkeypress="JavaScript:press(this.form)" />
+				</form>
 				<a href="#"><i class="fas fa-times search-x"></i></a>
 			</div>
+			<script>
+			function press(f){
+				if(f.keyCode==13){
+					formname.submit();
+				}
+			}
+			</script>
 			<div class="side-bar">
 				<div class="side-bar-top-cont side-bar-margin">
 					<% if(signedInMember==null){ %>

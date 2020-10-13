@@ -125,4 +125,11 @@ public class ProductService {
 		close(conn);
 		return productsList;
 	}
+//메인에서 제품검색
+	public ArrayList<Product> searchByKeyword(String searchKeyword) {
+		Connection conn=getConnection();
+		ArrayList<Product> productsList =dao.searchByKeyword(conn,searchKeyword);
+		close(conn);
+		return productsList;
+	}
 }
