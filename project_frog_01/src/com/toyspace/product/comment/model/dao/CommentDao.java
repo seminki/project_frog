@@ -30,10 +30,10 @@ public class CommentDao {
 			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
 			pstmt.setInt(1,c.getProductId());
 			pstmt.setInt(2,c.getMemberKey());
-			pstmt.setInt(3, 0);
-			pstmt.setInt(4,0);
-			pstmt.setInt(5,0);
-			pstmt.setString(6, c.getCommentContent());
+			
+			pstmt.setInt(3,c.isSecret()?1:0);
+			pstmt.setInt(4,c.isDeleted()?1:0);
+			pstmt.setString(5, c.getCommentContent());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

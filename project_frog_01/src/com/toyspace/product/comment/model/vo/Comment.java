@@ -2,13 +2,14 @@ package com.toyspace.product.comment.model.vo;
 
 import java.util.Date;
 
-public class Comment {
+public class Comment implements Comparable<Comment>{
 	
 	private int productCommentNo;
 	private int productId;
 	private int memberKey;
 	private int commentRefNo;
 	private boolean isSecret;
+	private boolean isDeleted;
 	private String commentContent;
 	private Date commentDate;
 	
@@ -16,17 +17,28 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	public Comment(int productCommentNo, int productId, int memberKey, int commentRefNo, boolean isSecret,
-			String commentContent, Date commentDate) {
+			boolean isDeleted, String commentContent, Date commentDate) {
 		super();
 		this.productCommentNo = productCommentNo;
 		this.productId = productId;
 		this.memberKey = memberKey;
 		this.commentRefNo = commentRefNo;
 		this.isSecret = isSecret;
+		this.isDeleted = isDeleted;
 		this.commentContent = commentContent;
 		this.commentDate = commentDate;
 	}
+
+	
+	
+	@Override
+	public int compareTo(Comment o) {
+		// TODO Auto-generated method stub
+		return this.productCommentNo-o.productCommentNo;
+	}
+
 
 	public int getProductCommentNo() {
 		return productCommentNo;
@@ -68,6 +80,14 @@ public class Comment {
 		this.isSecret = isSecret;
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	public String getCommentContent() {
 		return commentContent;
 	}
@@ -91,6 +111,7 @@ public class Comment {
 		result = prime * result + ((commentContent == null) ? 0 : commentContent.hashCode());
 		result = prime * result + ((commentDate == null) ? 0 : commentDate.hashCode());
 		result = prime * result + commentRefNo;
+		result = prime * result + (isDeleted ? 1231 : 1237);
 		result = prime * result + (isSecret ? 1231 : 1237);
 		result = prime * result + memberKey;
 		result = prime * result + productCommentNo;
@@ -119,6 +140,8 @@ public class Comment {
 			return false;
 		if (commentRefNo != other.commentRefNo)
 			return false;
+		if (isDeleted != other.isDeleted)
+			return false;
 		if (isSecret != other.isSecret)
 			return false;
 		if (memberKey != other.memberKey)
@@ -133,9 +156,10 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [productCommentNo=" + productCommentNo + ", productId=" + productId + ", memberKey=" + memberKey
-				+ ", commentRefNo=" + commentRefNo + ", isSecret=" + isSecret + ", commentContent=" + commentContent
-				+ ", commentDate=" + commentDate + "]";
+				+ ", commentRefNo=" + commentRefNo + ", isSecret=" + isSecret + ", isDeleted=" + isDeleted
+				+ ", commentContent=" + commentContent + ", commentDate=" + commentDate + "]";
 	}
-	
+
+
 	
 }
