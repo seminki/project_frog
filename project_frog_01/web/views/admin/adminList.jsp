@@ -55,7 +55,7 @@
                 <td><input type="text" name="" id="" value="<%=a.getNickname()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminName()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminLevel()%>"> </td>
-                <td><input type="submit" name="" id="" value="수정">ㅣ<input type="submit" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
+                <td><input type="submit" name="" id="" value="수정">ㅣ<input type="button" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
             </form>
          </tr>
          <%}} %>
