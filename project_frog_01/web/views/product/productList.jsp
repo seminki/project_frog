@@ -90,14 +90,14 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                         <div class="products_list" style="width: 100%; display:flex; flex-wrap: wrap; ">
                             <!-- 제품목록 db 에서 불러온 제품을 for문 으로 제한된 수량 배열-->
                             <style type="text/css">
-							 a:link { color: black; text-decoration: none;}
-							 a:visited { color: black; text-decoration: none;}
-							 a:hover { color: black; text-decoration: underline;}
+							 section a:link { color: black; text-decoration: none;}
+							 section a:visited { color: black; text-decoration: none;}
+							 section a:hover { color: black; text-decoration: underline;}
 							</style>
                             <style>
 
 
-                                .products-list-item-a{
+                                section .products-list-item-a{
                                     font-size: .9375rem;
                                     text-decoration: none;
                                     display: flex;
@@ -107,7 +107,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                     
                                     
                                 }
-                                .products-list-item{
+                                section .products-list-item{
                                     font-size: .9375rem;
                                     box-shadow: 3px 6px 9px 0 rgba(0,0,0,.1);
                                     margin-right: 12px;
@@ -119,13 +119,13 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                     max-width: 25%;
                                 }
 
-                                        .shopify-image{
+                                      section .shopify-image{
                                         cursor: pointer;
                                         width: 100%;
                                         background-size: contain;
                                         /*background-image: url("https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410"); */
                                         }
-                                        .addtocart{
+                                        section .addtocart{
                                             text-transform: uppercase;
                                             font-size: 1rem;
                                             font-family: "Open Sans Condensed",sans-serif;
@@ -141,7 +141,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                             margin:auto;
                                             display: block;
                                         }
-                                        .products-list-item{
+                                        section .products-list-item{
                                             flex-grow: 1;
                                             padding: 0 .5rem 2rem;
                                         }

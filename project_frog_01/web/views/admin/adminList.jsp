@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <%@ page import="com.toyspace.admin.model.vo.*, java.util.ArrayList" %>
 <%
@@ -14,12 +15,17 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
 </head>
 <body>
+<% if(admin!=null&& admin.getAdminLevel()!=0){ %>
+<div style="text-align:center;">
+            <h1 style="margin-top:100px ">권한이 없습니다.</h1>
+</div>            
+<%} %>
 
-<!-- 페이지에 권한부여 필요 (마스터 관리자만 이용가능)
-추가, 삭제, 수정 버튼에 기능 추가 해야됨 -->
+<!-- 페이지에 권한부여 필요 (마스터 관리자만 이용가능) url 직접 입력시 접근가능 
+추가 v , 삭제, 수정 버튼에 기능 추가 해야됨 -->
 <!-- 비밀번호 암호화 필요 --> 
 
-
+<% if(admin!=null&& admin.getAdminLevel()==0){ %>
 
 <body style="text-align: center;">
 <h2>:관리자 계정 관리:</h2>
@@ -91,6 +97,6 @@
 
     
 </body>
-
+<%} %>
 </body>
 </html>
