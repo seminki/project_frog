@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member, java.util.TreeMap"%>
 <%String contextPath = request.getContextPath(); 
 Member signedInMember=(Member)(session.getAttribute("signedInMember"));
-
+/* 이 트리맵의 키는 상품키, 밸류는 갯수를 의미한다. */
+TreeMap<Integer, Integer> cartValues = (TreeMap<Integer, Integer>)session.getAttribute("cart");
+int cartQty = 0;
+if(cartValues==null) {
+	cartValues = new TreeMap<Integer,Integer>();
+}
+else{
+	for(int productId : cartValues.keySet()){
+		cartQty+=cartValues.get(productId);
+	}
+}
 %>
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script
@@ -149,10 +159,10 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 								<i class="fas fa-search small-search"></i>
 							</a>
 						</li>
-						<li>
+						<li id="cart">
 							<a href="<%=contextPath%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
-								<div id="cart-amount">0</div>
+								<div id="cart-amount"><%=cartQty%></div>
 							</a>
 						</li>
 						<li>

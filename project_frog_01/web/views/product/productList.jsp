@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.toyspace.product.model.vo.*, java.util.ArrayList" %>
+<%@ page import="com.toyspace.product.model.vo.*, java.util.ArrayList, java.util.TreeMap" %>
 <%
 ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("productsList");
+
 
 %>
 <!DOCTYPE html>
@@ -103,7 +104,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                     text-decoration: none;
                                     display: flex;
                                     flex-direction: column;
-                                    height: 100%;
+                                    height: 95%;
                                     
                                     
                                     
@@ -153,7 +154,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
         	for(Product p : productsList){ %>
                             <div class="products-list-item">
                                 <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail?productId=<%=p.getProductId() %>">
-                                    <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" alt="Wall-E" style="">          
+                                    <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" alt="<%=p.getProductName() %>" style="">          
                                     <div class="">
                                         <div class="">
                                         	<p hidden><%=p.getProductId() %></p>               	
@@ -161,11 +162,12 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                             <strong class=""><%=p.getProductName() %></strong>
                                             <div class=""><%=p.getProductPrice() %>원</div>
                                         </div>
-                                        <div class="addtocart_div">
-                                            <button class="addtocart">Add To Cart</button>
-                                        </div>
                                     </div>
                                 </a>
+                                        <div class="addtocart_div">
+                                        	
+                                            <button class="addtocart" onclick="addToCart('<%=p.getProductId()%>');">Add To Cart</button>
+                                        </div>
                             </div>
                             <%}} %>
                          
