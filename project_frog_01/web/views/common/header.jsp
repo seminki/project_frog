@@ -160,7 +160,7 @@ else{
 							</a>
 						</li>
 						<li id="cart">
-							<a href="<%=contextPath%>/cart.do">
+							<a class="animate__animated" href="<%=contextPath%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
 								<div id="cart-amount"><%=cartQty%></div>
 							</a>
