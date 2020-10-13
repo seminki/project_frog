@@ -130,7 +130,18 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 							<%} else { %>
 							<a href="<%=contextPath%>/member/myPage">
 							<%} %>
+							<% if(signedInMember==null){ %>
+							<a href="<%=contextPath%>/login.do">
+							<%} else { %>
+							<a href="<%=contextPath%>/member/myPage">
+							<%} %>
+					<%if(signedInMember!=null&&signedInMember.getUserProfilePicPath()!=null){ %>
+					<img alt="" class="user-pic-wide" src="<%=contextPath+"/upload/member/"+signedInMember.getUserProfilePicPath()%>">
+					<%}else if(signedInMember!=null&&signedInMember.getUserProfilePicUrl()!=null){ %>
+					<img alt="" class="user-pic-wide" src="<%=signedInMember.getUserProfilePicUrl()%>">
+					<%} else{ %>
 								<i class="fas fa-user-astronaut user"></i>
+								<%} %></a>
 							</a>
 						</li>
 						<li>
@@ -165,7 +176,13 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 							<%} else { %>
 							<a href="<%=contextPath%>/member/myPage">
 							<%} %>
-					<i class="fa fa-user-circle user2"></i></a>
+					<%if(signedInMember!=null&&signedInMember.getUserProfilePicPath()!=null){ %>
+					<img alt="" class="user-pic-narrow" src="<%=contextPath+"/upload/member/"+signedInMember.getUserProfilePicPath()%>">
+					<%}else if(signedInMember!=null&&signedInMember.getUserProfilePicUrl()!=null){ %>
+					<img alt="" class="user-pic-narrow" src="<%=signedInMember.getUserProfilePicUrl()%>">
+					<%} else{ %>
+					<i class="fa fa-user-circle user2"></i>
+					<%} %></a>
 					<a href="#"><i class="fas fa-times side-x"></i></a>
 				</div>
 						<style type="text/css">

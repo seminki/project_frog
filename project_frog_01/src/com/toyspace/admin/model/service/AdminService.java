@@ -1,7 +1,10 @@
 package com.toyspace.admin.model.service;
 
-import java.sql.Connection;
 import static com.toyspace.common.JDBCTemplate.*;
+
+
+import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.toyspace.admin.model.dao.AdminDao;
 import com.toyspace.admin.model.vo.Admin;
@@ -21,4 +24,22 @@ public class AdminService {
 		return admin;
 	}
 	
+	//admin 계정 리스트
+	public ArrayList<Admin> loadAllAdmin(){
+		Connection conn=getConnection();
+		ArrayList<Admin> adminList=dao.loadAllAdmin(conn);
+		close(conn);
+		return adminList;
+		
+	}
+	
+	public boolean insertAdmin(Admin admin) {
+		Connection conn = getConnection();
+		boolean result = dao.insertAdmin(conn, admin);
+		if(result) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 }

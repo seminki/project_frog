@@ -11,7 +11,8 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Document</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" />
+    <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" /> --%>
+    <!-- ??? 왜 productDetailStyle.css 적용?? -->
     
     </head>
    <body>
@@ -136,7 +137,8 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                             position: relative;
                                             margin: .33rem 0;
                                             cursor: pointer;
-                                            margin-left: 16.8%;
+                                            /* margin-left: 16.8%; */
+                                            margin:auto;
                                             display: block;
                                         }
                                         .products-list-item{
@@ -171,11 +173,12 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                         <!-- 페이징 -->
                         <div class="center">
                             <div class="pagination">
-                                <button class="black  pageControl previous " disabled="" tabindex="0">
+                                <button class="black  pageControl previous" tabindex="0">
                                 <span class="sr-only">Previous page of results</span>
                                 <span class="hide-for-small" aria-hidden="true">PREV</span>
                                 <span class="show-for-small" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
                                 </button>
+                                
                                 <span class="sr-only">Go to page</span>
                                 <button class="page active" tabindex="0">1</button>
                                 <button class="page white" tabindex="0">2</button>
