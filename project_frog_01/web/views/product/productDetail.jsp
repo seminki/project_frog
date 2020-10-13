@@ -84,7 +84,7 @@ Product p=(Product)request.getAttribute("product");
           data-field="quantity"
           onclick="incrementValue(event);"
         />
-        <input type="button" class="add-cart" value="장바구니 담기" onclick="addToCart('<%=p.getProductId()%>');">
+        <input type="button" class="add-cart" value="장바구니 담기" onclick="addToCart('<%=p.getProductId()%>','<%=contextPath%>');">
         
         </form>
         <!-- 찜 -->
@@ -298,26 +298,7 @@ Product p=(Product)request.getAttribute("product");
               $('.fa-heart').toggleClass('color');
           }
     
-    	function addToCart(productId){
-    		let qty =$(".quantity-field")[0].value;
-    		$.ajax({
-    			url: '<%=request.getContextPath()%>/cart/addToCart',
-    			data: {
-    				"productId" : productId, "value": qty	
-    			},
-    			type: 'POST',
-    			success : (data) =>{
-    				
-    				
-    				$("#cart-amount").html(data);
-    				$("#cart-amount").parent().removeClass("animate__rubberBand").addClass("animate__rubberBand");
-    				$(".quantity-field")[0].value=0;
-    			},
-    			fail: (error) =>{
-    				console.log(error);
-    			}
-    		})
-    	}
+
     
     </script>
 

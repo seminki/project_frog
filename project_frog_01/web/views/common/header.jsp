@@ -159,8 +159,8 @@ else{
 								<i class="fas fa-search small-search"></i>
 							</a>
 						</li>
-						<li id="cart">
-							<a class="animate__animated" href="<%=contextPath%>/cart.do">
+						<li id="cart" class="animate__animated">
+							<a href="<%=contextPath%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
 								<div id="cart-amount"><%=cartQty%></div>
 							</a>
@@ -281,7 +281,4 @@ else{
 			</div>
 		</header>
 	<script src="<%=contextPath%>/js/common/headerScript.js"></script>
-<script>
-
-</script>
 

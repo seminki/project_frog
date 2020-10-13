@@ -166,7 +166,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                 </a>
                                         <div class="addtocart_div">
                                         	
-                                            <button class="addtocart" onclick="addToCart('<%=p.getProductId()%>');">Add To Cart</button>
+                                            <button class="addtocart" onclick="addToCart('<%=p.getProductId()%>','<%=contextPath%>');">Add To Cart</button>
                                         </div>
                             </div>
                             <%}} %>
@@ -211,29 +211,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
         </div>
     </div>
     
-    <script>
-    
-    	function addToCart(productId){
-    		let qty =1;
-    		$.ajax({
-    			url: '<%=request.getContextPath()%>/cart/addToCart',
-    			data: {
-    				"productId" : productId, "value": qty	
-    			},
-    			type: 'POST',
-    			success : (data) =>{
-    				
-    				
-    				$("#cart-amount").html(data);
-    				$("#cart-amount").parent().removeClass("animate__rubberBand").addClass("animate__rubberBand");
-    			},
-    			fail: (error) =>{
-    				console.log(error);
-    			}
-    		})
-    	}
-    
-    </script>
+
     
     
     
