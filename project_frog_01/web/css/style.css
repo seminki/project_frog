@@ -22,10 +22,12 @@ div.pic {
 div.main-container {
   width: 100%;
   display: flex;
-  background-color: #fcda93;
+  background-image:url('./sky.jpg')
 }
-
-.fall {
+.text-container{
+  color: white;
+}
+.text-title {
   font-size: 50px;
   font-weight: bolder;
   margin: 0;
@@ -67,11 +69,11 @@ div.main2-container {
 }
 
 div.main2-1 {
-  background-color: #45202c;
+  background-color: darkred;
   color: #ffffff;
 }
 div.main2-2 {
-  background-color: #6c5793;
+  background-color: black;
   color: white;
 }
 

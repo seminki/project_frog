@@ -16,12 +16,12 @@
       <div class="main-container">
         <div class="text-main">
           <div class="text-container">
-            <div>A WORLD OF IMAGINATION</div>
-            <h1 class="fall">FALL IN LOVE WITH WETMORE FOREST</h1>
+            <div>디즈니 Kingdom of Disney</div>
+            <h1 class="text-title">디즈니와 함께 사랑에 빠져볼까요?</h1>
             <div class="text-shop">
               <p>
-                Save 30% on the loveable monsters of Wetmore Forest. Fun for the
-                whole family with games, books, puzzles and more!
+                	우리들의 친구 미키마우스! 미워할 수 없는 마녀 말레피센트까지<br>
+                	지금 토이스페이스에서 만나보세요!
               </p>
               <a class="shop1-btn" href="">Shop Collection</a>
             </div>
@@ -30,7 +30,7 @@
         <div class="pic">
           <div class="img-container">
             <a href="">
-              <img src="<%=request.getContextPath()%>/image/product/wetmore.JPG" alt="" />
+              <img src="<%=request.getContextPath()%>/image/product/Disney_Cinderella.png" alt="" />
             </a>
           </div>
         </div>
@@ -40,9 +40,9 @@
         <div class="main2-1">
           <div class="main2-container">
             <div class="main2-text">
-              <h1>PIXAR ALIENS REMIX</h1>
+              <h1>마블 MARVEL</h1>
               <div class="main2-shop">
-                <p>OUT OF THIS WORLD CUTE</p>
+                <p>"I am inevitable"</p>
                 <a class="shop2-btn" href="">SHOP COLLECTION</a>
               </div>
             </div>
@@ -51,9 +51,9 @@
         <div class="main2-2">
           <div class="main2-container">
             <div class="main2-text">
-              <h1>ALICE COOPER</h1>
+              <h1>스타워즈 STAR WARS</h1>
               <div class="main2-shop">
-                <p>THE ARCHITECT OF SHOCK-ROCK</p>
+                <p>"May the Force be with you."</p>
                 <a class="shop2-btn" href="">SHOP COLLECTION</a>
               </div>
             </div>
