@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.toyspace.admin.model.vo.Admin;
@@ -53,7 +55,43 @@ public class AdminDao {
 		
 		return admin;
 	}
+//	private String adminId;
+//	private String adminPassword;
+//	private String nickname;
+//	private String adminName;
+//	private int adminLevel;
+//	private String adminLevelDescription;
+	public Admin adminConvention(ResultSet rs) throws SQLException{
+		Admin admin=new Admin();
+		admin.setAdminId(rs.getString("ADMIN_ID"));
+		admin.setAdminPassword(rs.getString("ADMIN_PASSWORD"));
+		admin.setNickname(rs.getString("ADMIN_NICKNAME"));
+		admin.setAdminName(rs.getString("ADMIN_NAME"));
+		admin.setAdminLevel(rs.getInt("ADMIN_LEVEL"));
+		return admin;
+	}
 	
+	public ArrayList<Admin> loadAllAdmin(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Admin> adminList=new ArrayList<Admin>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("loadAllAdmin"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Admin admin=adminConvention(rs);
+				
+				adminList.add(admin);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return adminList;
+	}
 	
 	
 }
