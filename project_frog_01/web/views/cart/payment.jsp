@@ -4,9 +4,10 @@
     <% Member m = (Member)session.getAttribute("signedInMember"); 
     
 	@SuppressWarnings("unchecked")
-	TreeMap<Product, Integer> buyingItems = (TreeMap<Product, Integer>)request.getAttribute("boughtItems");
+	TreeMap<Product, Integer> buyingItems = (TreeMap<Product, Integer>)request.getAttribute("buyingItems");
     
     %>
+     
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +15,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/cart/payment.css">
-    <title>Document</title> 
+    <title>TOY SPACE - Where All Toys' Dream Comes True</title> 
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
+<script>
+<%if(signedInMember==null){ %>
+	location.href = "<%=contextPath%>/msg?loc=<%=contextPath%>&msg=로그인 하지 않았습니다.로그인을 먼저 진행해 주세요.";
+<%} %>
+</script>
  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <section class="container">
         <div class="left">
@@ -47,7 +53,7 @@
                         <input type="email" id="email" name="email" placeholder="이메일">
                     </div>
                     <div class="Keep">
-                        <label><input type="checkbox">&nbspKeep me up to deate on news and exclusive offers</label>
+                        <label><input type="checkbox">&nbspKeep me up to date on news and exclusive offers</label>
                     </div>
                 <div class="Shipping">
                     <p>배송지 주소</p>

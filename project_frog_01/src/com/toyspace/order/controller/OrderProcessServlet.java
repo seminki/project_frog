@@ -49,7 +49,7 @@ public class OrderProcessServlet extends HttpServlet {
 		String merchant_uid = request.getParameter("merchant_uid");
 		
 //		디비에 merchat_uid로 지정된 결제의 totalamount 불러오기!
-		double amount = ps.loadTotalAmount(merchant_uid);
+//		double amount = ps.loadTotalAmount(merchant_uid);
 		
 		String api_key = "9845619002442630";
 		String api_secret = "4ikpSZKORdkvnfxsuWSICeLlnLWZSDcXVxnOw8CnlWTJcqcGn4o0jalGWiGOWTMSq9GWhjkDfdmsEy82";
@@ -92,9 +92,10 @@ public class OrderProcessServlet extends HttpServlet {
 		*
 		*/
 		/////////////////////////////
-		if(imp_uid.contentEquals(payment.getImpUid())&& merchant_uid.equals(payment.getMerchantUid())&&
-				amount == payment.getAmount().doubleValue()) {
-//			서버저장 로직
+//		if(imp_uid.contentEquals(payment.getImpUid())&& merchant_uid.equals(payment.getMerchantUid())&&
+//				amount == payment.getAmount().doubleValue()) {
+		if(true) { //테스트용
+//			서버저장 로직 쓸것!
 			System.out.println("정상정상!");
 ////////////////////////////////////
 //			1이면 정상

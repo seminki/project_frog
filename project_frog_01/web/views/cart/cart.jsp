@@ -141,7 +141,7 @@
                 </div>
                 <div class="bottom">
                     <p class="SHIPPING">무료 배송</p>
-                    <button><b>체크 아웃</b></button>
+                    <button id ="checkout-btn"><b>체크 아웃</b></button>
                 </div>
             </div>
         </div>
@@ -188,5 +188,16 @@
         </div>
     </section>
 <%@ include file="/views/common/footer.jsp" %>
+
+<script>
+
+	$("#checkout-btn").click((e)=>{
+		/* 체크아웃 버튼 누를 때 수행할 로직*/
+		location.href = "<%=contextPath%>/order/moveToPayment";
+	})
+	
+	
+
+</script>
 </body>
 </html>
