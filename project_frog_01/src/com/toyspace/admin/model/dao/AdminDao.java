@@ -120,7 +120,7 @@ public class AdminDao {
 			pstmt=conn.prepareStatement(prop.getProperty("deleteAdmin"));
 			pstmt.setNString(1,adminId);
 			result=pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);

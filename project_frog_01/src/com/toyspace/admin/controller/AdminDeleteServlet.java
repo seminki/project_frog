@@ -34,8 +34,8 @@ public class AdminDeleteServlet extends HttpServlet {
 		boolean result=new AdminService().deleteAdmin(adminId);
 		
 		
-		String msg="";
-		String loc=request.getContextPath()+"/admin/adminList";
+		String loc = request.getContextPath()+"/admin/adminList";
+		String msg = "";
 		
 		if(!result) {
 			msg="계정삭제 실패";
