@@ -112,6 +112,21 @@ public class AdminDao {
 		}
 		return result==1;
 	}
+	//관리자 계정 삭제
+	public boolean deleteAdmin(Connection conn, String adminId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteAdmin"));
+			pstmt.setNString(1,adminId);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result==1;
+	}
 	
 	
 }
