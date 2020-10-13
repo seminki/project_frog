@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <title>Insert title here</title>
+<%@ include file="/views/common/favicon.jsp" %>
 <link rel="stylesheet" type="text/css" 
 href="<%=request.getContextPath() %>/css/login/style.css">
 </head>

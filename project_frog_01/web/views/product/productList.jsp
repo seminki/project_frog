@@ -9,6 +9,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="/views/common/favicon.jsp" %>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Document</title>
     <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" /> --%>

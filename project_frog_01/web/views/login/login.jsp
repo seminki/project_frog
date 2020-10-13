@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" 
 href="<%=request.getContextPath() %>/css/login/style.css">
+<%@ include file="/views/common/favicon.jsp" %>
 <!-- 구글 로그인 api 로드 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="<%=clientId%>">

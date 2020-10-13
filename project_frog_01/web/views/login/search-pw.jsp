@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" 
 href="<%=request.getContextPath() %>/css/login/style.css">
+<%@ include file="/views/common/favicon.jsp" %>
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>

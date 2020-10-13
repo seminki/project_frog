@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<%@ include file="/views/common/favicon.jsp" %>
 <!-- 구글 로그인 api 로드 -->
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="<%=clientId%>">
