@@ -119,7 +119,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                     background-color: white;
                                     text-align: center;
                                     max-width: 25%;
-                                    min-width : 20%;
+                                    min-width : 300px;
                                 }
 
                                       section .shopify-image{

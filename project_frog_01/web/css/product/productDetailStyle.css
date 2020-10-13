@@ -1,23 +1,20 @@
-* {
+section * {
   box-sizing: border-box;
 }
-body {
-  font-family: Verdana, sans-serif;
-  margin: 0;
-}
+
 section{
-	margin-top:5em;
-	
+	padding:3em;
+	margin:0;	
 }
 .mySlides {
   display: none;
 }
-img {
+section img {
   vertical-align: middle;
 }
 
 /* Slideshow container */
-.slideshow-container {
+section .slideshow-container {
   max-width: 500px;
   position: relative;
   margin: auto;
@@ -52,7 +49,7 @@ img {
 }
 
 /* Caption text */
-.text {
+section .text {
   color: #f2f2f2;
   font-size: 15px;
   padding: 8px 12px;
@@ -123,8 +120,8 @@ img {
   }
 }
 /* 전체 */
-.all-container {
-  margin: 50px;
+section .all-container {
+  margin: 50xp;
 }
 
 /* 장바구니 버튼  */
@@ -154,12 +151,12 @@ img {
   margin-left: 10px;
 }
 
-.fa-heart {
+section .fa-heart {
   font-size: 25px;
   padding: 5px;
   color: lightgray;
 }
-.fa-heart.color {
+section .fa-heart.color {
   color: hotpink;
 }
 
@@ -178,7 +175,7 @@ img {
   outline: 0;
   margin: 20px 30px;
 }
-textarea {
+section textarea {
   border-radius: 20px;
 }
 
@@ -194,7 +191,7 @@ textarea {
   padding: 0px 10px;
   margin: 10px;
 }
-.item-container {
+section .item-container {
   text-decoration: none;
   color: black;
 }
@@ -215,8 +212,8 @@ textarea {
   width: 100%;
 }
 /* 수량버튼 */
-input,
-textarea {
+section input,
+section textarea {
   border: 1px solid lightgray;
   box-sizing: border-box;
   margin: 0;
@@ -224,13 +221,13 @@ textarea {
   padding: 10px;
 }
 
-input[type="button"] {
+section input[type="button"] {
   -webkit-appearance: button;
   cursor: pointer;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+section input::-webkit-outer-spin-button,
+section input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
@@ -272,7 +269,7 @@ input::-webkit-inner-spin-button {
   left: -13px;
 }
 
-input[type="number"] {
+section input[type="number"] {
   background-color: lightgray;
   -moz-appearance: textfield;
   -webkit-appearance: none;
@@ -290,13 +287,13 @@ input[type="number"] {
     
       flex-wrap: wrap;
     }
-    textarea{
+    section textarea{
         width:100%;
     }
 }
 /* 추천상품 */
 @media screen and (max-width: 768px) {
-    div.rec-pic-text {
+    section div.rec-pic-text {
       flex-wrap: wrap;
     }
 }

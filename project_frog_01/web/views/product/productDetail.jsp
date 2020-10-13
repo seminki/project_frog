@@ -140,8 +140,8 @@ Product p=(Product)request.getAttribute("product");
 		   					<button class="btn-reply" value="">답글</button>
 		   				</td>
 		   			</tr>
-	<%} %>
-   		</table> --%>
+	<%} %> --%>
+   		</table> 
 	
 	
         <hr>
@@ -215,6 +215,9 @@ Product p=(Product)request.getAttribute("product");
               </div>
         </div>
     </div>
+    
+
+</section>
         <script>
         //리뷰
         function fn_access(){
@@ -294,7 +297,7 @@ Product p=(Product)request.getAttribute("product");
           }
         </script>
 
-</section>
+
 <%@ include file="/views/common/footer.jsp"%>
 </body>
 </html>
