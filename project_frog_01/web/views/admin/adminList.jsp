@@ -31,7 +31,7 @@
 <h2>:관리자 계정 관리:</h2>
 <fieldset style="text-align: center;">
     <legend><strong>관리자 회원 목록</strong></legend>
-    <form action="">
+    
     <table border="3" style="margin: auto;">
         <thead>
             <tr>
@@ -48,23 +48,24 @@
         <%if(adminList!=null&&adminList.size()!=0){
         for(Admin a: adminList){%>
         <tr>
-            <form action="<%= request.getContextPath()%>/admin/removeAdmin" method="post">
+            <form action="<%= request.getContextPath()%>/admin/editAdmin" method="post">
                 <td><input type="checkbox" name="" id=""></td>
                 <td><input type="text" name="adminId" id="" value="<%=a.getAdminId()%>"> </td>
-                <td><input type="password" name="" id="" value="<%=a.getAdminPassword()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getNickname()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getAdminName()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getAdminLevel()%>"> </td>
-                <td><input type="submit" name="" id="" value="수정">ㅣ<input type="button" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
+                <td><input type="password" name="adminPw" id="" value="<%=a.getAdminPassword()%>"> </td>
+                <td><input type="text" name="adminNic" id="" value="<%=a.getNickname()%>"> </td>
+                <td><input type="text" name="adminName" id="" value="<%=a.getAdminName()%>"> </td>
+                <td><input type="text" name="adminLevel" id="" value="<%=a.getAdminLevel()%>"> </td>
+                <td><input type="submit" name="" id="" value="수정">
+                	ㅣ<input type="button" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
             </form>
          </tr>
          <%}} %>
         </tbody>
     </table>
     <br>
-    <button style="width:5%;" type="submit"><strong>선택 삭제</strong></button>
+    <button style="width:5%;" type="button" onclick=""><strong>선택 삭제</strong></button>
     <br>
-    </form>
+    
 </fieldset>
 <hr>
 <fieldset style="text-align: center;">

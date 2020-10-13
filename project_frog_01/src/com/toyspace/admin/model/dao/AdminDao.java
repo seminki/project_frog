@@ -127,6 +127,27 @@ public class AdminDao {
 		}
 		return result==1;
 	}
-	
+	public boolean editAdmin(Connection conn,Admin a) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("editAdmin"));
+			pstmt.setString(1,a.getAdminPassword());
+			pstmt.setString(2,a.getNickname());
+			pstmt.setString(3,a.getAdminName());
+			pstmt.setInt(4,a.getAdminLevel());
+			pstmt.setString(5,a.getAdminId());
+			System.out.println("됨3");
+			result=pstmt.executeUpdate();
+			System.out.println("됨4");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result==1;
+	}
 	
 }

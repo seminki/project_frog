@@ -54,4 +54,13 @@ public class AdminService {
 		
 		return result;
 	}
+	public boolean editAdmin(Admin admin) {
+		Connection conn = getConnection();
+		boolean result = dao.editAdmin(conn,admin);
+		if(result) commit(conn);
+		else rollback(conn);
+		System.out.println("됨2");
+		close(conn);
+		return result;
+	}
 }
