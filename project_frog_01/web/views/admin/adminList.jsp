@@ -48,21 +48,21 @@
         <%if(adminList!=null&&adminList.size()!=0){
         for(Admin a: adminList){%>
         <tr>
-            <form action="">
+            <form action="<%= request.getContextPath()%>/admin/removeAdmin" method="post">
                 <td><input type="checkbox" name="" id=""></td>
-                <td><input type="text" name="" id="" value="<%=a.getAdminId()%>"> </td>
+                <td><input type="text" name="adminId" id="" value="<%=a.getAdminId()%>"> </td>
                 <td><input type="password" name="" id="" value="<%=a.getAdminPassword()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getNickname()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminName()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminLevel()%>"> </td>
-                <td><input type="button" name="" id="" value="수정">ㅣ<input type="button" name="" id="" value="삭제"></td>
+                <td><input type="submit" name="" id="" value="수정">ㅣ<input type="submit" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
             </form>
          </tr>
          <%}} %>
         </tbody>
     </table>
     <br>
-    <button style="width:5%;"><strong>선택 삭제</strong></button>
+    <button style="width:5%;" type="submit"><strong>선택 삭제</strong></button>
     <br>
     </form>
 </fieldset>

@@ -42,4 +42,16 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+	//관리자 계정 삭제
+	public boolean deleteAdmin(String adminId) {
+		Connection conn=getConnection();
+		boolean result=dao.deleteAdmin(conn,adminId);
+		if(result) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+		
+		
+		return result;
+	}
 }
