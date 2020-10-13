@@ -210,6 +210,34 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
             </div>
         </div>
     </div>
+    
+    <script>
+    
+    	function addToCart(productId){
+    		let qty =1;
+    		$.ajax({
+    			url: '<%=request.getContextPath()%>/cart/addToCart',
+    			data: {
+    				"productId" : productId, "value": qty	
+    			},
+    			type: 'POST',
+    			success : (data) =>{
+    				
+    				
+    				$("#cart-amount").html(data);
+    				$("#cart-amount").parent().removeClass("animate__rubberBand").addClass("animate__rubberBand");
+    			},
+    			fail: (error) =>{
+    				console.log(error);
+    			}
+    		})
+    	}
+    
+    </script>
+    
+    
+    
+    
 	<%@ include file="/views/common/footer.jsp" %>
 </section>
 </html>
