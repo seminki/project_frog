@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.toyspace.product.comment.model.service.CommentService;
+import com.toyspace.product.comment.model.vo.Comment;
+
 /**
  * Servlet implementation class CommentWriteServlet
  */
@@ -26,8 +29,28 @@ public class CommentWriteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Comment c=new Comment();
+		c.setMemberKey(Integer.parseInt(request.getParameter("memberKey")));
+		c.setProductId(Integer.parseInt(request.getParameter("productId")));
+		c.setCommentContent(request.getParameter("commentContent"));
+		System.out.println(c);
+		int result=new CommentService().insertComment(c);
+		
+		String msg;
+		String loc=request.getContextPath()+"/product/productDetail";
+		
+		if(result>0) {
+			msg="댓글등록 성공";
+	
+		} else {
+			msg="댓글등록 실패";
+
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

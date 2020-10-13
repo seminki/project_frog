@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*,com.toyspace.product.comment.model.vo.*,java.util.List"%>
+
 <%
 Product p=(Product)request.getAttribute("product");
+
+/* List<Comment> list=(List<Comment>)request.getAttribute("comment"); */
+
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +34,6 @@ Product p=(Product)request.getAttribute("product");
         <img src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(1) %>" style="width: 100%" />
         <%} %>
       </div>
-
       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
       <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
@@ -112,61 +116,34 @@ Product p=(Product)request.getAttribute("product");
             <div class="review-content">
              	<div class="comment-box">
                 	<form action="<%=request.getContextPath() %>/comment/commentWrite" method="get">
-                		<input type="hidden" name="commentLevel" value="1"> 
-						<input type="hidden" name="commentWriter" value="">
-						<input type="hidden" name="CommentRef" value="0">
+                		
+						<input type="hidden" name="memberKey" value="<%=signedInMember!=null?signedInMember.getMemberKey():"" %>">
+                		<input type="hidden" name="productId" value="<%=p.getProductId() %>"> 
                 	<textarea name="commentContent" id="" cols="120" rows="4" style="resize:none"></textarea>
             	 </div>   
-            <button type=submit class="review-btn">리뷰 남기기</button>
+            <button type=submit class="review-btn" onclick="fn_access();">리뷰 남기기</button>
            		 </form>
             </div>
         </div>
+        <hr>
              <table class="tbl-comment">
+ <%--   	<%for(Comment c: list) {	%>
    	
 		   			<tr class="level1">
 		   				<td>
-		   					<sub class="comment-writer"></sub>
-		   					<sub class="comment-date"></sub>
+		   					<sub class="comment-writer"><%=c.getProductCommentNo() %></sub>
+		   					<sub class="comment-date"><%=c.getCommentDate() %></sub>
 		   					<br>
-	
+							<%=c.getCommentContent() %>
 		   				</td>
 		   				<td>
 		   					<button class="btn-reply" value="">답글</button>
 		   				</td>
 		   			</tr>
-
-   					<tr class="level2">
-	   				<td>
-	   					<sub></sub>
-	   					<sub></sub>
-	   					<br>
-	   				</td>
-	   				<td>
-	   					
-	   				</td>
-	   			</tr>
-  
-   		</table>
-		<script>
-	<%-- 	$(".btn-reply").click(e => {
-				<%if(loginMember!=null){%>
-					let tr=$("<tr>");
-					let form=$("div.comment-editor>form").clone();
-					console.log(form);
-					form.find("textarea").attr("rows","1");
-					form.find("[name=boardCommentLevel]").val("2");
-					form.find("[name=boardCommentRef]").val(e.target.value);
-					form.find("[type=submit]").addClass("btn-insert2");
-					let td=$("<td>").attr("colspan","2");
-					td.append(form);
-					tr.append(td);
-					tr.find("td").css("display","none");
-					$(e.target).parents("tr").after(tr.children("td").slideDown(800));
-					$(e.target).off("click"); //클릭 이벤트 제거하기 !! 
-					
-				<%}%>
-			}); --%> 
-		</script>
+	<%} %>
+   		</table> --%>
+	
+	
         <hr>
         <div class="recommend-container">
             <div class="rec-container">
@@ -239,6 +216,15 @@ Product p=(Product)request.getAttribute("product");
         </div>
     </div>
         <script>
+        //리뷰
+        function fn_access(){
+        	if(<%=signedInMember==null%>){
+        		alert("로그인 후 이용가능");
+        		return false;
+        	} else return true;
+        }
+       
+        
             // 이미지 슬라이드
           let slideIndex = 1;
           showSlides(slideIndex);
