@@ -49,13 +49,13 @@
         for(Admin a: adminList){%>
         <tr>
             <form action="<%= request.getContextPath()%>/admin/removeAdmin" method="post">
-                <td><input type="checkbox" name="" id=""></td>
-                <td><input type="text" name="adminId" id="" value="<%=a.getAdminId()%>"> </td>
-                <td><input type="password" name="" id="" value="<%=a.getAdminPassword()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getNickname()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getAdminName()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getAdminLevel()%>"> </td>
-                <td><input type="submit" name="" id="" value="수정">ㅣ<input type="button" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
+                <td><input type="checkbox" name="checkbox" value= "<%=a.getAdminId()%>" > </td>
+                <td><input type="text" name="adminId"  value="<%=a.getAdminId()%>"> </td>
+                <td><input type="password" name="adminPassword"  value="<%=a.getAdminPassword()%>"> </td>
+                <td><input type="text" name="nickname"  value="<%=a.getNickname()%>"> </td>
+                <td><input type="text" name=""  value="<%=a.getAdminName()%>"> </td>
+                <td><input type="text" name=""  value="<%=a.getAdminLevel()%>"> </td>
+                <td><input type="submit" name=""  value="수정">ㅣ<input type="button" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
             </form>
          </tr>
          <%}} %>

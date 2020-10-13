@@ -42,7 +42,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="">DISNEY</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -54,7 +54,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="">STARWARS</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -66,7 +66,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="">왕좌의 게임</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -78,7 +78,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="">포켓몬</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -90,7 +90,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="">MARVEL</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -102,7 +102,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="">전체 상품</a>
 								</div>
 							</li>
 						</ul>
@@ -200,7 +200,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>DISENY</span>
             </a>
             
           </div>
@@ -209,7 +209,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>STARWARS</span>
             </a>
             
           </div>
@@ -218,7 +218,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>왕좌의 게임</span>
             </a>
             
           </div>
@@ -227,7 +227,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>포켓몬</span>
             </a>
             
           </div>
@@ -236,7 +236,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>마블</span>
             </a>
             
           </div>
@@ -245,7 +245,7 @@ Member signedInMember=(Member)(session.getAttribute("signedInMember"));
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>전체</span>
             </a>
             
           </div>
