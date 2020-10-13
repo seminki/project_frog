@@ -118,4 +118,11 @@ public class ProductService {
 		return productsList;
 	}
 	
+	
+	public ArrayList<Product> loadAllProductsWithMainPic() {
+		Connection conn=getConnection();
+		ArrayList<Product> productsList=dao.loadAllProductsWithMainPic(conn);
+		close(conn);
+		return productsList;
+	}
 }
