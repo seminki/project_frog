@@ -59,7 +59,23 @@ public class AdminService {
 		boolean result = dao.editAdmin(conn,admin);
 		if(result) commit(conn);
 		else rollback(conn);
-		System.out.println("됨2");
+		
+		close(conn);
+		return result;
+	}
+	
+	public boolean selectedAdminRemove(String[] adminIds) {
+		Connection conn=getConnection();
+		boolean result = false;
+		for(String adminId : adminIds) {
+			result=dao.deleteAdmin(conn,adminId);
+			if(!result) {
+				rollback(conn);
+				close(conn);
+				return result;
+			}
+		}
+		commit(conn);
 		close(conn);
 		return result;
 	}

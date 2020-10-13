@@ -137,9 +137,7 @@ public class AdminDao {
 			pstmt.setString(3,a.getAdminName());
 			pstmt.setInt(4,a.getAdminLevel());
 			pstmt.setString(5,a.getAdminId());
-			System.out.println("됨3");
 			result=pstmt.executeUpdate();
-			System.out.println("됨4");
 			
 		} catch (Exception e) {
 			// TODO: handle exception
