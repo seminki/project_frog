@@ -72,7 +72,8 @@ Product p=(Product)request.getAttribute("product");
           type="number"
           step="1"
           max=""
-          value="1"
+          min="0"
+          value="0"
           name="quantity"
           class="quantity-field"
         />
@@ -83,7 +84,8 @@ Product p=(Product)request.getAttribute("product");
           data-field="quantity"
           onclick="incrementValue(event);"
         />
-        <button class="add-cart">장바구니 담기</button>
+        <input type="button" class="add-cart" value="장바구니 담기" onclick="addToCart('<%=p.getProductId()%>');">
+        
         </form>
         <!-- 찜 -->
         </div>
@@ -295,8 +297,29 @@ Product p=(Product)request.getAttribute("product");
           function zzim(){
               $('.fa-heart').toggleClass('color');
           }
-        </script>
-
+    
+    	function addToCart(productId){
+    		let qty =$(".quantity-field")[0].value;
+    		$.ajax({
+    			url: '<%=request.getContextPath()%>/cart/addToCart',
+    			data: {
+    				"productId" : productId, "value": qty	
+    			},
+    			type: 'POST',
+    			success : (data) =>{
+    				
+    				
+    				$("#cart-amount").html(data);
+    				$("#cart-amount").parent().removeClass("animate__rubberBand").addClass("animate__rubberBand");
+    				$(".quantity-field")[0].value=0;
+    			},
+    			fail: (error) =>{
+    				console.log(error);
+    			}
+    		})
+    	}
+    
+    </script>
 
 <%@ include file="/views/common/footer.jsp"%>
 </body>
