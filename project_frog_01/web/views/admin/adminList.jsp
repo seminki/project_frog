@@ -31,6 +31,7 @@
 <h2>:관리자 계정 관리:</h2>
 <fieldset style="text-align: center;">
     <legend><strong>관리자 회원 목록</strong></legend>
+<form action="<%=request.getContextPath()%>/admin/selectedAdminRemove" method="post">
     
     <table border="3" style="margin: auto;">
         <thead>
@@ -48,24 +49,26 @@
         <%if(adminList!=null&&adminList.size()!=0){
         for(Admin a: adminList){%>
         <tr>
+
+                <td><input type="checkbox" name="checkbox" value="<%=a.getAdminId()%>" ></td>
             <form action="<%= request.getContextPath()%>/admin/editAdmin" method="post">
-                <td><input type="checkbox" name="" id=""></td>
-                <td><input type="text" name="adminId" id="" value="<%=a.getAdminId()%>"> </td>
-                <td><input type="password" name="adminPw" id="" value="<%=a.getAdminPassword()%>"> </td>
-                <td><input type="text" name="adminNic" id="" value="<%=a.getNickname()%>"> </td>
-                <td><input type="text" name="adminName" id="" value="<%=a.getAdminName()%>"> </td>
-                <td><input type="text" name="adminLevel" id="" value="<%=a.getAdminLevel()%>"> </td>
-                <td><input type="submit" name="" id="" value="수정">
-                	ㅣ<input type="button" name="" id="" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
+                <td><input type="text" name="adminId" value="<%=a.getAdminId()%>"> </td>
+                <td><input type="password" name="adminPw"  value="<%=a.getAdminPassword()%>"> </td>
+                <td><input type="text" name="adminNic"  value="<%=a.getNickname()%>"> </td>
+                <td><input type="text" name="adminName"  value="<%=a.getAdminName()%>"> </td>
+                <td><input type="text" name="adminLevel"  value="<%=a.getAdminLevel()%>"> </td>
+                <td><input type="submit" value="수정">
+                	ㅣ<input type="button" value="삭제" onclick="location.href='<%=request.getContextPath()%>/admin/adminDelete?adminId=<%=a.getAdminId()%>'"></td>
+
             </form>
          </tr>
          <%}} %>
         </tbody>
     </table>
     <br>
-    <button style="width:5%;" type="button" onclick=""><strong>선택 삭제</strong></button>
+    <button style="width:5%;" type="submit" onclick=""><strong>선택 삭제</strong></button>
     <br>
-    
+    </form>
 </fieldset>
 <hr>
 <fieldset style="text-align: center;">
@@ -82,11 +85,11 @@
         </thead>
         <tbody>
             <form action="<%=request.getContextPath()%>/admin/insertAdmin" method="post">
-                <td><input type="text" name="adminId" id=""></td>
-                <td><input type="password" name="adminPw" id=""></td>
-                <td><input type="text" name="adminNic" id=""></td>
-                <td><input type="text" name="adminName" id=""></td>
-                <td><input type="number" name="adminLevel" id=""></td>
+                <td><input type="text" name="adminId" ></td>
+                <td><input type="password" name="adminPw" ></td>
+                <td><input type="text" name="adminNic" ></td>
+                <td><input type="text" name="adminName" ></td>
+                <td><input type="number" name="adminLevel" ></td>
                 <td><button type="submit">추가</button></td>
             </form>
         </tbody>

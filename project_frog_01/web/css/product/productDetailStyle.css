@@ -5,6 +5,10 @@ body {
   font-family: Verdana, sans-serif;
   margin: 0;
 }
+section{
+	margin-top:5em;
+	
+}
 .mySlides {
   display: none;
 }
@@ -289,9 +293,10 @@ input[type="number"] {
     textarea{
         width:100%;
     }
+}
 /* 추천상품 */
 @media screen and (max-width: 768px) {
     div.rec-pic-text {
       flex-wrap: wrap;
     }
-  }
+}
