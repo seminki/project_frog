@@ -15,7 +15,9 @@
 </head>
 <body>
 
-
+<!-- 페이지에 권한부여 필요 (마스터 관리자만 이용가능)
+추가, 삭제, 수정 버튼에 기능 추가 해야됨 -->
+<!-- 비밀번호 암호화 필요 --> 
 
 
 
@@ -23,6 +25,7 @@
 <h2>:관리자 계정 관리:</h2>
 <fieldset style="text-align: center;">
     <legend><strong>관리자 회원 목록</strong></legend>
+    <form action="">
     <table border="3" style="margin: auto;">
         <thead>
             <tr>
@@ -52,6 +55,10 @@
          <%}} %>
         </tbody>
     </table>
+    <br>
+    <button style="width:5%;"><strong>선택 삭제</strong></button>
+    <br>
+    </form>
 </fieldset>
 <hr>
 <fieldset style="text-align: center;">
@@ -63,16 +70,16 @@
                 <th>비밀번호</th>
                 <th>NICKNAME</th>
                 <th>이름</th>
-                <th>LEVLE</th>
+                <th>LEVEL</th>
             </tr>
         </thead>
         <tbody>
-            <form action="">
-                <td><input type="text" name="" id=""></td>
-                <td><input type="text" name="" id=""></td>
-                <td><input type="text" name="" id=""></td>
-                <td><input type="text" name="" id=""></td>
-                <td><input type="text" name="" id=""></td>
+            <form action="<%=request.getContextPath()%>/admin/insertAdmin" method="post">
+                <td><input type="text" name="adminId" id=""></td>
+                <td><input type="text" name="adminPw" id=""></td>
+                <td><input type="text" name="adminNic" id=""></td>
+                <td><input type="text" name="adminName" id=""></td>
+                <td><input type="number" name="adminLevel" id=""></td>
                 <td><input type="button" name="" id="" value="추가"></td>
             </form>
         </tbody>
