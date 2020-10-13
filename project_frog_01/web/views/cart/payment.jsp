@@ -20,7 +20,7 @@
 <body>
 <%@ include file="/views/common/header.jsp" %>
 <script>
-<%if(signedInMember==null){ %>
+<%if(m==null){ %>
 	location.href = "<%=contextPath%>/msg?loc=<%=contextPath%>&msg=로그인 하지 않았습니다.로그인을 먼저 진행해 주세요.";
 <%} %>
 </script>

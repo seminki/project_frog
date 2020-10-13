@@ -345,6 +345,7 @@ public class ProductDao {
 				
 				productsList.add(p);
 			}
+			Collections.sort(productsList);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

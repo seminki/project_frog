@@ -30,7 +30,7 @@
         </div>
         <div class="pic">
           <div class="img-container">
-            <a href="">
+            <a href="<%=request.getContextPath() %>/product/productDetail?productId=48">
               <img src="<%=request.getContextPath()%>/image/product/mickey.png" alt="" />
             </a>
           </div>
@@ -43,7 +43,7 @@
             <div class="main2-text">
               <h1>마블 MARVEL</h1>
               <div class="main2-shop">
-                <p>"I am inevitable"</p>
+                <p>"I am INEVITABLE"</p>
                 <a class="shop2-btn" href="">SHOP COLLECTION</a>
               </div>
             </div>
