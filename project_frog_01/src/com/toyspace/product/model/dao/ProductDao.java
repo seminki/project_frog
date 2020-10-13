@@ -328,5 +328,29 @@ public class ProductDao {
 		return productsList;
 	}
 	
-	
+	public ArrayList<Product> loadAllProductsWithMainPic(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Product> productsList=new ArrayList<Product>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("loadAllProductsWithMainPic"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Product p=productConvention(rs);
+				p.setCategoryName(rs.getString("category_name"));
+				
+				ArrayList<String> mainPicPath =new ArrayList<String>();
+				mainPicPath.add(rs.getNString("IMAGE_ROUTE"));
+				p.setProductImageFilePaths(mainPicPath);
+				
+				productsList.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productsList;
+	}
 }

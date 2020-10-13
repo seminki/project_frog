@@ -118,6 +118,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                     background-color: white;
                                     text-align: center;
                                     max-width: 25%;
+                                    min-width : 20%;
                                 }
 
                                       section .shopify-image{
@@ -152,7 +153,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
         	for(Product p : productsList){ %>
                             <div class="products-list-item">
                                 <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail?productId=<%=p.getProductId() %>">
-                                    <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/Disney_Rapunzel.png" alt="Wall-E" style="">          
+                                    <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" alt="Wall-E" style="">          
                                     <div class="">
                                         <div class="">
                                         	<p hidden><%=p.getProductId() %></p>               	
