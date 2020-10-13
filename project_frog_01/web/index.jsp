@@ -31,7 +31,7 @@
         <div class="pic">
           <div class="img-container">
             <a href="">
-              <img src="<%=request.getContextPath()%>/image/product/Disney_Cinderella.png" alt="" />
+              <img src="<%=request.getContextPath()%>/image/product/mickey.png" alt="" />
             </a>
           </div>
         </div>
