@@ -45,7 +45,7 @@
             <form action="">
                 <td><input type="checkbox" name="" id=""></td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminId()%>"> </td>
-                <td><input type="text" name="" id="" value="<%=a.getAdminPassword()%>"> </td>
+                <td><input type="password" name="" id="" value="<%=a.getAdminPassword()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getNickname()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminName()%>"> </td>
                 <td><input type="text" name="" id="" value="<%=a.getAdminLevel()%>"> </td>
@@ -76,11 +76,11 @@
         <tbody>
             <form action="<%=request.getContextPath()%>/admin/insertAdmin" method="post">
                 <td><input type="text" name="adminId" id=""></td>
-                <td><input type="text" name="adminPw" id=""></td>
+                <td><input type="password" name="adminPw" id=""></td>
                 <td><input type="text" name="adminNic" id=""></td>
                 <td><input type="text" name="adminName" id=""></td>
                 <td><input type="number" name="adminLevel" id=""></td>
-                <td><input type="button" name="" id="" value="추가"></td>
+                <td><button type="submit">추가</button></td>
             </form>
         </tbody>
     </table>

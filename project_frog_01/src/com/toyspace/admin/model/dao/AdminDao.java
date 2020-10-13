@@ -92,16 +92,16 @@ public class AdminDao {
 		}
 		return adminList;
 	}
-	public int insertAdmin(Connection conn,Admin a) {
+	public boolean insertAdmin(Connection conn,Admin a) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertAdmin"));
 			pstmt.setString(1,a.getAdminId());
-			pstmt.setString(1,a.getAdminPassword());
-			pstmt.setString(1,a.getNickname());
-			pstmt.setString(1,a.getAdminName());
-			pstmt.setInt(1,a.getAdminLevel());
+			pstmt.setString(2,a.getAdminPassword());
+			pstmt.setString(3,a.getNickname());
+			pstmt.setString(4,a.getAdminName());
+			pstmt.setInt(5,a.getAdminLevel());
 			result=pstmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class AdminDao {
 		}finally {
 			close(pstmt);
 		}
-		return result;
+		return result==1;
 	}
 	
 	

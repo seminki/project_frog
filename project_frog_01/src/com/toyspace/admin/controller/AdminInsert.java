@@ -36,14 +36,20 @@ public class AdminInsert extends HttpServlet {
 		String adminName=request.getParameter("adminName");
 		String adminLevel=request.getParameter("adminLevel");
 		
-		Admin admin = new Admin(adminId,adminPw,adminNic,adminName,Integer(adminLevel),null);
-		int result=new AdminService().insertAdmin(admin);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	private int Integer(String adminLevel) {
-		// TODO Auto-generated method stub
-		return Integer(adminLevel);
+		Admin admin = new Admin(adminId,adminPw,adminNic,adminName,Integer.parseInt(adminLevel),null);
+		boolean result=new AdminService().insertAdmin(admin);
+		
+		String loc = request.getContextPath()+"/admin/adminList";
+		String msg = "";
+		
+		if(!result) {
+			msg="관리자 추가에 실패했습니다.";
+		} else {
+			msg = "관리자 추가에 성공했습니다.";
+		}
+		
+		request.getRequestDispatcher("/msg?msg="+msg+"&loc="+loc).forward(request, response);
+		
 	}
 
 	/**

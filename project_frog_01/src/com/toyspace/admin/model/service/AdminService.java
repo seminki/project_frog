@@ -1,7 +1,7 @@
 package com.toyspace.admin.model.service;
 
-import static com.toyspace.common.JDBCTemplate.close;
-import static com.toyspace.common.JDBCTemplate.getConnection;
+import static com.toyspace.common.JDBCTemplate.*;
+
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -33,4 +33,13 @@ public class AdminService {
 		
 	}
 	
+	public boolean insertAdmin(Admin admin) {
+		Connection conn = getConnection();
+		boolean result = dao.insertAdmin(conn, admin);
+		if(result) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 }
