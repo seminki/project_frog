@@ -1,13 +1,14 @@
 package com.toyspace.member.model.dao;
 
+import static com.toyspace.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-import static com.toyspace.common.JDBCTemplate.*;
-
+import com.toyspace.admin.model.vo.Admin;
 import com.toyspace.member.model.vo.Member;
 import com.toyspace.member.model.vo.SNSLogin;
 
@@ -289,4 +290,38 @@ public class MemberDao {
 	      return result;
 	   }
 	
+	public Member loadMembers(Connection conn, String memberId, String memberPw) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadMember"));
+			
+			pstmt.setNString(1, memberId);
+			pstmt.setNString(2, memberPw);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				member = new Member(rs.getInt("MEMBER_KEY"),rs.getString("USER_ID"),rs.getString("USER_EMAIL"),rs.getString("USER_PASSWORD"),
+						rs.getString("USER_GENDER"),rs.getString("USER_NAME"),rs.getString("USER_NICKNAME"),rs.getInt("USER_AGE"),
+						rs.getString("USER_BIRTHDAY"),rs.getString("USER_ADDRESS"),rs.getString("USER_PHONE"),rs.getDate("USER_SIGN_UP_DATE"),
+						rs.getString("USER_PROFILE_PIC_PATH"),rs.getInt("USER_MILEAGE"),rs.getString("RECOVERY_PASSWORD"),rs.getInt("MEMBER_LEVEL_NO"),
+						rs.getDate("MODIFIED_DATE"),null, rs.getString("USER_PROFILE_PIC_URL"));
+				
+			
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("오류발생");
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return member;
+	}
+		
 }
