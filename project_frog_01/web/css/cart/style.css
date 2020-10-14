@@ -36,11 +36,10 @@ section .top1{
 }
 section .top1 .ITEM{
     max-width:100%;
-    padding-right: 740px;
+    
 }
 section .top1 .QTY{
     max-width:100%;
-    padding-right: 150px;
 }
 /* 상품쪽 */
 section .top2{
