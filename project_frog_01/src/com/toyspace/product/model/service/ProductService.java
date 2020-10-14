@@ -8,11 +8,10 @@ import static com.toyspace.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 import com.toyspace.product.model.dao.ProductDao;
 import com.toyspace.product.model.vo.Product;
-import com.toyspace.product.model.vo.Tags;
 
 public class ProductService {
 
@@ -124,5 +123,16 @@ public class ProductService {
 		ArrayList<Product> productsList=dao.loadAllProductsWithMainPic(conn);
 		close(conn);
 		return productsList;
+	}
+	
+	public TreeMap<Integer, Product> loadSelectedProductsWithMainPic(TreeMap<Integer, Integer> cartValues){
+		Connection conn = getConnection();
+		TreeMap<Integer, Product> productInCart = new TreeMap<Integer, Product>();
+		for(int productId: cartValues.keySet()) {
+			productInCart.put(productId, dao.loadSelectedProductWithMainPic(conn,productId));
+		}
+		close(conn);
+		
+		return productInCart;
 	}
 }

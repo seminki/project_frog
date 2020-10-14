@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.toyspace.product.model.vo.Product;
@@ -353,5 +354,31 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return productsList;
+	}
+	
+	public Product loadSelectedProductWithMainPic(Connection conn, int productId){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Product p = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadSelectedProductWithMainPic"));
+			pstmt.setInt(1, productId);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				p = productConvention(rs);
+				ArrayList<String> mainPicPath =new ArrayList<String>();
+				mainPicPath.add(rs.getNString("IMAGE_ROUTE"));
+				p.setProductImageFilePaths(mainPicPath);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return p;
 	}
 }

@@ -110,10 +110,11 @@ section .plus2 .plus3 .minus:hover{
 }
 /* 버튼 사이 숫자 쪽 */
 section .plus2 .plus3 .int{
- 	width:3em;
+ 	width:2em;
 	height:2em;
 	background-color: rgb(243,243,247);
 	border:none;
+	text-align: center
 }
 /* 버튼 + 쪽 */
 section .plus2 .plus3 .plus{
