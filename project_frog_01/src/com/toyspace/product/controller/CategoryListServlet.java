@@ -13,16 +13,16 @@ import com.toyspace.product.model.service.ProductService;
 import com.toyspace.product.model.vo.Product;
 
 /**
- * Servlet implementation class ProductList
+ * Servlet implementation class DisneyListServlet
  */
-@WebServlet("/productlist.do")
-public class ProductListPage extends HttpServlet {
+@WebServlet("/categodylist.do")
+public class CategoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListPage() {
+    public CategoryListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +32,9 @@ public class ProductListPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		ArrayList<Product> productsList=new ProductService().loadAllProductsWithMainPic();
+		String categoryName=request.getParameter("category");
+		System.out.println(categoryName);
+		ArrayList<Product> productsList=new ProductService().loadDisney(categoryName);
 		request.setAttribute("productsList",productsList);
 		
 		

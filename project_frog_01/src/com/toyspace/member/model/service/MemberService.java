@@ -1,8 +1,13 @@
 package com.toyspace.member.model.service;
 
+import static com.toyspace.common.JDBCTemplate.close;
+import static com.toyspace.common.JDBCTemplate.commit;
+import static com.toyspace.common.JDBCTemplate.getConnection;
+import static com.toyspace.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 
-import static com.toyspace.common.JDBCTemplate.*;
+import com.toyspace.admin.model.vo.Admin;
 import com.toyspace.member.model.dao.MemberDao;
 import com.toyspace.member.model.vo.Member;
 import com.toyspace.member.model.vo.SNSLogin;
@@ -107,4 +112,11 @@ public class MemberService {
 	      close(conn);
 	      return result;
 	   }
+	public Member loadMembers(String userId, String userPw) {
+		Connection conn =  getConnection();
+		Member member= dao.loadMembers(conn, userId, userPw);
+		close(conn);
+		return member;
+	}
+	
 }

@@ -28,8 +28,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
 <section>
     <div style="margin: auto;
     margin-left:100px;
-    margin-right:100px;
-   ">
+    margin-right:100px;">
         <div>
             <header class="productsheader" style="display: flex;"> 
                 <div class="h1" style="width:200px";></div>
@@ -150,8 +149,8 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                         }
                                     </style>
 
-         <%if(productsList!=null&&productsList.size()!=0){
-        	for(Product p : productsList){ %>
+				         <%if(productsList!=null&&productsList.size()!=0){
+				        	for(Product p : productsList){ %>
                             <div class="products-list-item">
                                 <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail?productId=<%=p.getProductId() %>">
                                     <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" alt="<%=p.getProductName() %>" style="">          
@@ -166,7 +165,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                 </a>
                                         <div class="addtocart_div">
                                         	
-                                            <button class="addtocart" onclick="addToCart('<%=p.getProductId()%>');">Add To Cart</button>
+                                            <button class="addtocart" onclick="addToCart('<%=p.getProductId()%>','<%=contextPath%>');">Add To Cart</button>
                                         </div>
                             </div>
                             <%}} %>
@@ -211,29 +210,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
         </div>
     </div>
     
-    <script>
-    
-    	function addToCart(productId){
-    		let qty =1;
-    		$.ajax({
-    			url: '<%=request.getContextPath()%>/cart/addToCart',
-    			data: {
-    				"productId" : productId, "value": qty	
-    			},
-    			type: 'POST',
-    			success : (data) =>{
-    				
-    				
-    				$("#cart-amount").html(data);
-    				$("#cart-amount").parent().removeClass("animate__rubberBand").addClass("animate__rubberBand");
-    			},
-    			fail: (error) =>{
-    				console.log(error);
-    			}
-    		})
-    	}
-    
-    </script>
+
     
     
     

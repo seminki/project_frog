@@ -35,6 +35,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <img src="<%=request.getContextPath()%>/image/login/pikachu.png" alt="fun" id="fun">
             </div>
                 <h1>LOG IN</h1>
+            <form action="<%=request.getContextPath()%>/memberloginout.do" method="post">
             <div class="in-area">
                 <input type="text" name="id" id="id" autocomplete="off" placeholder="아이디를 입력해주세요."  required>
                 <label for="id"></label>
@@ -47,8 +48,9 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <a href="<%=request.getContextPath() %>/searchpw.do">비밀번호를 잊으셨나요?</a>
             </div>
             <div class="btn-area">
-                <button onclick="">로그인</button> 
+                <button onclick=>로그인</button> 
              </div>
+           </form>
             <div class="last-area">
                 <p>ToySpace는 처음이신가요?<a href="<%=request.getContextPath() %>/signup.do"> 지금 가입하기</a></p>
             </div>

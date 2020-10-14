@@ -109,3 +109,50 @@ $("#chatting-input").keydown((key) => {
 $("#chatting-send-button").click((e)=>{
 	
 });
+
+const animateCSS = (element, animation, prefix = 'animate__') =>
+  // We create a Promise and return it
+  new Promise((resolve, reject) => {
+    const animationName = `${prefix}${animation}`;
+    const node = document.querySelector(element);
+
+    node.classList.add(`${prefix}animated`, animationName);
+
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd() {
+      node.classList.remove(`${prefix}animated`, animationName);
+      resolve('Animation ended');
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd, {once: true});
+  });
+
+
+  function addToCart(productId,contextPath){
+	let qty;
+			if($(".quantity-field").val()!=null){
+     qty=$(".quantity-field")[0].value;
+} else qty=1;
+    		$.ajax({
+    			url: contextPath+'/cart/addToCart',
+    			data: {
+    				"productId" : productId, "value": qty	
+    			},
+    			type: 'POST',
+    			success : (data) =>{
+    				
+    				animateCSS('#cart','rubberBand');
+    				$("#cart-amount").html(data);
+    				
+    				
+    				$("#cart-amount").parent().parent().removeClass("animate__rubberBand").addClass("animate__rubberBand")
+		if($(".quantity-field").val()!=null){    				
+		$(".quantity-field")[0].value=0;
+		}
+    			},
+    			fail: (error) =>{
+    				console.log(error);
+    			}
+    		})
+  }
+

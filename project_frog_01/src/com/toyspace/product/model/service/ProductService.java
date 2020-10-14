@@ -125,6 +125,7 @@ public class ProductService {
 		close(conn);
 		return productsList;
 	}
+
 //메인에서 제품검색
 	public ArrayList<Product> searchByKeyword(String searchKeyword) {
 		Connection conn=getConnection();
@@ -134,6 +135,12 @@ public class ProductService {
 			filePaths.add(dao.loadMainPicForProduct(conn,p.getProductId()));
 			p.setProductImageFilePaths(filePaths);
 		}
+		return productsList;
+	}
+	public ArrayList<Product> loadDisney(String category) {
+		Connection conn=getConnection();
+		System.out.println(category+"2");
+		ArrayList<Product> productsList=dao.loadDisney(conn,category);
 		close(conn);
 		return productsList;
 	}
