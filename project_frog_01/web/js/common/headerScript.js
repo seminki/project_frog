@@ -144,7 +144,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     				animateCSS('#cart','rubberBand');
     				$("#cart-amount").html(data);
     				
-    				console.log($("#cart-amount").parent().parent());
+    				
     				$("#cart-amount").parent().parent().removeClass("animate__rubberBand").addClass("animate__rubberBand")
 		if($(".quantity-field").val()!=null){    				
 		$(".quantity-field")[0].value=0;
