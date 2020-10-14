@@ -125,4 +125,11 @@ public class ProductService {
 		close(conn);
 		return productsList;
 	}
+	public ArrayList<Product> loadDisney(String category) {
+		Connection conn=getConnection();
+		System.out.println(category+"2");
+		ArrayList<Product> productsList=dao.loadDisney(conn,category);
+		close(conn);
+		return productsList;
+	}
 }

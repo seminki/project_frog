@@ -352,6 +352,36 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
+		
+		return productsList;
+	}
+	public ArrayList<Product> loadDisney(Connection conn, String category) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<Product> productsList=new ArrayList<Product>();
+		try {
+			System.out.println(category+"3");
+			pstmt=conn.prepareStatement(prop.getProperty("loadDisney"));
+			pstmt.setNString(1,category);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Product p=productConvention(rs);
+				p.setCategoryName(rs.getString("category_name"));
+				
+				ArrayList<String> mainPicPath =new ArrayList<String>();
+				mainPicPath.add(rs.getNString("IMAGE_ROUTE"));
+				p.setProductImageFilePaths(mainPicPath);
+				
+				productsList.add(p);
+			}
+			Collections.sort(productsList);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
 		return productsList;
 	}
 }
