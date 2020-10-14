@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.toyspace.product.model.vo.Product, java.util.TreeMap"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/cart/newStyle.css">
-    <title>df</title> 
+	<%@ include file="/views/common/favicon.jsp" %>
+     <title>TOY SPACE - Where All Toys' Dream Comes True</title>
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
@@ -17,12 +19,21 @@
       </div>
       
       <!-- 카트에 들어간게 있을때와 없을때 -->
-      <%if(cartValues!=null&& cartValues.size()!=0){ %>
+      <%if(cartValues!=null&& cartValues.size()!=0){ 
+      	TreeMap<Integer, Product> productInCart = (TreeMap<Integer, Product>)request.getAttribute("productInCart");
+      	int totalAmount = 0;
+      	for(int productId : productInCart.keySet()){
+      		totalAmount+=productInCart.get(productId).getProductPrice() * cartValues.get(productId);
+      	}
+      %>
       
       <div class="summary-container">
         <div class="summary-top medium-title">
           <span>총 갯수</span>
-          <span id="summary-qty">0 개</span>
+          <div>
+          <span id="summary-qty"><%=cartQty %></span>
+          <span> 개</span>
+          </div>
         </div>
         <hr>
         <div class="summary-middle">
@@ -33,7 +44,10 @@
         <hr>
         <div class="summary-bottom medium-title">
           <span>총 금액</span>
-          <span id="summary-amount">0 원</span>
+         	<div>
+          <span id="summary-amount"><%=totalAmount %></span>
+          <span> 원</span>
+          </div>
         </div>
       </div>
       <div class="product-container">
@@ -47,19 +61,22 @@
               <td colspan="3"> <hr> </td>
           </tr>
           <!-- 여기서부터 포문 돌리기 -->
+          <%for(int productId : productInCart.keySet()) { 
+        	  Product p =productInCart.get(productId);
+          %>
           <tr>
             <td>
               <div class="product-table-img-cont">
-                <img src="<%=contextPath%>/upload/product/Disney_Esmerelda.png" alt="11">
+                <img src="<%=contextPath%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" alt="11">
               </div>
             </td>
             <td>
               <div class="product-description-cont">
                 <div>
-                  <span class="cart-product-category small-title">CATEGORY</span>
+                  <span class="cart-product-category small-title"><%=p.getCategoryName() %></span>
                 </div>
                 <div>
-                  <b class="cart-product-name">Esmeralda</b>
+                  <b class="cart-product-name"><%=p.getProductName() %></b>
                 </div>
               </div>
             </td>
@@ -77,7 +94,8 @@
                     <button class="minus">
                         <i class="fas fa-minus"></i>
                     </button>
-                    <input type="number" class="int" min="0">
+                    <input type="number" class="int" id="" min="0" value="<%=cartValues.get(productId)%>">
+                    
                     <button class="plus">
                         <i class="fas fa-plus"></i>
                     </button>
@@ -86,13 +104,15 @@
             </td>
             <td>
               <div class="money">
-                <span class="sub-amount">11원</span>
+                <span class="sub-amount"><%=p.getProductPrice()*cartValues.get(productId) %></span>
+                <span> 원</span>
             </div>
             </td>
           </tr>
           <tr>
             <td colspan="3"><hr></td>
           </tr>
+          <%} %>
 <!-- 여기까지! -->
         </table>
 
