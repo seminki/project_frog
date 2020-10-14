@@ -90,7 +90,8 @@ section .plus2{
 section .plus3{
   display:flex;
   justify-content: space-between;
-  width: 6em;
+  align-items: center;
+  width: 10em;
   height: 2em;
   /* border: 2px solid pink; */
   border-radius: 6em;
@@ -109,7 +110,10 @@ section .plus2 .plus3 .minus:hover{
 }
 /* 버튼 사이 숫자 쪽 */
 section .plus2 .plus3 .int{
-  padding-top: 0.3em;
+ 	width:3em;
+	height:2em;
+	background-color: rgb(243,243,247);
+	border:none;
 }
 /* 버튼 + 쪽 */
 section .plus2 .plus3 .plus{
@@ -121,6 +125,9 @@ section .plus2 .plus3 .plus{
 section .plus2 .plus3 .plus:hover{
   background-color: black;
   color: var(--menu-white);
+}
+.qty-btn-cont{
+	text-align: center;
 }
 /* 제품 가격 */
 section .money{
@@ -153,3 +160,15 @@ section .money{
   background-color: black;
   color: white;
 }
+
+.empty-space{
+	width:100%;
+	height: 200px;
+}
+
+section input[type="number"]::-webkit-outer-spin-button,
+section input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
