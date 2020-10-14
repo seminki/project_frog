@@ -52,7 +52,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="">DISNEY</a>
+									<a href="<%=contextPath%>/categodylist.do?category=디즈니">DISNEY</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -64,7 +64,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="">STARWARS</a>
+									<a href="<%=contextPath%>/categodylist.do?category=스타워즈">STARWARS</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -76,7 +76,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="">왕좌의 게임</a>
+									<a href="<%=contextPath%>/categodylist.do?category=왕좌의 게임">왕좌의 게임</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -88,7 +88,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="">포켓몬</a>
+									<a href="<%=contextPath%>/categodylist.do?category=포켓몬스터">포켓몬</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -100,7 +100,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="">MARVEL</a>
+									<a href="<%=contextPath%>/categodylist.do?category=마블">MARVEL</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -112,7 +112,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="">전체 상품</a>
+									<a href="<%=contextPath%>/productlist.do">전체 상품</a>
 								</div>
 							</li>
 						</ul>
@@ -201,12 +201,17 @@ else{
 		a-color:hover { color: black; text-decoration: underline;}
 		</style>
 		<!-- a태그  눌렀을때 마우스 올렸을때  평상시 색상 블랙 으로 변경  -->
+		
+		
+		
+		
+		
 				<div class="side-bar-product side-bar-margin" >
 				<a  class="a-color" href="<%=contextPath%>/productlist.do" >PRODUCTS</a>
 				</div>
 				<div class="side-bar-product-cont side-bar-margin">
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/categodylist.do?category=디즈니">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -215,7 +220,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/categodylist.do?category=스타워즈">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -224,7 +229,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/categodylist.do?category=왕좌의 게임">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -233,7 +238,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/categodylist.do?category=포켓몬스터">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -242,7 +247,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/categodylist.do?category=마블">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -251,7 +256,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>

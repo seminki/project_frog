@@ -28,8 +28,7 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
 <section>
     <div style="margin: auto;
     margin-left:100px;
-    margin-right:100px;
-   ">
+    margin-right:100px;">
         <div>
             <header class="productsheader" style="display: flex;"> 
                 <div class="h1" style="width:200px";></div>
@@ -150,8 +149,8 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                         }
                                     </style>
 
-         <%if(productsList!=null&&productsList.size()!=0){
-        	for(Product p : productsList){ %>
+				         <%if(productsList!=null&&productsList.size()!=0){
+				        	for(Product p : productsList){ %>
                             <div class="products-list-item">
                                 <a class="products-list-item-a" href="<%=contextPath%>/product/productDetail?productId=<%=p.getProductId() %>">
                                     <img class="shopify-image " src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" alt="<%=p.getProductName() %>" style="">          

@@ -124,7 +124,7 @@ public class ProductService {
 		close(conn);
 		return productsList;
 	}
-	
+
 	public TreeMap<Integer, Product> loadSelectedProductsWithMainPic(TreeMap<Integer, Integer> cartValues){
 		Connection conn = getConnection();
 		TreeMap<Integer, Product> productInCart = new TreeMap<Integer, Product>();
@@ -134,5 +134,13 @@ public class ProductService {
 		close(conn);
 		
 		return productInCart;
+	}
+	public ArrayList<Product> loadDisney(String category) {
+		Connection conn=getConnection();
+		System.out.println(category+"2");
+		ArrayList<Product> productsList=dao.loadDisney(conn,category);
+		close(conn);
+		return productsList;
+
 	}
 }
