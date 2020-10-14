@@ -33,25 +33,26 @@ public class MemberLoginOutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId= request.getParameter("userId");
-		String userPw= request.getParameter("userPw");
+		String userId= request.getParameter("id");
+		String userPw= request.getParameter("pw");
 		
 		Member member = new MemberService().loadMembers(userId,userPw);
 		
 		String msg;
 		String loc;
 		String path;
-		
+		System.out.println("실행잘되는중");
 		if(member!=null) {
-			request.getSession().setAttribute("loggedInMember", member);
-			path="/views/index.jsp";
+			request.getSession().setAttribute("signedInMember", member);
+			loc=request.getContextPath();
+			msg="로그인 성공";
 		} else {
 			msg="로그인 실패";
 			loc=request.getContextPath()+"/login.do";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			path="/views/common/msg.jsp";
 		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		path="/views/common/msg.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
 		
 		
