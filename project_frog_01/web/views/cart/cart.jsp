@@ -15,6 +15,10 @@
       <div class="title section-title">
           MY CART
       </div>
+      
+      <!-- 카트에 들어간게 있을때와 없을때 -->
+      <%if(cartValues!=null&& cartValues.size()!=0){ %>
+      
       <div class="summary-container">
         <div class="summary-top medium-title">
           <span>총 갯수</span>
@@ -67,18 +71,18 @@
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
-            <td>
+            <td class="qty-btn-cont">
               <div class="plus2">
                 <div class="plus3">
                     <button class="minus">
                         <i class="fas fa-minus"></i>
                     </button>
-                    <div class="int">1</div>
+                    <input type="number" class="int" min="0">
                     <button class="plus">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
-            </div>
+           </div>
             </td>
             <td>
               <div class="money">
@@ -97,7 +101,15 @@
       <div class="bottom-checkout-container">
         <button id ="checkout-btn"><b>체크 아웃</b></button>
       </div>
-
+	<%}else{ %>
+		<div class="summary-container">
+        <div class="summary-top medium-title">
+          엇..... 아무것도 없는데요? 장난감들이 여러분을 기다리고 있는데 ㅠ
+        </div>
+        
+      </div>
+		<div class="empty-space"></div>
+	<%} %>
     </section>
 <%@ include file="/views/common/footer.jsp" %>
 
