@@ -124,7 +124,11 @@ ArrayList<Product> productsList=(ArrayList<Product>)request.getAttribute("produc
                                       section .shopify-image{
                                         cursor: pointer;
                                         width: 100%;
+                                        max-width : 300px;
+                                        max-height: 300px;
+                                        object-fit: contain;
                                         background-size: contain;
+                                       
                                         /*background-image: url("https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410"); */
                                         }
                                         section .addtocart{
