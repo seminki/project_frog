@@ -1,5 +1,6 @@
 package com.toyspace.product.model.dao;
 
+
 import static com.toyspace.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -304,7 +305,7 @@ public class ProductDao {
 		}
 		return result.length==productIds.length;
 	}
-	
+//관리자용 상품찾기 	
 	public ArrayList<Product> searchProductList(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -313,9 +314,8 @@ public class ProductDao {
 			pstmt=conn.prepareStatement(prop.getProperty("searchProductList"));
 			pstmt.setString(1, "%"+searchKeyword+"%");
 			rs=pstmt.executeQuery();
-			while(rs.next()){
-				Product p = productConvention(rs);
-				
+			while(rs.next()){		
+				Product p = productConvention(rs);	
 				productsList.add(p);
 			}
 			Collections.sort(productsList);
@@ -354,7 +354,7 @@ public class ProductDao {
 		}
 		return productsList;
 	}
-//메인에서 제품검색
+//메인에서(고객용) 제품검색
 	public ArrayList<Product> searchByKeyword(Connection conn, String searchKeyword) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -365,9 +365,13 @@ public class ProductDao {
 			pstmt.setString(2, "%"+searchKeyword+"%");
 			rs=pstmt.executeQuery();
 			while(rs.next()){
-				Product p = productConvention(rs);
-				
+				Product p=new Product();		
+				p.setProductId(rs.getInt("product_id"));
+				p.setCategoryNo(rs.getInt("category_no"));
+				p.setProductName(rs.getString("product_name"));
+				p.setProductPrice(rs.getDouble("product_price"));
 				productsList.add(p);
+
 			}
 			Collections.sort(productsList);
 		}catch(SQLException e) {
@@ -377,6 +381,25 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return productsList;
+	}
+	public String loadMainPicForProduct(Connection conn, int productId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String imageFile=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectImageFile"));
+			pstmt.setInt(1, productId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				imageFile=rs.getString(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return imageFile;
+		
 	}
 	
 }

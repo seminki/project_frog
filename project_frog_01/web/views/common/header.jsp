@@ -176,7 +176,7 @@ else{
 			<div class="gray-scale"></div>
 			<div class="search-bar-input">
 				<i class="fas fa-search search-input-icon"></i>
-				<form action="<%=contextPath%>/productSearch.do" method="post" name="formname">
+				<form action="<%=contextPath%>/productSearch.do" method="get" name="formname">
 				<input type="text" id="search-input" name="searchKeyword" onkeypress="JavaScript:press(this.form)" />
 				</form>
 				<a href="#"><i class="fas fa-times search-x"></i></a>

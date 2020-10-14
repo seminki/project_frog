@@ -129,6 +129,11 @@ public class ProductService {
 	public ArrayList<Product> searchByKeyword(String searchKeyword) {
 		Connection conn=getConnection();
 		ArrayList<Product> productsList =dao.searchByKeyword(conn,searchKeyword);
+		for(Product p : productsList) {
+			ArrayList<String> filePaths = new ArrayList<String>();
+			filePaths.add(dao.loadMainPicForProduct(conn,p.getProductId()));
+			p.setProductImageFilePaths(filePaths);
+		}
 		close(conn);
 		return productsList;
 	}
