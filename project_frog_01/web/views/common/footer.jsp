@@ -18,12 +18,12 @@ pageEncoding="UTF-8"%>
 	<div class="footer-second-cont">
 		<div class="footer-menu-cont">
 			<ul>
-				<li><a href="">ACCOUNT</a></li>
-				<li><a href="">계정</a></li>
+				<li><a href="#">ACCOUNT</a></li>
+				<li><a href='<%=signedInMember==null?contextPath+"/login.do":contextPath+"/member/myPage"%>'>계정</a></li>
 				<li><a href="">구매 기록</a></li>
 			</ul>
 			<ul>
-				<li><a href="">ASSISTANCE</a></li>
+				<li><a href="#">ASSISTANCE</a></li>
 				<li><a href="<%=request.getContextPath()%>/return.do">반품 정책</a></li>
 				<li><a href="<%=request.getContextPath()%>/substitute.do">교환 정책</a></li>
 				<li><a href="<%=request.getContextPath()%>/cancellation.do">취소 정책</a></li>
@@ -31,19 +31,19 @@ pageEncoding="UTF-8"%>
 		</div>
 		<div class="footer-menu-cont">
 			<ul>
-				<li><a href="">ABOUT TOYSPACE</a></li>
+				<li><a href="<%=request.getContextPath()%>/introduce.do">ABOUT TOYSPACE</a></li>
 				<li><a href="<%=request.getContextPath()%>/introduce.do">회사 소개</a></li>
 				<li><a href="<%=request.getContextPath()%>/map.do">위치</a></li>
 				<li><a href="<%=request.getContextPath()%>/job.do">직업을 찾으십니까?</a></li>
-				<li><a href="">매장 현황</a></li>
+				
 			</ul>
 			<ul>
-				<li><a href="">CONNECT WITH US</a></li>
-				<li><a href="">연락처</a></li>
-				<li><a href="">Twitter</a></li>
-				<li><a href="">Instagram</a></li>
-				<li><a href="">Facebook</a></li>
-				<li><a href="">Youtube</a></li>
+				<li><a href="#">CONNECT WITH US</a></li>
+				<li><a href="#">연락처</a></li>
+				<li><a href="#">Twitter</a></li>
+				<li><a href="#">Instagram</a></li>
+				<li><a href="#">Facebook</a></li>
+				<li><a href="#">Youtube</a></li>
 			</ul>
 		</div>
 	</div>
