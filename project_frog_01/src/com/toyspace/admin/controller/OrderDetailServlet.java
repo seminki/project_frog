@@ -1,7 +1,7 @@
 package com.toyspace.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.toyspace.order.history.model.service.OrderHistoryService;
 import com.toyspace.order.history.model.vo.OrderHistory;
+import com.toyspace.product.model.service.ProductService;
+import com.toyspace.product.model.vo.Product;
 
 /**
- * Servlet implementation class ManageOrderServlet
+ * Servlet implementation class OrderDetailServlet
  */
-@WebServlet("/admin/manageOrder")
-public class ManageOrderServlet extends HttpServlet {
+@WebServlet("/admin/orderDetail")
+public class OrderDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageOrderServlet() {
+    public OrderDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +34,15 @@ public class ManageOrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
 		
-		ArrayList<OrderHistory> orderHistories = new OrderHistoryService().loadAllOrderHistories();
+		OrderHistory oh = new OrderHistoryService().loadOrderHistory(orderNo);
+		TreeMap<Integer, Product> productInfo = new ProductService().loadSelectedProductsWithMainPic(oh.getProductList());
 		
-		request.setAttribute("orderHistories", orderHistories);
-		request.getRequestDispatcher("/views/admin/manageOrder.jsp").forward(request, response);
+		request.setAttribute("orderHistory", oh);
+		request.setAttribute("productInfo", productInfo);
+		
+		request.getRequestDispatcher("/views/admin/orderDetail.jsp").forward(request, response);
 	}
 
 	/**

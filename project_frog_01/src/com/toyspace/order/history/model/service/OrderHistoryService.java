@@ -72,4 +72,11 @@ public class OrderHistoryService {
 		close(conn);
 		return orderHistories;
 	}
+	
+	public ArrayList<OrderHistory> loadAllOrderHistories(){
+		Connection conn = getConnection();
+		ArrayList<OrderHistory> orderHistories = dao.loadAllOrderHistories(conn);
+		close(conn);
+		return orderHistories;
+	}
 }

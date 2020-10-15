@@ -198,4 +198,26 @@ public class OrderHistoryDao {
 		}
 		return orderHistories;
 	}
+	
+	public ArrayList<OrderHistory> loadAllOrderHistories(Connection conn){
+		ArrayList<OrderHistory> orderHistories = new ArrayList<OrderHistory>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadAllOrderHistories"));
+			
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				OrderHistory oh = orderHistoryConvention(rs);
+				orderHistories.add(oh);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return orderHistories;
+	}
 }
