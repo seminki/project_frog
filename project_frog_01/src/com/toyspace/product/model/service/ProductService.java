@@ -127,9 +127,9 @@ public class ProductService {
 
 
 //메인에서 제품검색
-	public ArrayList<Product> searchByKeyword(String searchKeyword) {
+	public ArrayList<Product> searchByKeyword(String searchKeyword, int cPage, int numPerPage) {
 		Connection conn=getConnection();
-		ArrayList<Product> productsList =dao.searchByKeyword(conn,searchKeyword);
+		ArrayList<Product> productsList =dao.searchByKeyword(conn,searchKeyword, cPage, numPerPage);
 		for(Product p : productsList) {
 			ArrayList<String> filePaths = new ArrayList<String>();
 			filePaths.add(dao.loadMainPicForProduct(conn,p.getProductId()));
@@ -151,7 +151,7 @@ public class ProductService {
 	}
 	public ArrayList<Product> loadDisney(String category) {
 		Connection conn=getConnection();
-		System.out.println(category+"2");
+		
 		ArrayList<Product> productsList=dao.loadDisney(conn,category);
 		close(conn);
 		return productsList;
@@ -160,6 +160,13 @@ public class ProductService {
 	public int selectProductCount() {
 		Connection conn=getConnection();
 		int count=dao.selectProductCount(conn);
+		close(conn);
+		return count;
+	}
+	
+	public int selectProductCountByKeyword(String searchKeyword) {
+		Connection conn =getConnection();
+		int count = dao.selectProductCountByKeyword(conn, searchKeyword);
 		close(conn);
 		return count;
 	}

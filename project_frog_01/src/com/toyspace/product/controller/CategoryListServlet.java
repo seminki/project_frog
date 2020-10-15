@@ -33,7 +33,7 @@ public class CategoryListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String categoryName=request.getParameter("category");
-		System.out.println(categoryName);
+		
 		ArrayList<Product> productsList=new ProductService().loadDisney(categoryName);
 		request.setAttribute("productsList",productsList);
 		

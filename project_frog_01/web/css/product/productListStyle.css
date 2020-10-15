@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.filter_con{
+	position:sticky;
+	top:20%;
+	
+	}
+
 section ul li {
 	list-style: none;
 }
@@ -25,7 +31,7 @@ section .products-list-item {
 	margin-bottom: 10px;
 	background-color: white;
 	text-align: center;
-	max-width: 25%;
+	max-width: 320px;
 }
 
 section .shopify-image {

@@ -358,8 +358,7 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(productsList);
-		System.out.println();
+		
 		return productsList;
 	}
 	
@@ -369,7 +368,7 @@ public class ProductDao {
 		ResultSet rs=null;
 		ArrayList<Product> productsList=new ArrayList<Product>();
 		try {
-			System.out.println(category+"3");
+			
 			pstmt=conn.prepareStatement(prop.getProperty("loadDisney"));
 			pstmt.setNString(1,category);
 			rs=pstmt.executeQuery();
@@ -395,7 +394,7 @@ public class ProductDao {
 	}
 
 //메인에서(고객용) 제품검색
-	public ArrayList<Product> searchByKeyword(Connection conn, String searchKeyword) {
+	public ArrayList<Product> searchByKeyword(Connection conn, String searchKeyword, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<Product> productsList= new ArrayList<Product>();
@@ -403,7 +402,12 @@ public class ProductDao {
 			pstmt=conn.prepareStatement(prop.getProperty("searchByKeyword"));
 			pstmt.setString(1, "%"+searchKeyword+"%");
 			pstmt.setString(2, "%"+searchKeyword+"%");
+			pstmt.setString(3, "%"+searchKeyword+"%");
+			pstmt.setInt(4, (cPage-1)*numPerPage+1); 
+			pstmt.setInt(5, cPage*numPerPage);
+			
 			rs=pstmt.executeQuery();
+			
 			while(rs.next()){
 				Product p=new Product();		
 				p.setProductId(rs.getInt("product_id"));
@@ -486,5 +490,25 @@ public class ProductDao {
 			close(pstmt);
 		}return result;
 	}
-
+	
+	public int selectProductCountByKeyword(Connection conn, String searchKeyword) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectProductCountByKeyword"));
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			pstmt.setString(2, "%"+searchKeyword+"%");
+			pstmt.setString(3, "%"+searchKeyword+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 }

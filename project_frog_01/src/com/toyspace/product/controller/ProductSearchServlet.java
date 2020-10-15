@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.toyspace.common.model.vo.Page;
 import com.toyspace.product.model.service.ProductService;
 import com.toyspace.product.model.vo.Product;
 
@@ -32,10 +33,26 @@ public class ProductSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ProductService ps = new ProductService();
 		String searchKeyword = request.getParameter("searchKeyword");
-		System.out.println(searchKeyword);
-		ArrayList<Product> productsList = new ProductService().searchByKeyword(searchKeyword);
+		int cPage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			cPage=1;
+		}
+		int numPerPage = 4;
+		int pageBarSize = 5;
+		ArrayList<Product> productsList = ps.searchByKeyword(searchKeyword, cPage, numPerPage);
+		int totalData = ps.selectProductCountByKeyword(searchKeyword);
+		String loc = "/productSearch.do";
+		Page page = new Page(cPage, numPerPage, totalData, pageBarSize, request, loc, searchKeyword);
+		
+		request.setAttribute("pageBar", page.getPageBar());
 		request.setAttribute("productsList", productsList);
+		request.setAttribute("searchKeyword", searchKeyword);
+		request.setAttribute("totalData", totalData);
 		request.getRequestDispatcher("/views/product/productList.jsp").forward(request, response);
 	}
 

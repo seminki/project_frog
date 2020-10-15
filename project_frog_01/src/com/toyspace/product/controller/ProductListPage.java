@@ -33,18 +33,18 @@ public class ProductListPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		ProductService ps = new ProductService();
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			cPage=1;
 		}
-		int numPerPage=2;
+		int numPerPage=6;
 		
-		ArrayList<Product> productsList=new ProductService().loadAllProductsWithMainPic(cPage,numPerPage);
-		int totalData=new ProductService().selectProductCount();
+		ArrayList<Product> productsList=ps.loadAllProductsWithMainPic(cPage,numPerPage);
+		int totalData=ps.selectProductCount();
 		int pageBarSize=5;
 		String loc = "/productlist.do";
 		Page page = new Page(cPage, numPerPage, totalData, pageBarSize, request, loc);
@@ -53,13 +53,9 @@ public class ProductListPage extends HttpServlet {
 		
 		String pageBar=page.getPageBar();
 		
-
+		request.setAttribute("totalData", totalData);
 		request.setAttribute("productsList", productsList);
 		request.setAttribute("pageBar", pageBar);
-					
-		
-		
-		
 		
 		request.getRequestDispatcher("/views/product/productList.jsp").forward(request, response);
 	}
