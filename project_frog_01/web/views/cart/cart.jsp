@@ -125,7 +125,7 @@ int totalAmount=0;
       </div>
 
       <div class="bottom-checkout-container">
-        <button id ="checkout-btn"><b>체크 아웃</b></button>
+        <button id ="checkout-btn" onclick = "toCheckOut();"><b>체크 아웃</b></button>
       </div>
 	<%}else{ %>
 		<div class="summary-container">
@@ -141,6 +141,7 @@ int totalAmount=0;
 <%@ include file="/views/common/footer.jsp" %>
 
 <script>
+
 
 	$("#checkout-btn").click((e)=>{
 		/* 체크아웃 버튼 누를 때 수행할 로직*/
@@ -169,6 +170,8 @@ int totalAmount=0;
       })
     }
   }
+	
+	
 	
 	function addQty(e, productId){
 		let qty = $("#qty-"+productId).val();
