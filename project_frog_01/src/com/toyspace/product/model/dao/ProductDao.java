@@ -391,7 +391,7 @@ public class ProductDao {
 			pstmt.setInt(5, cPage*numPerPage);
 			
 			rs=pstmt.executeQuery();
-			System.out.println(sql);
+			
 			while(rs.next()) {
 				Product p=new Product();		
 				p.setProductId(rs.getInt("product_id"));
@@ -408,7 +408,7 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(productsList);
+		
 		return productsList;
 	}
 
@@ -604,14 +604,14 @@ public class ProductDao {
 				
 			}
 			
-			System.out.println(sql);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(categoryQty);
+		
 		
 		return categoryQty;
 	}

@@ -165,7 +165,8 @@ section{
             <div class="face face2">
                 <div class="content">
                     <p>2020년 7월21일
-                    Frog팀은 피규어 쇼핑물 웹사이트를 만들기로<br>
+                    Frog팀은 피규어<br> 
+                    쇼핑물 웹사이트를 만들기로<br>
                     다짐한 사람들이 모여 만들어진<br>
                     조직이다.</p> 
                 </div>
@@ -181,10 +182,10 @@ section{
             <div class="face face2">
                 <div class="content">
                     <p>2020년 10월2일<br>
-                    TOYSPACE는 Frog팀의 회사명이며 
+                    TOYSPACE는 Frog팀의 회사명이며 <br>
                     피규어를 다루는 쇼핑몰이다. <br>
                     피규어 종류로는
-                    디즈니, 스타워즈, 왕좌의 게임, 포켓몬스터, 마블 의 피규어들이 있다.
+                    디즈니, 스타워즈, 왕좌의 게임, 포켓몬스터, 마블의 피규어들이 있다.
                 </p>
                 </div>
             </div>
@@ -198,7 +199,7 @@ section{
             </div>
             <div class="face face2">
                 <div class="content">
-                    <p>나의 TOYSPACE... 10월 2일에<br>
+                    <p>우리의 TOYSPACE... 10월 2일에<br>
                         시작해 구매자들이 많을거라<br>
                         기대를 했지만 10월 16일부로<br>
                         서비스를 종료합니다.

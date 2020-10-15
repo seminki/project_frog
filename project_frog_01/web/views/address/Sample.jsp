@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script language="javascript">
@@ -9,40 +10,52 @@
 //document.domain = "abc.go.kr";
 
 function goPopup(){
-	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-	var pop = window.open("<%=request.getContextPath()%>/views/address/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	
+    var pop = window.open("<%=request.getContextPath()%>/views/address/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 }
-
-
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadFullAddr.value = roadFullAddr;
-		document.form.jibunAddr.value = jibunAddr;
-		document.form.zipNo.value = zipNo;
-		
+/** API 서비스 제공항목 확대 (2017.02) **/
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.roadAddrPart2.value = roadAddrPart2;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
 }
-
 </script>
 <title>주소 입력 샘플</title>
 </head>
 <body>
 <form name="form" id="form" method="post">
-
-	<input type="button" onClick="goPopup();" value="우편번호 검색"/>
-	<div id="list"></div>
-	<div id="callBackDiv">
-		<table>
-			<tr><td>도로명주소 전체(포멧)</td><td><input type="text"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" /></td></tr>
-			<tr><td>지번                 </td><td><input type="text"  style="width:500px;" id="jibunAddr"  name="jibunAddr" /></td></tr>
-			<tr><td>우편번호             </td><td><input type="text"  style="width:500px;" id="zipNo"  name="zipNo" /></td></tr>
-			
+	<table >
+			<colgroup>
+				<col style="width:20%"><col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>우편번호</th>
+					<td>
+					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px">
+						<input type="button"  value="주소검색" onclick="goPopup();">
+					</td>
+				</tr>
+				<tr>
+					<th>도로명주소</th>
+					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+					<td>
+						<input type="text" id="addrDetail" style="width:40%" value="">
+						<input type="text" id="roadAddrPart2"  style="width:40%" value="">
+					</td>
+				</tr>
+			</tbody>
 		</table>
-	</div>
-
 </form>
 </body>
 </html>
