@@ -12,6 +12,8 @@ public class Comment implements Comparable<Comment>{
 	private boolean isDeleted;
 	private String commentContent;
 	private Date commentDate;
+	private String userId;
+	private String userNickname;
 	
 	public Comment() {
 		// TODO Auto-generated constructor stub
@@ -33,6 +35,23 @@ public class Comment implements Comparable<Comment>{
 
 	
 	
+	
+	public Comment(int productCommentNo, int productId, int memberKey, int commentRefNo, boolean isSecret,
+			boolean isDeleted, String commentContent, Date commentDate, String userId, String userNickname) {
+		super();
+		this.productCommentNo = productCommentNo;
+		this.productId = productId;
+		this.memberKey = memberKey;
+		this.commentRefNo = commentRefNo;
+		this.isSecret = isSecret;
+		this.isDeleted = isDeleted;
+		this.commentContent = commentContent;
+		this.commentDate = commentDate;
+		this.userId = userId;
+		this.userNickname = userNickname;
+	}
+
+
 	@Override
 	public int compareTo(Comment o) {
 		// TODO Auto-generated method stub
@@ -103,6 +122,26 @@ public class Comment implements Comparable<Comment>{
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
+	
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+	public String getUserNickname() {
+		return userNickname;
+	}
+
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -116,8 +155,11 @@ public class Comment implements Comparable<Comment>{
 		result = prime * result + memberKey;
 		result = prime * result + productCommentNo;
 		result = prime * result + productId;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userNickname == null) ? 0 : userNickname.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -150,15 +192,30 @@ public class Comment implements Comparable<Comment>{
 			return false;
 		if (productId != other.productId)
 			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (userNickname == null) {
+			if (other.userNickname != null)
+				return false;
+		} else if (!userNickname.equals(other.userNickname))
+			return false;
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
 		return "Comment [productCommentNo=" + productCommentNo + ", productId=" + productId + ", memberKey=" + memberKey
 				+ ", commentRefNo=" + commentRefNo + ", isSecret=" + isSecret + ", isDeleted=" + isDeleted
-				+ ", commentContent=" + commentContent + ", commentDate=" + commentDate + "]";
+				+ ", commentContent=" + commentContent + ", commentDate=" + commentDate + ", userId=" + userId
+				+ ", userNickname=" + userNickname + "]";
 	}
+
+
+	
 
 
 	

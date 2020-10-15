@@ -6,6 +6,7 @@ import static com.toyspace.common.JDBCTemplate.getConnection;
 import static com.toyspace.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.toyspace.product.comment.model.dao.CommentDao;
 import com.toyspace.product.comment.model.vo.Comment;
@@ -20,6 +21,13 @@ public class CommentService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+
+	public List<Comment> loadProductComment(String productId) {
+		Connection conn=getConnection();
+		List<Comment> commentList=dao.loadProductComment(conn,productId);
+		close(conn);
+		return commentList;
 	}
 
 }

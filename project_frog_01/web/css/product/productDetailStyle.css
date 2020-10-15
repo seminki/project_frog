@@ -142,14 +142,8 @@ section .all-container {
   align-items: center;
 }
 
-/* 찜 */
-.heart {
-  border: 1px lightgray solid;
-  border-radius: 100%;
-  height: 50px;
-  width: 50px;
-  margin-left: 10px;
-}
+
+
 
 section .fa-heart {
   font-size: 25px;
@@ -238,7 +232,7 @@ section input::-webkit-inner-spin-button {
 }
 
 .input-group input[type="button"] {
-  background-color: lightgray;
+  
   min-width: 38px;
   width: auto;
   transition: all 300ms ease;
