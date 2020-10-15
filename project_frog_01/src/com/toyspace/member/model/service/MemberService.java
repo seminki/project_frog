@@ -112,6 +112,14 @@ public class MemberService {
 	      close(conn);
 	      return result;
 	   }
+	public int memberInfoChange(Member m) {
+		Connection conn = getConnection();
+		int result= dao.memberInfoChange(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	public Member loadMembers(String userId, String userPw) {
 		Connection conn =  getConnection();
 		Member member= dao.loadMembers(conn, userId, userPw);

@@ -289,6 +289,34 @@ public class MemberDao {
 	      
 	      return result;
 	   }
+	public int memberInfoChange(Connection conn,Member m) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberInfoChange"));         
+			pstmt.setInt(1,m.getMemberKey());
+			pstmt.setString(2,m.getUserEmail());
+			pstmt.setString(3,m.getPassword());      
+			pstmt.setString(4,m.getUserGender());               
+			pstmt.setString(5,m.getUserName());
+			pstmt.setString(6,m.getUserNickname());    
+			
+			pstmt.setInt(7,m.getUserAge());    
+			pstmt.setString(8,m.getUserBirthday());    
+			pstmt.setString(9,m.getUserPhone());    
+			pstmt.setString(10,m.getUserId());
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("dao 레벨에서 멤버 업데이트 실패!");
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	public Member loadMembers(Connection conn, String memberId, String memberPw) {
 		Member member = null;
