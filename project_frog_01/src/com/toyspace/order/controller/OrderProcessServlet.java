@@ -1,7 +1,6 @@
 package com.toyspace.order.controller;
 
 import java.io.IOException;
-import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +15,9 @@ import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import com.toyspace.product.model.service.ProductService;
-import com.toyspace.product.model.vo.Product;
+import com.toyspace.member.model.vo.Member;
+import com.toyspace.order.history.model.service.OrderHistoryService;
+import com.toyspace.order.history.model.vo.OrderHistory;
 
 /**
  * Servlet implementation class OrderCompleteServlet
@@ -39,17 +39,19 @@ public class OrderProcessServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ProductService ps = new ProductService();
+		int flag = -1;
+		OrderHistoryService os = new OrderHistoryService();
 		
 		HttpSession session = request.getSession();
 		Gson gson = new Gson();
+		Member m = (Member)session.getAttribute("signedInMember");
 		
 		
 		String imp_uid = request.getParameter("imp_uid");
 		String merchant_uid = request.getParameter("merchant_uid");
 		
 //		디비에 merchat_uid로 지정된 결제의 totalamount 불러오기!
-//		double amount = ps.loadTotalAmount(merchant_uid);
+		int amount = os.loadTotalAmount(m.getMemberKey(),merchant_uid);
 		
 		String api_key = "9845619002442630";
 		String api_secret = "4ikpSZKORdkvnfxsuWSICeLlnLWZSDcXVxnOw8CnlWTJcqcGn4o0jalGWiGOWTMSq9GWhjkDfdmsEy82";
@@ -65,8 +67,7 @@ public class OrderProcessServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		AccessToken tokenCont = res.getResponse();
-		String token = tokenCont.getToken();
+
 		
 		IamportResponse<Payment> payRes =null;
 		
@@ -92,19 +93,29 @@ public class OrderProcessServlet extends HttpServlet {
 		*
 		*/
 		/////////////////////////////
-//		if(imp_uid.contentEquals(payment.getImpUid())&& merchant_uid.equals(payment.getMerchantUid())&&
-//				amount == payment.getAmount().doubleValue()) {
-		if(true) { //테스트용
+		if(imp_uid.equals(payment.getImpUid())&& merchant_uid.equals(payment.getMerchantUid())&&
+				amount == payment.getAmount().intValue()) {
+
 //			서버저장 로직 쓸것!
-			System.out.println("정상정상!");
+			System.out.println(m.getMemberKey()+"님의 결제가 정상적으로 완료되었습니다!");
+			OrderHistory oh = new OrderHistory();
+			
+			oh.setPaymentMethod(payment.getPayMethod());
+			oh.setApplyNum(payment.getApplyNum());
+			oh.setBuyerTel(payment.getBuyerTel());
+			oh.setReceiverName(payment.getBuyerName());
+			oh.setReceiverPostcode(payment.getBuyerPostcode());
+			oh.setReceiverAddr(payment.getBuyerAddr());
+			os.updateSuccessStatus(merchant_uid, oh);
 ////////////////////////////////////
 //			1이면 정상
-			gson.toJson(1, response.getWriter());
-			return;
+			flag=1;
 		} else {
-			System.out.println("결제 위변조가 감지되었습니다!!!");
+			System.out.println(m.getMemberKey()+"님의 결제에서 위변조가 감지되었습니다!!!");
+			os.cancelOrder(merchant_uid);
+			flag=0;
 		}
-		gson.toJson(0,response.getWriter());
+		gson.toJson(flag,response.getWriter());
 	}
 
 	/**

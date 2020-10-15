@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.TreeMap;
 
+import com.toyspace.order.history.model.vo.OrderHistory;
+
 
 
 public class OrderHistoryDao {
@@ -51,7 +53,7 @@ public class OrderHistoryDao {
 	
 	/////////////////////////////////////////
 	
-	public boolean createPaymentLog(Connection conn, int orderNo, int memberKey, String merchantUid) {
+	public boolean createPaymentLog(Connection conn, int orderNo, int memberKey, String merchantUid, int totalAmount) {
 		PreparedStatement pstmt = null;
 		int result = -1;
 		
@@ -60,6 +62,7 @@ public class OrderHistoryDao {
 			pstmt.setInt(1, orderNo);
 			pstmt.setInt(2, memberKey);
 			pstmt.setString(3, merchantUid);
+			pstmt.setInt(4, totalAmount);
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -99,5 +102,69 @@ public class OrderHistoryDao {
 		}
 		
 		return result.length==cartValues.size();
+	}
+	
+	public boolean cancelOrder(Connection conn, String merchant_uid) {
+		PreparedStatement pstmt = null;
+		int result =-1;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("cancelOrder"));
+			pstmt.setString(1, merchant_uid);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result == 1;
+	}
+	
+	public int loadTotalAmount(Connection conn, int memberKey, String merchantUid) {
+		int amount = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadTotalAmount"));
+			pstmt.setInt(1, memberKey);
+			pstmt.setString(2, merchantUid);
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				amount = rs.getInt("TOTAL_AMOUNT");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return amount;
+	}
+	
+	public boolean updateSuccessStatus(Connection conn, String merchant_uid, OrderHistory oh) {
+		int result =-1;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("updateSuccessStatus"));
+			pstmt.setNString(1, oh.getPaymentMethod());
+			pstmt.setNString(2, oh.getApplyNum());
+			pstmt.setString(3, oh.getBuyerTel());
+			pstmt.setString(4, oh.getReceiverName());
+			pstmt.setString(5, oh.getBuyerTel());
+			pstmt.setString(6, ""+oh.getReceiverPostcode());
+			pstmt.setNString(7, oh.getReceiverAddr());
+			pstmt.setNString(8, merchant_uid);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result == 1;
 	}
 }

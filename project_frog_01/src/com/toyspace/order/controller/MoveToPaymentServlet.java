@@ -41,8 +41,13 @@ public class MoveToPaymentServlet extends HttpServlet {
 		Member m = (Member)session.getAttribute("signedInMember");
 		TreeMap<Integer, Integer> cartValues = (TreeMap<Integer, Integer>)session.getAttribute("cart");
 		TreeMap<Integer, Product> productInfo = new ProductService().loadSelectedProductsWithMainPic(cartValues);
+		int totalAmount=0;
+		for(int productId : productInfo.keySet()) {
+			Product p= productInfo.get(productId);
+        	totalAmount+=p.getProductPrice() * cartValues.get(productId); 
+		}
 		
-		String merchant_uid = new OrderHistoryService().createPaymentLog(m.getMemberKey(), cartValues);
+		String merchant_uid = new OrderHistoryService().createPaymentLog(m.getMemberKey(), cartValues, totalAmount);
 		
 		String path = "";
 		
