@@ -6,6 +6,7 @@ import static com.toyspace.common.JDBCTemplate.getConnection;
 import static com.toyspace.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.toyspace.admin.model.vo.Admin;
 import com.toyspace.member.model.dao.MemberDao;
@@ -117,6 +118,14 @@ public class MemberService {
 		Member member= dao.loadMembers(conn, userId, userPw);
 		close(conn);
 		return member;
+	}
+	
+//관리자페이지 멤버리스트 
+	public ArrayList<Member> loadAllMemberList() {
+		Connection conn=getConnection();
+		ArrayList<Member> memberList=dao.loadAllMemberList(conn);
+		close(conn);
+		return memberList;
 	}
 	
 }

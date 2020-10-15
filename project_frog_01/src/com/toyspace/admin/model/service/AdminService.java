@@ -5,9 +5,11 @@ import static com.toyspace.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.toyspace.admin.model.dao.AdminDao;
 import com.toyspace.admin.model.vo.Admin;
+import com.toyspace.member.model.vo.Member;
 
 public class AdminService {
 
@@ -79,4 +81,5 @@ public class AdminService {
 		close(conn);
 		return result;
 	}
+
 }

@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.toyspace.admin.model.vo.Admin;
@@ -324,4 +326,37 @@ public class MemberDao {
 		return member;
 	}
 		
+	//멤버 리스트
+		public ArrayList<Member> loadAllMemberList(Connection conn) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			ArrayList<Member> memberList=new ArrayList<Member>();
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("loadAllMember"));
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					Member m= new Member();
+					m.setMemberKey(rs.getInt("member_key"));
+					m.setUserId(rs.getString("user_id"));
+					m.setUserEmail(rs.getString("user_email"));
+					m.setUserName(rs.getString("user_name"));
+					m.setUserNickname(rs.getString("user_nickname"));
+					m.setUserSignUpDate(rs.getDate("user_sign_up_date"));
+					memberList.add(m);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return memberList;
+		}
+	
+	
+	
+	
+	
+	
 }

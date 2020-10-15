@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList,com.toyspace.member.model.vo.*"%>    
+  <%
+  	ArrayList<Member> memberList =(ArrayList<Member>)request.getAttribute("memberList");
+  %>
+    
 <%@ include file="/views/common/admin_header.jsp"%>
 <style type="text/css">
       section.memberList-container {
@@ -76,51 +81,40 @@
           </form>
         </div>
       </div>
-      <div class="numPerPage-container">
-        페이지당 회원수 :
-        <form class="numPerPageFrm" name="numPerPageFrm" action="">
-          <select name="numPerPage" class="numPerPage">
-            <option value="5">5</option>
-            <option value="3">3</option>
-          </select>
-        </form>
-      </div>
+     
       <table class="tbl-member">
         <thead>
           <tr>
+            <th>멤버키</th>
             <th>아이디</th>
-            <th>이름</th>
-            <th>성별</th>
-            <th>나이</th>
             <th>이메일</th>
-            <th>전화번호</th>
-            <th>주소</th>
-            <th>취미</th>
+            <th>이름</th>
+            <th>닉네임</th>
             <th>가입날짜</th>
+
           </tr>
         </thead>
         <tbody>
-          DB에서 받아온 데이터출력할것
-          <%--  <%if(list.isEmpty()) {%>
+  
+            <%if(memberList.isEmpty()) {%>
             <tr>
                 <td colspan="9">조회되 회원이 없습니다!</td>
             </tr>
         <%}else{ 
-            for(Member m : list){
+            for(Member m : memberList){
         %>
             <tr>
+            	<td><%=m.getMemberKey() %></td>
                 <td><%=m.getUserId() %></td>
-                <td><%=m.getUserName() %></td>
-                <td><%=m.getGender() %></td>
-                <td><%=m.getAge() %></td>
-                <td><%=m.getEmail() %></td>
-                <td><%=m.getPhone() %></td>
-                <td><%=m.getAddress() %></td>
-                <td><%=m.getHobby() %></td>
-                <td><%=m.getEnrollDate() %></td>
+                <td><%=m.getUserEmail() %></td>
+                <td><%=m.getUserName() %></td>               
+                <td><%=m.getUserNickname() %></td>
+                <td><%=m.getUserSignUpDate() %></td>
+
+
             </tr>
         <%} 
-        }%>  --%>
+        }%>  
         </tbody>
       </table>
     </section>
