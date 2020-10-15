@@ -131,7 +131,7 @@ List<Comment> commentList=(List<Comment>)request.getAttribute("commentList");
     		if(c.getCommentRefNo()==0)%>	
 		   			<tr class="reply-box">
 		   				<td>
-		   					<sub class="comment-nick"><b>"<%=c.getUserNickname() %>"</b></sub>
+		   					<sub class="comment-nick"><b>"<%=c.getUserNickname() %>"님</b></sub>
 		   					<sub class="comment-writer">(<%=c.getUserId() %>)</sub> 
 		   					<sub class="comment-date"><%=c.getCommentDate() %></sub>
 		   					<br>
