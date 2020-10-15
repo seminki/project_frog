@@ -74,6 +74,15 @@ public class ProductDao {
 	}
 	
 	
+	public TreeMap<Integer, Integer> categoryQtyTreeMapConvention() {
+	
+		TreeMap<Integer, Integer> categoryQty = new TreeMap<Integer, Integer>();
+		for(int i =1; i<6; i++) {
+			categoryQty.put(i, 0);
+		}
+		return categoryQty;
+	}
+	
 	////////////////////////////////////////////////////////////////
 	public boolean insertProduct(Connection conn, int productId, Product insertion) {
 		
@@ -363,24 +372,34 @@ public class ProductDao {
 	}
 	
 	
-	public ArrayList<Product> loadDisney(Connection conn, String category) {
+	public ArrayList<Product> searchByCategoryAndKeyword(Connection conn, String[] categoryNumbers,String searchKeyword , int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<Product> productsList=new ArrayList<Product>();
 		try {
+			String sql = prop.getProperty("searchByCategoryAndKeywordHead");
+			for(int i = 0; i<categoryNumbers.length;i++) {
+				if(i!=categoryNumbers.length-1) sql +=categoryNumbers[i]+", ";
+				else sql+=categoryNumbers[i];
+			}
+			sql += prop.getProperty("searchByCategoryAndKeywordTail");
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setNString(1,"%"+searchKeyword+"%");
+			pstmt.setNString(2,"%"+searchKeyword+"%");
+			pstmt.setNString(3,"%"+searchKeyword+"%");
+			pstmt.setInt(4, (cPage-1)*numPerPage+1); 
+			pstmt.setInt(5, cPage*numPerPage);
 			
-			pstmt=conn.prepareStatement(prop.getProperty("loadDisney"));
-			pstmt.setNString(1,category);
 			rs=pstmt.executeQuery();
+			System.out.println(sql);
 			while(rs.next()) {
-				Product p=productConvention(rs);
-				p.setCategoryName(rs.getString("category_name"));
-				
-				ArrayList<String> mainPicPath =new ArrayList<String>();
-				mainPicPath.add(rs.getNString("IMAGE_ROUTE"));
-				p.setProductImageFilePaths(mainPicPath);
-				
+				Product p=new Product();		
+				p.setProductId(rs.getInt("product_id"));
+				p.setCategoryNo(rs.getInt("category_no"));
+				p.setProductName(rs.getString("product_name"));
+				p.setProductPrice(rs.getDouble("product_price"));
 				productsList.add(p);
+
 			}
 			Collections.sort(productsList);
 		}catch(SQLException e) {
@@ -389,7 +408,7 @@ public class ProductDao {
 			close(rs);
 			close(pstmt);
 		}
-		
+		System.out.println(productsList);
 		return productsList;
 	}
 
@@ -426,6 +445,8 @@ public class ProductDao {
 		}
 		return productsList;
 	}
+	
+	
 	public String loadMainPicForProduct(Connection conn, int productId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -509,6 +530,89 @@ public class ProductDao {
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return result;
+		}
+		return result;
+	}
+	
+	public TreeMap<Integer, Integer> loadCategoryQty(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TreeMap<Integer, Integer> categoryQty = categoryQtyTreeMapConvention();
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadCategoryQty"));
+			rs=pstmt.executeQuery();
+				
+			while(rs.next()) {
+				categoryQty.put(rs.getInt("CATEGORY_NO"),rs.getInt("SUM_CAT"));
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return categoryQty;
+	}
+	
+	public TreeMap<Integer, Integer> loadCategoryQty(Connection conn, String searchKeyword){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TreeMap<Integer, Integer> categoryQty = categoryQtyTreeMapConvention();
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadCategoryQtyWithKeyword"));
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			pstmt.setString(2, "%"+searchKeyword+"%");
+			pstmt.setString(3, "%"+searchKeyword+"%");
+			rs=pstmt.executeQuery();
+				
+			while(rs.next()) {
+				categoryQty.put(rs.getInt("CATEGORY_NO"),rs.getInt("SUM_CAT"));
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return categoryQty;
+	}
+	public TreeMap<Integer, Integer> loadCategoryQty(Connection conn, String[] categoryNumbers, String searchKeyword){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TreeMap<Integer, Integer> categoryQty = categoryQtyTreeMapConvention();
+		
+		try {
+			String sql = prop.getProperty("loadCategoryQtyWithCategoryAndKeywordHead")+ prop.getProperty("searchByCategoryAndKeywordHead");
+			for(int i = 0; i<categoryNumbers.length;i++) {
+				if(i!=categoryNumbers.length-1) sql +=categoryNumbers[i]+", ";
+				else sql+=categoryNumbers[i];
+			}
+			sql+=prop.getProperty("loadCategoryQtyWithCategoryAndKeywordTail");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			pstmt.setString(2, "%"+searchKeyword+"%");
+			pstmt.setString(3, "%"+searchKeyword+"%");
+			rs=pstmt.executeQuery();
+				
+			while(rs.next()) {
+				categoryQty.put(rs.getInt("CATEGORY_NO"),rs.getInt(2));
+				
+			}
+			
+			System.out.println(sql);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(categoryQty);
+		
+		return categoryQty;
 	}
 }

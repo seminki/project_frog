@@ -6,6 +6,8 @@
 	ArrayList<Product> productsList = (ArrayList<Product>) request.getAttribute("productsList");
 	String searchKeyword =(String)request.getAttribute("searchKeyword");
 	Object totalData=request.getAttribute("totalData");
+	TreeMap<Integer, Integer> categoryQty = (TreeMap<Integer, Integer>)request.getAttribute("categoryQty");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -55,8 +57,13 @@ div {
 								<br>
 							<style>
 							.filter_con{
+							
+							display: flex;		
+							}
+							.filter_box{
 							position: sticky;
-							display: inline-flex;		
+							top:50px;
+							
 							}
 							
 .section-logo{
@@ -67,16 +74,16 @@ section ul li {
 	list-style: none;
 }
 </style>
-							<label for=""><input type="checkbox" name ="category" value="디즈니"></label>
-							<span>디즈니</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="스타워즈"></label> 
-							<span>스타워즈</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="왕좌의 게임"></label> 
-							<span>왕좌의 게임</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="포켓몬스터"></label> 
-							<span>왕좌의 게임</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="마블"></label> 
-							<span>왕좌의 게임</span> <br> 
+							<label for=""><input type="checkbox" name ="category" value="1"></label>
+							<span>디즈니</span><span id="qty-disney">(<%=categoryQty.get(1) %>)</span><br> 
+							<label for=""><input type="checkbox" name="category" value="2"></label> 
+							<span>스타워즈</span><span id="qty-starwars">(<%=categoryQty.get(2) %>)</span> <br> 
+							<label for=""><input type="checkbox" name="category" value="3"></label> 
+							<span>왕좌의 게임</span><span id=qty-thrones>(<%=categoryQty.get(3) %>)</span> <br> 
+							<label for=""><input type="checkbox" name="category" value="4"></label> 
+							<span>포켓몬스터</span><span id="qty-pocket">(<%=categoryQty.get(4) %>)</span> <br> 
+							<label for=""><input type="checkbox" name="category" value="5"></label> 
+							<span>마블</span><span id="qty-marvel">(<%=categoryQty.get(5) %>)</span> <br> 
 								<br><br>
 								<button type="submit">검색</button>
 							</form>

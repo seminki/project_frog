@@ -34,8 +34,8 @@ public class CategoryListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String categoryName=request.getParameter("category");
 		
-		ArrayList<Product> productsList=new ProductService().loadDisney(categoryName);
-		request.setAttribute("productsList",productsList);
+//		ArrayList<Product> productsList=new ProductService().loadDisney(categoryName);
+//		request.setAttribute("productsList",productsList);
 		
 		
 		request.getRequestDispatcher("/views/product/productList.jsp").forward(request, response);

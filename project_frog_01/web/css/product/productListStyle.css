@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-.filter_con{
-	position:sticky;
+.filter_box{
+	position: fixed;
 	top:20%;
-	
-	}
+}
+
 
 section ul li {
 	list-style: none;

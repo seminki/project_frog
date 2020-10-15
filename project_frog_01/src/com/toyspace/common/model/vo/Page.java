@@ -14,7 +14,7 @@ public class Page {
 	private String loc;
 	private String pageBar;
 	private String searchKeyword;
-	
+	private String categoryParameter;
 	public Page() {
 		// TODO Auto-generated constructor stub
 	}
@@ -125,8 +125,130 @@ public class Page {
 					"					</button></a>";
 		}
 	}
-
+	public Page(int cPage, int numPerPage, int totalData, int pageBarSize, HttpServletRequest request, String loc, String searchKeyword, String[] categoryNumbers) {
+		super();
+		this.cPage = cPage;
+		this.numPerPage = numPerPage;
+		this.totalData = totalData;
+		this.pageBarSize = pageBarSize;
+		this.loc = request.getContextPath()+loc;
+		this.searchKeyword = searchKeyword;
+		this.categoryParameter= categoryParameterMaker(categoryNumbers);
+		
+		totalPage = (int)Math.ceil((double)totalData/numPerPage);
+		pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		pageEnd =pageNo+pageBarSize-1;
+		
+		pageBar = "";
+		if(pageNo ==1) {
+			pageBar+="<button>" + 
+					"<span " + 
+					"aria-hidden=\"true\">PREV</span> <span" + 
+					"aria-hidden=\"true\"><i" + 
+					"class=\"fas fa-chevron-left\"></i></span>" + 
+					"</button>";
+		} else {
+			pageBar+="<a href='"+this.loc+"?cPage="
+					+(pageNo-1)+"&searchKeyword="+this.searchKeyword+categoryParameter+"'><button>"+ 
+					"					<span " + 
+					"					aria-hidden=\"true\">PREV</span> <span " + 
+					"					aria-hidden=\"true\"><i " + 
+					"					class=\"fas fa-chevron-left\"></i></span>" + 
+					"					</button></a>";	
+		}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+=" "+"<button>"+pageNo+"</button>"+" ";
+			}else {
+				pageBar+=" "+"<a href='"+this.loc+"?cPage="+pageNo+"&searchKeyword="+this.searchKeyword+categoryParameter+"'><button>"+pageNo+"</button></a>"+" ";	
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<button>" + 
+					"<span " + "aria-hidden=\"true\">NEXT</span> <span " + 
+					"aria-hidden=\"true\"><i " + 
+					"class=\"fas fa-chevron-right\"></i></span>" + 
+					"</button>";
+		}else {
+			pageBar+="<a href='"+this.loc+"?cPage="+pageNo+"&searchKeyword="+this.searchKeyword+categoryParameter+"'><button>" + 
+					"					<span " + "aria-hidden=\"true\">NEXT</span> <span " +
+					"					aria-hidden=\"true\"><i " + 
+					"					class=\"fas fa-chevron-right\"></i></span> " + 
+					"					</button></a>";
+		}
+	}
 	
+	public Page(int cPage, int numPerPage, int totalData, int pageBarSize, HttpServletRequest request, String loc, String[] categoryNumbers) {
+		super();
+		this.cPage = cPage;
+		this.numPerPage = numPerPage;
+		this.totalData = totalData;
+		this.pageBarSize = pageBarSize;
+		this.loc = request.getContextPath()+loc;
+		
+		this.categoryParameter= categoryParameterMaker(categoryNumbers);
+		
+		totalPage = (int)Math.ceil((double)totalData/numPerPage);
+		pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		pageEnd =pageNo+pageBarSize-1;
+		
+		pageBar = "";
+		if(pageNo ==1) {
+			pageBar+="<button>" + 
+					"<span " + 
+					"aria-hidden=\"true\">PREV</span> <span" + 
+					"aria-hidden=\"true\"><i" + 
+					"class=\"fas fa-chevron-left\"></i></span>" + 
+					"</button>";
+		} else {
+			pageBar+="<a href='"+this.loc+"?cPage="
+					+(pageNo-1)+"&searchKeyword="+this.searchKeyword+categoryParameter+"'><button>"+ 
+					"					<span " + 
+					"					aria-hidden=\"true\">PREV</span> <span " + 
+					"					aria-hidden=\"true\"><i " + 
+					"					class=\"fas fa-chevron-left\"></i></span>" + 
+					"					</button></a>";	
+		}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+=" "+"<button>"+pageNo+"</button>"+" ";
+			}else {
+				pageBar+=" "+"<a href='"+this.loc+"?cPage="+pageNo+"&searchKeyword="+this.searchKeyword+categoryParameter+"'><button>"+pageNo+"</button></a>"+" ";	
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<button>" + 
+					"<span " + "aria-hidden=\"true\">NEXT</span> <span " + 
+					"aria-hidden=\"true\"><i " + 
+					"class=\"fas fa-chevron-right\"></i></span>" + 
+					"</button>";
+		}else {
+			pageBar+="<a href='"+this.loc+"?cPage="+pageNo+"&searchKeyword="+this.searchKeyword+categoryParameter+"'><button>" + 
+					"					<span " + "aria-hidden=\"true\">NEXT</span> <span " +
+					"					aria-hidden=\"true\"><i " + 
+					"					class=\"fas fa-chevron-right\"></i></span> " + 
+					"					</button></a>";
+		}
+	}
+	
+	private String categoryParameterMaker(String[] categoryNumbers) {
+		String result = "";
+		for(String categoryNo : categoryNumbers) {
+			result+="&category=";
+			result+=categoryNo;
+		}
+		return result;
+	}
+	
+	
+	public String getCategoryParameter() {
+		return categoryParameter;
+	}
+
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}

@@ -149,10 +149,15 @@ public class ProductService {
 		return productInCart;
 
 	}
-	public ArrayList<Product> loadDisney(String category) {
+	public ArrayList<Product> searchByCategoryAndKeyword(String[] categoryNumbers, String searchKeyword, int cPage, int numPerPage) {
 		Connection conn=getConnection();
 		
-		ArrayList<Product> productsList=dao.loadDisney(conn,category);
+		ArrayList<Product> productsList=dao.searchByCategoryAndKeyword(conn,categoryNumbers, searchKeyword, cPage, numPerPage);
+		for(Product p : productsList) {
+			ArrayList<String> filePaths = new ArrayList<String>();
+			filePaths.add(dao.loadMainPicForProduct(conn,p.getProductId()));
+			p.setProductImageFilePaths(filePaths);
+		}
 		close(conn);
 		return productsList;
 
@@ -169,6 +174,27 @@ public class ProductService {
 		int count = dao.selectProductCountByKeyword(conn, searchKeyword);
 		close(conn);
 		return count;
+	}
+	
+	public TreeMap<Integer, Integer> loadCategoryQty(){
+		Connection conn = getConnection();
+		TreeMap<Integer, Integer> categoryQty = dao.loadCategoryQty(conn);
+		close(conn);
+		return categoryQty;
+	}
+	
+	public TreeMap<Integer, Integer> loadCategoryQty(String searchKeyword){
+		Connection conn = getConnection();
+		TreeMap<Integer, Integer> categoryQty = dao.loadCategoryQty(conn, searchKeyword);
+		close(conn);
+		return categoryQty;
+	}
+	
+	public TreeMap<Integer, Integer> loadCategoryQty(String[] categoryNumbers, String searchKeyword){
+		Connection conn = getConnection();
+		TreeMap<Integer, Integer> categoryQty = dao.loadCategoryQty(conn, categoryNumbers, searchKeyword);
+		close(conn);
+		return categoryQty;
 	}
 	
 }

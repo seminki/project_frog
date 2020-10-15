@@ -52,7 +52,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="<%=contextPath%>/categodylist.do?category=디즈니">DISNEY</a>
+									<a href="<%=contextPath%>/productlist.do?category=1&searchKeyword=">DISNEY</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -64,7 +64,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="<%=contextPath%>/categodylist.do?category=스타워즈">STARWARS</a>
+									<a href="<%=contextPath%>/productlist.do?category=2&searchKeyword=">STARWARS</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -76,7 +76,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="<%=contextPath%>/categodylist.do?category=왕좌의 게임">왕좌의 게임</a>
+									<a href="<%=contextPath%>/productlist.do?category=3&searchKeyword=">왕좌의 게임</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -88,7 +88,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="<%=contextPath%>/categodylist.do?category=포켓몬스터">포켓몬</a>
+									<a href="<%=contextPath%>/productlist.do?category=4&searchKeyword=">포켓몬</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -100,7 +100,7 @@ else{
 											alt=""
 										/>
 									</div>
-									<a href="<%=contextPath%>/categodylist.do?category=마블">MARVEL</a>
+									<a href="<%=contextPath%>/productlist.do?category=5&searchKeyword=">MARVEL</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -176,7 +176,7 @@ else{
 			<div class="gray-scale"></div>
 			<div class="search-bar-input">
 				<i class="fas fa-search search-input-icon"></i>
-				<form action="<%=contextPath%>/productSearch.do" method="get" name="formname">
+				<form action="<%=contextPath%>/productlist.do" method="get" name="formname">
 				<input type="text" id="search-input" name="searchKeyword" onkeypress="JavaScript:press(this.form)" />
 				</form>
 				<a href="#"><i class="fas fa-times search-x"></i></a>
@@ -220,7 +220,7 @@ else{
 				</div>
 				<div class="side-bar-product-cont side-bar-margin">
           <div class="side-bar-product-category">
-            <a href="<%=contextPath%>/categodylist.do?category=디즈니">
+            <a href="<%=contextPath%>/productlist.do?category=1&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -229,7 +229,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="<%=contextPath%>/categodylist.do?category=스타워즈">
+            <a href="<%=contextPath%>/productlist.do?category=2&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -238,7 +238,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="<%=contextPath%>/categodylist.do?category=왕좌의 게임">
+            <a href="<%=contextPath%>/productlist.do?category=3&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -247,7 +247,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="<%=contextPath%>/categodylist.do?category=포켓몬스터">
+            <a href="<%=contextPath%>/productlist.do?category=4&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
@@ -256,7 +256,7 @@ else{
             
           </div>
           <div class="side-bar-product-category">
-            <a href="<%=contextPath%>/categodylist.do?category=마블">
+            <a href="<%=contextPath%>/productlist.do?category=5&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
