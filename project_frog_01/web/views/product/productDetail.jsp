@@ -4,7 +4,7 @@
 <%
 Product p=(Product)request.getAttribute("product");
 
-/* List<Comment> list=(List<Comment>)request.getAttribute("comment"); */
+List<Comment> commentList=(List<Comment>)request.getAttribute("commentList"); 
 
 %>
 
@@ -72,8 +72,8 @@ Product p=(Product)request.getAttribute("product");
           type="number"
           step="1"
           max=""
-          min="0"
-          value="0"
+          min="1"
+          value="1"
           name="quantity"
           class="quantity-field"
         />
@@ -84,12 +84,10 @@ Product p=(Product)request.getAttribute("product");
           data-field="quantity"
           onclick="incrementValue(event);"
         />
-        <input type="button" class="add-cart" value="장바구니 담기" onclick="addToCart('<%=p.getProductId()%>','<%=contextPath%>');">
-        
+        <input type="button" class="add-cart" value="장바구니 담기" onclick="addToCart('<%=p.getProductId()%>','<%=contextPath%>');">       
         </form>
-        <!-- 찜 -->
         </div>
-        <button class="heart" onclick="zzim();"><i class="fas fa-heart"></i></button> 
+       
       </div>
       <hr />
       </div>
@@ -99,15 +97,15 @@ Product p=(Product)request.getAttribute("product");
             <li class="item-detais-info">상품번호:<%=p.getProductId() %></li>
             <li class="item-detais-info">상품명:<%=p.getProductName() %></li>
             <li class="item-detais-info">상품 카테고리:<%=p.getCategoryName() %></li>
-            <li class="item-detais-info">사용연령:<%=p.getRecommendedAge() %>이상</li>
+            <li class="item-detais-info">사용연령:<%=p.getRecommendedAge() %>세 이상</li>
             <li class="item-detais-info">제조자:<%=p.getManufacturer() %></li>
             <li class="item-detais-info">제조국:<%=p.getManufacturedCountry() %></li>
             <li class="item-detais-info">사이즈: 약 10.8cm</li>
             <li class="item-detais-info">취급 시 주의사항
-                <ol type="1">
+                <ul type="">
                     <li><%=p.getCaution() %></li>
                     
-                </ol>
+                </ul>
             </li>
         </ul>
         <br>
@@ -123,99 +121,31 @@ Product p=(Product)request.getAttribute("product");
                 		<input type="hidden" name="productId" value="<%=p.getProductId() %>"> 
                 	<textarea name="commentContent" id="" cols="120" rows="4" style="resize:none"></textarea>
             	 </div>   
-            <button type=submit class="review-btn" onclick="fn_access();">리뷰 남기기</button>
+            <button type=submit class="review-btn" onclick="return fn_access();">리뷰 남기기</button>
            		 </form>
             </div>
         </div>
         <hr>
              <table class="tbl-comment">
- <%--   	<%for(Comment c: list) {	%>
-   	
-		   			<tr class="level1">
+    	<%for(Comment c: commentList) {	
+    		if(c.getCommentRefNo()==0)%>	
+		   			<tr class="reply-box">
 		   				<td>
-		   					<sub class="comment-writer"><%=c.getProductCommentNo() %></sub>
+		   					<sub class="comment-nick"><b>"<%=c.getUserNickname() %>"</b></sub>
+		   					<sub class="comment-writer">(<%=c.getUserId() %>)</sub> 
 		   					<sub class="comment-date"><%=c.getCommentDate() %></sub>
+		   					<br>
 		   					<br>
 							<%=c.getCommentContent() %>
 		   				</td>
-		   				<td>
-		   					<button class="btn-reply" value="">답글</button>
-		   				</td>
+		   				
 		   			</tr>
-	<%} %> --%>
-   		</table> 
+	<%} %> 
+   		</table>  
 	
 	
         <hr>
-        <div class="recommend-container">
-            <div class="rec-container">
-                <header>
-                  <h2 class="recommend-item">이 상품은 어때요?</h2>
-                </header>
-                <div class="rec-pic-text">
-                  <div class="item1">
-                    <a class="item-container" href="">
-                      <img src="pics/harry.JPG" alt="" />
-                      <div class="item-info">
-                        <div class="item-title">
-                          <div clss="brand">POP!</div>
-                          <strong class="model">Harry Potter</strong>
-                          <div class="price">9900원</div>
-                        </div>
-                        <div class="item-add-cart">
-                          <button class="item-cart-btn">Add To Cart</button>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="item2">
-                    <a class="item-container" href="">
-                      <img src="pics/hagrid.JPG" alt="" />
-                      <div class="item-info">
-                        <div class="item-title">
-                          <div clss="brand">POP!</div>
-                          <strong class="model">Harry Potter</strong>
-                          <div class="price">9900원</div>
-                        </div>
-                        <div class="item-add-cart">
-                          <button class="item-cart-btn">Add To Cart</button>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="item3">
-                    <a class="item-container" href="">
-                      <img src="pics/malfoy.JPG" alt="" />
-                      <div class="item-info">
-                        <div class="item-title">
-                          <div clss="brand">POP!</div>
-                          <strong class="model">Harry Potter</strong>
-                          <div class="price">9900원</div>
-                        </div>
-                        <div class="item-add-cart">
-                          <button class="item-cart-btn">Add To Cart</button>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="item4">
-                    <a class="item-container" href="">
-                      <img src="pics/ron.JPG" alt="" />
-                      <div class="item-info">
-                        <div class="item-title">
-                          <div clss="brand">POP!</div>
-                          <strong class="model">Harry Potter</strong>
-                          <div class="price">9900원</div>
-                        </div>
-                        <div class="item-add-cart">
-                          <button class="item-cart-btn">Add To Cart</button>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-        </div>
+ 
     </div>
     
 
@@ -261,7 +191,7 @@ Product p=(Product)request.getAttribute("product");
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
           }
-      
+        //수량버튼 
           function incrementValue(e) {
             e.preventDefault();
             let fieldName = $(e.target).data("field");
@@ -277,7 +207,7 @@ Product p=(Product)request.getAttribute("product");
               parent.find("input[name=" + fieldName + "]").val(0);
             }
           }
-        //수량버튼 
+        
           function decrementValue(e) {
             e.preventDefault();
             let fieldName = $(e.target).data("field");
@@ -293,10 +223,7 @@ Product p=(Product)request.getAttribute("product");
               parent.find("input[name=" + fieldName + "]").val(0);
             }
           }
-          //찜
-          function zzim(){
-              $('.fa-heart').toggleClass('color');
-          }
+
     
 
     
