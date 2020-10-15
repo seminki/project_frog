@@ -32,20 +32,43 @@ public class Page {
 		
 		pageBar = "";
 		if(pageNo ==1) {
-			pageBar+="<span> [이전] </span>";
+			pageBar+="<button>" + 
+					"<span " + 
+					"aria-hidden=\"true\">PREV</span> <span" + 
+					"aria-hidden=\"true\"><i" + 
+					"class=\"fas fa-chevron-left\"></i></span>" + 
+					"</button>";
 		} else {
-			pageBar+="<a href='"+ loc +"?cPage="+(pageNo-1)+"'> [이전] </a>";
+			pageBar+="<a href='"+this.loc+"?cPage="
+					+(pageNo-1)+"'><button>"+ 
+					"					<span " + 
+					"					aria-hidden=\"true\">PREV</span> <span " + 
+					"					aria-hidden=\"true\"><i " + 
+					"					class=\"fas fa-chevron-left\"></i></span>" + 
+					"					</button></a>";	
 		}
-		while(pageNo<=totalPage&&pageNo<=pageEnd) {
-			pageBar+="<a href='"+ loc +"?cPage="+(pageNo)+"'> "+pageNo+" </a>";
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+=" "+"<button>"+pageNo+"</button>"+" ";
+			}else {
+				pageBar+=" "+"<a href='"+this.loc+"?cPage="+pageNo+"'><button>"+pageNo+"</button></a>"+" ";	
+			}
 			pageNo++;
 		}
-		if(pageNo==totalPage) {
-			pageBar+="<span> [다음] </span>";
-		}else {
-			pageBar+="<a href='"+ loc +"?cPage="+(pageEnd+1)+"'> [다음] </a>";
-		}
 		
+		if(pageNo>totalPage) {
+			pageBar+="<button>" + 
+					"<span " + "aria-hidden=\"true\">NEXT</span> <span " + 
+					"aria-hidden=\"true\"><i " + 
+					"class=\"fas fa-chevron-right\"></i></span>" + 
+					"</button>";
+		}else {
+			pageBar+="<a href='"+this.loc+"?cPage="+pageNo+"'><button>" + 
+					"					<span " + "aria-hidden=\"true\">NEXT</span> <span " +
+					"					aria-hidden=\"true\"><i " + 
+					"					class=\"fas fa-chevron-right\"></i></span> " + 
+					"					</button></a>";
+		}
 	}
 
 	public int getcPage() {

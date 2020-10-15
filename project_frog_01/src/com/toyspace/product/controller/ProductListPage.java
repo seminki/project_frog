@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.toyspace.common.model.vo.Page;
 import com.toyspace.product.model.service.ProductService;
 import com.toyspace.product.model.vo.Product;
 
@@ -33,8 +34,31 @@ public class ProductListPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		ArrayList<Product> productsList=new ProductService().loadAllProductsWithMainPic();
-		request.setAttribute("productsList",productsList);
+		int cPage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			cPage=1;
+		}
+		int numPerPage=2;
+		
+		ArrayList<Product> productsList=new ProductService().loadAllProductsWithMainPic(cPage,numPerPage);
+		int totalData=new ProductService().selectProductCount();
+		int pageBarSize=5;
+		String loc = "/productlist.do";
+		Page page = new Page(cPage, numPerPage, totalData, pageBarSize, request, loc);
+		
+		
+		
+		String pageBar=page.getPageBar();
+		
+
+		request.setAttribute("productsList", productsList);
+		request.setAttribute("pageBar", pageBar);
+					
+		
+		
 		
 		
 		request.getRequestDispatcher("/views/product/productList.jsp").forward(request, response);

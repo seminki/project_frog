@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -329,12 +330,16 @@ public class ProductDao {
 		return productsList;
 	}
 	
-	public ArrayList<Product> loadAllProductsWithMainPic(Connection conn) {
+	public ArrayList<Product> loadAllProductsWithMainPic(Connection conn, int cPage, int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		ArrayList<Product> productsList=new ArrayList<Product>();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("loadAllProductsWithMainPic"));
+			
+			  pstmt.setInt(1, (cPage-1)*numPerPage+1); 
+			  pstmt.setInt(2, cPage*numPerPage);
+			 
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Product p=productConvention(rs);
@@ -346,16 +351,19 @@ public class ProductDao {
 				
 				productsList.add(p);
 			}
-			Collections.sort(productsList);
+			 Collections.sort(productsList);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		
+		System.out.println(productsList);
+		System.out.println();
 		return productsList;
 	}
+	
+	
 	public ArrayList<Product> loadDisney(Connection conn, String category) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -460,6 +468,23 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return p;
+	}
+	public int selectProductCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectProductCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
 	}
 
 }
