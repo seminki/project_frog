@@ -25,9 +25,9 @@ pageEncoding="UTF-8"%>
 			<ul>
 				<li><a href="">ASSISTANCE</a></li>
 				<li><a href="">지원 센터</a></li>
-				<li><a href="">환불 정책</a></li>
-				<li><a href="">교환 정책</a></li>
-				<li><a href="">정책</a></li>
+				<li><a href="<%=request.getContextPath()%>/return.do">반품 정책</a></li>
+				<li><a href="<%=request.getContextPath()%>/substitute.do">교환 정책</a></li>
+				<li><a href="<%=request.getContextPath()%>/cancellation.do">취소 정책</a></li>
 			</ul>
 		</div>
 		<div class="footer-menu-cont">
