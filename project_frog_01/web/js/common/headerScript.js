@@ -160,7 +160,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 
 let socket;
 //1. Websocket객체를 만들어서 소켓 서버와 연결을 함
-socket = new WebSocket("ws://mightymosses.hopto.org:9090<%=request.getContextPath()%>/chatting");
+socket = new WebSocket("ws://mightymosses.hopto.org:9090/project_frog_01/chatting");
 //실행될 함수
 socket.onmessage = e=>{
 	

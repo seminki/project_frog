@@ -117,11 +117,11 @@ else{
 							</li>
 						</ul>
 					</div>
-					<div class="header-community-container header-menu-container">
+					<!-- <div class="header-community-container header-menu-container">
 						<a href="" class="header-menu-title">COMMUNITY</a>
-					</div>
+					</div> -->
 					<div class="header-about-container header-menu-container">
-						<a href="" class="header-menu-title">ABOUT</a>
+						<a href="<%=contextPath %>/introduce.do" class="header-menu-title">ABOUT</a>
 					</div>
 				</div>
 				<div class="header-icons">
