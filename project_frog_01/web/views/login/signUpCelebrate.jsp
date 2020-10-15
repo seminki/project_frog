@@ -10,9 +10,44 @@
 <meta charset="UTF-8">
 <title>TOY SPACE - Where All Toys' Dream Comes True</title>
 </head>
+<style>
+<style>
+section{
+    
+}
+.container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.Sign-up{}
+.sign-up-text{
+    font-size: 3em;
+}
+#TOYSPACE{
+    color:blue;
+}
+
+</style>
+</style>
 <body>
 <%@ include file="/views/common/header.jsp" %>
-	회원가입 추카추카~
+<body>
+    <section>
+        <div class="container">
+            <div class="Sign-up">
+            	<img src="<%=request.getContextPath()%>/image/login/resume.png">
+            </div>
+            <div class="sign-up-text">
+                <h3><span id="TOYSPACE">TOYSPACE</span> 홈페이지<br> 
+                    회원가입이 완료 되었습니다.</h3>
+            </div>
+        </div>
+    </section>
+</body>
 	   <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
