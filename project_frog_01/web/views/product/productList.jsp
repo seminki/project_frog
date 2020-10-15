@@ -51,10 +51,25 @@ div {
 							<strong> Filters</strong>
 						</div>
 						<div>
-							<form action=""></form>
+							<form action="<%=contextPath%>/productlist.do">
 							<input type="text" name="searchKeyword" id="" value="<%=searchKeyword!=null?searchKeyword:"" %>"
 								style="text-align:center; border: 2px black solid; border-radius: 10px; width: 80%;"><br>
 								<br>
+							<label for=""><input type="checkbox" name ="category" value="1"></label>
+							<span>디즈니</span><span id="qty-disney">(<%=categoryQty.get(1) %>)</span><br> 
+							<label for=""><input type="checkbox" name="category" value="2"></label> 
+							<span>스타워즈</span><span id="qty-starwars">(<%=categoryQty.get(2) %>)</span> <br> 
+							<label for=""><input type="checkbox" name="category" value="3"></label> 
+							<span>왕좌의 게임</span><span id=qty-thrones>(<%=categoryQty.get(3) %>)</span> <br> 
+							<label for=""><input type="checkbox" name="category" value="4"></label> 
+							<span>포켓몬스터</span><span id="qty-pocket">(<%=categoryQty.get(4) %>)</span> <br> 
+							<label for=""><input type="checkbox" name="category" value="5"></label> 
+							<span>마블</span><span id="qty-marvel">(<%=categoryQty.get(5) %>)</span> <br> 
+								<br><br>
+								<button type="submit">검색</button>
+							</form>
+						</div>
+					</div>
 							<style>
 							.filter_con{
 							
@@ -74,21 +89,6 @@ section ul li {
 	list-style: none;
 }
 </style>
-							<label for=""><input type="checkbox" name ="category" value="1"></label>
-							<span>디즈니</span><span id="qty-disney">(<%=categoryQty.get(1) %>)</span><br> 
-							<label for=""><input type="checkbox" name="category" value="2"></label> 
-							<span>스타워즈</span><span id="qty-starwars">(<%=categoryQty.get(2) %>)</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="3"></label> 
-							<span>왕좌의 게임</span><span id=qty-thrones>(<%=categoryQty.get(3) %>)</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="4"></label> 
-							<span>포켓몬스터</span><span id="qty-pocket">(<%=categoryQty.get(4) %>)</span> <br> 
-							<label for=""><input type="checkbox" name="category" value="5"></label> 
-							<span>마블</span><span id="qty-marvel">(<%=categoryQty.get(5) %>)</span> <br> 
-								<br><br>
-								<button type="submit">검색</button>
-							</form>
-						</div>
-					</div>
 					<div class=""
 						style="width: 100%; display: flex; flex-wrap: wrap; max-width: 85%;">
 						<!-- 오른쪽 제품 -->
