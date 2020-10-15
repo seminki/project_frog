@@ -110,6 +110,18 @@
 	.orderHistoryRow{
 		cursor:pointer;
 	}
+	/* 추가 부분 */
+	table{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    table th{
+        text-align: left;
+    }
+    table td{
+        border: 2px solid black;
+    }
 	</style>
 	
 	</section>

@@ -44,6 +44,15 @@
 	.orderHistoryRow{
 		cursor:pointer;
 	}
+	/* 추가한 부분 */
+	table{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+	table td{
+    border : 1px solid black;
+	}
 	</style>
 	
 	
