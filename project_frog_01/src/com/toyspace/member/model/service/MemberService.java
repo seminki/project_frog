@@ -1,5 +1,6 @@
 package com.toyspace.member.model.service;
 
+
 import static com.toyspace.common.JDBCTemplate.close;
 import static com.toyspace.common.JDBCTemplate.commit;
 import static com.toyspace.common.JDBCTemplate.getConnection;
@@ -118,5 +119,13 @@ public class MemberService {
 		close(conn);
 		return member;
 	}
+	
+	public String selectMemberId(String userid) {
+		Connection conn=getConnection();
+		String member=dao.selectMemberId(conn,userid);
+		close(conn);
+		return member;
+	}
+	
 	
 }
