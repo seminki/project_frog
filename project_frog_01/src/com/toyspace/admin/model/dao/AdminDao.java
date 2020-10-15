@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.toyspace.admin.model.vo.Admin;
+import com.toyspace.member.model.vo.Member;
 
 public class AdminDao {
 	
@@ -147,5 +148,7 @@ public class AdminDao {
 		}
 		return result==1;
 	}
+
+
 	
 }
