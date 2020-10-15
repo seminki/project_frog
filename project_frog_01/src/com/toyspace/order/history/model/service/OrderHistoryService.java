@@ -1,9 +1,12 @@
 package com.toyspace.order.history.model.service;
 
-import static com.toyspace.common.JDBCTemplate.*;
-
+import static com.toyspace.common.JDBCTemplate.close;
+import static com.toyspace.common.JDBCTemplate.commit;
+import static com.toyspace.common.JDBCTemplate.getConnection;
+import static com.toyspace.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import com.toyspace.order.history.model.dao.OrderHistoryDao;
@@ -61,5 +64,12 @@ public class OrderHistoryService {
 		if(!result) rollback(conn);
 		else commit(conn);
 		close(conn);
+	}
+	
+	public ArrayList<OrderHistory> loadMemberOrderHistory(int memberKey){
+		Connection conn =getConnection();
+		ArrayList<OrderHistory> orderHistories = dao.loadMemberOrderHistory(conn,memberKey);
+		close(conn);
+		return orderHistories;
 	}
 }

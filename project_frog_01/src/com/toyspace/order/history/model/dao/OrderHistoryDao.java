@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.TreeMap;
 
@@ -49,6 +50,14 @@ public class OrderHistoryDao {
 			close(pstmt);
 		}
 		return orderNo;
+	}
+	
+	public OrderHistory orderHistoryConvention(ResultSet rs) throws Exception {
+		return new OrderHistory(rs.getInt("order_no"), 0, rs.getInt("member_key"), 
+				rs.getDate("ordered_date"), rs.getNString("payment_method"), rs.getInt("order_status_no"), 
+				rs.getString("apply_num"), rs.getNString("merchant_uid"), rs.getNString("buyer_tel"), 
+				rs.getNString("receiver_name"), rs.getNString("receiver_tel"), rs.getNString("RECEIVER_POSTCODE"), 
+				rs.getNString("RECEIVER_ADDR"),rs.getString("RECEIVER_COMMENT"), null, rs.getInt("TOTAL_AMOUNT"));
 	}
 	
 	/////////////////////////////////////////
@@ -166,5 +175,27 @@ public class OrderHistoryDao {
 		}
 		
 		return result == 1;
+	}
+	
+	public ArrayList<OrderHistory> loadMemberOrderHistory(Connection conn, int memberKey){
+		ArrayList<OrderHistory> orderHistories = new ArrayList<OrderHistory>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadMemberOrderHistory"));
+			pstmt.setInt(1, memberKey);
+			rs= pstmt.executeQuery();
+			while(rs.next()) {
+				OrderHistory oh = orderHistoryConvention(rs);
+				orderHistories.add(oh);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return orderHistories;
 	}
 }

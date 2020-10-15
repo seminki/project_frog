@@ -142,4 +142,12 @@ public class MemberService {
 		return memberList;
 	}
 	
+	public Member loadMemberDetail(int memberKey) {
+		Connection conn =getConnection();
+		Member m = dao.loadMemberByMemberKey(conn, memberKey);
+		close(conn);
+		return m;
+	}
+	
+	
 }

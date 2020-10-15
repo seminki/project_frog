@@ -1,3 +1,4 @@
+<%@page import="sun.misc.Contended"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList,com.toyspace.member.model.vo.*"%>    
@@ -50,7 +51,10 @@
       div.search-userName {
         display: none;
       }
-
+	 
+	 section tr{
+	 	cursor: pointer;
+	 }
     </style>
 
     <section class="memberList-container">
@@ -99,7 +103,8 @@
         <%}else{ 
             for(Member m : memberList){
         %>
-            <tr>
+            <tr onclick="moveToMemberDetail('<%=m.getMemberKey()%>');">
+       
             	<td><%=m.getMemberKey() %></td>
                 <td><%=m.getUserId() %></td>
                 <td><%=m.getUserEmail() %></td>
@@ -129,6 +134,10 @@
 		});
 		$(".searchType").change();
 	});
+ 
+ function moveToMemberDetail(memberKey){
+	 location.href = '<%=request.getContextPath()%>/admin/memberDetail?memberKey='+memberKey;
+ }
  </script>
     </section>
   </body>
