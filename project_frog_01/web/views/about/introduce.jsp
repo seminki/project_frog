@@ -46,8 +46,15 @@ section{
 }
 .container .card:hover .face.face1
 {
-    /* background: #ff0057; */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    box-shadow:
+     inset 0 0 60px #fff,
+     inset 20px 0 80px #f0f,
+     inset -20px 0 80px #0ff,
+     inset 20px 0 300px #f0f,
+     inset -20px 0 300px #0ff,
+     0 0 50px #fff,
+     -10px 0 80px #f0f,
+     10px 0 80px #0ff;
     transform: translateY(0px);
 }
 .container .card .face.face2
