@@ -330,22 +330,18 @@ public class MemberDao {
 		public ArrayList<Member> loadAllMemberList(Connection conn) {
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
+			Member m=null;
 			ArrayList<Member> memberList=new ArrayList<Member>();
 			try {
 				pstmt=conn.prepareStatement(prop.getProperty("loadAllMember"));
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
-					Member m= new Member();
-					m.setMemberKey(rs.getInt("member_key"));
-					m.setUserId(rs.getString("user_id"));
-					m.setUserEmail(rs.getString("user_email"));
-					m.setUserName(rs.getString("user_name"));
-					m.setUserNickname(rs.getString("user_nickname"));
-					m.setUserSignUpDate(rs.getDate("user_sign_up_date"));
+					m=memberConvention(rs);
+					
 					memberList.add(m);
 				}
 				
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
 				close(rs);

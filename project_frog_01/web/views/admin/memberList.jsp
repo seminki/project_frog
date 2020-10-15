@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList,com.toyspace.member.model.vo.*"%>    
   <%
   	ArrayList<Member> memberList =(ArrayList<Member>)request.getAttribute("memberList");
+	String type=request.getParameter("searchType");
+	String key=request.getParameter("searchKeyword");
   %>
     
 <%@ include file="/views/common/admin_header.jsp"%>
@@ -40,6 +42,7 @@
         padding: 3px;
         background-color: rgb(0, 0, 0);
         color: white;
+        
       }
       div.search-userId {
         display: inline-block;
@@ -47,15 +50,7 @@
       div.search-userName {
         display: none;
       }
-      div.search-gender {
-        display: none;
-      }
-      div.numPerPage-container {
-        float: right;
-      }
-      form.numPerPageFrm {
-        display: inline;
-      }
+
     </style>
 
     <section class="memberList-container">
@@ -63,25 +58,26 @@
       <div class="search-container">
         회원조회:
         <select class="searchType">
-          <option value="userId">아이디</option>
-          <option value="userName">회원명</option>
-          <option value="gender">성별</option>
+          <option value="userId" <%=type!=null&&type.equals("userId")?"selected":"" %>>아이디</option>
+		<option value="userName" <%=type!=null&&type.equals("userName")?"selected":"" %>>회원명</option>
         </select>
         <div class="search-userId">
-          <form action>
-            <input type="hidden" name="searchType" value="userId" />
-            <input
-              type="text"
-              name="searchKeyword"
-              placeholder="아이디검색"
-              size="25"
-              value=""
-            />
-            <button type="submit">검색</button>
-          </form>
-        </div>
-      </div>
-     
+				<form action="<%=request.getContextPath() %>/admin/searchMember">
+					<input type="hidden" name="searchType" value="userId">
+					<input type="text" name="searchKeyword" placeholder="아이디검색" size="25"
+					value="<%=key!=null&&type!=null&&type.equals("userId")?key:""%>">
+					<button type="submit">검색</button>
+				</form>
+			</div>
+			<div class="search-userName">
+				<form action="<%=request.getContextPath() %>/admin/searchMember">
+					<input type="hidden" name="searchType" value="userName">
+					<input type="text" name="searchKeyword" placeholder="이름검색" size="25"
+					value="<%=key!=null&&type!=null&&type.equals("userName")?key:""%>">
+					<button type="submit">검색</button>
+				</form>
+			</div>
+    </div> 
       <table class="tbl-member">
         <thead>
           <tr>
@@ -117,6 +113,23 @@
         }%>  
         </tbody>
       </table>
+      
+      
+ <script>
+ $(function(){
+		let userId=$(".search-userId");
+		let userName=$(".search-userName");
+
+		
+		$(".searchType").change(e => {
+			userId.css("display","none");
+			userName.css("display","none");
+			let v=$(e.target).val();
+			$(".search-"+v).css("display","inline-block");
+		});
+		$(".searchType").change();
+	});
+ </script>
     </section>
   </body>
 </html>
