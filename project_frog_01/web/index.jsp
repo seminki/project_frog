@@ -26,13 +26,13 @@
                		 The Happiest Place on Earth는 문을 닫았지만<br>
                		 당신은 여전히 디즈니와 함께할 수 있어요!
               </p>
-              <a class="shop1-btn" href="<%=contextPath %>/categodylist.do?category=%EB%94%94%EC%A6%88%EB%8B%88">Shop Collection</a>
+              <a class="shop1-btn" href="<%=contextPath%>/productlist.do?category=1&searchKeyword=">Shop Collection</a>
             </div>
           </div>
         </div>
         <div class="pic">
           <div class="img-container">
-            <a href="<%=request.getContextPath() %>/product/productDetail?productId=48">
+            <a href="<%=request.getContextPath() %>/product/productDetail?productId=63">
               <img src="<%=request.getContextPath()%>/image/product/mickey.png" alt="" />
             </a>
           </div>
@@ -46,7 +46,7 @@
               <h1>마블 MARVEL</h1>
               <div class="main2-shop">
                 <p>"I am INEVITABLE"</p>
-                <a class="shop2-btn" href="">SHOP COLLECTION</a>
+                <a class="shop2-btn" href="<%=contextPath%>/productlist.do?category=5&searchKeyword=">SHOP COLLECTION</a>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
               <h1>스타워즈 STAR WARS</h1>
               <div class="main2-shop">
                 <p>"May the Force be with you."</p>
-                <a class="shop2-btn" href="">SHOP COLLECTION</a>
+                <a class="shop2-btn" href="<%=contextPath%>/productlist.do?category=2&searchKeyword=">SHOP COLLECTION</a>
               </div>
             </div>
           </div>
