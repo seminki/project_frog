@@ -62,18 +62,18 @@
 		<option value="userName" <%=type!=null&&type.equals("userName")?"selected":"" %>>회원명</option>
         </select>
         <div class="search-userId">
-				<form action="<%=request.getContextPath() %>/admin/searchMember">
-					<input type="hidden" name="searchType" value="userId">
+				<form action="<%=request.getContextPath() %>/admin/memberSearch">
+					<input type="hidden" name="searchType" value="user_id">
 					<input type="text" name="searchKeyword" placeholder="아이디검색" size="25"
-					value="<%=key!=null&&type!=null&&type.equals("userId")?key:""%>">
+					value="<%=key!=null&&type!=null&&type.equals("user_id")?key:""%>">
 					<button type="submit">검색</button>
 				</form>
 			</div>
 			<div class="search-userName">
-				<form action="<%=request.getContextPath() %>/admin/searchMember">
-					<input type="hidden" name="searchType" value="userName">
+				<form action="<%=request.getContextPath() %>/admin/memberSearch">
+					<input type="hidden" name="searchType" value="user_name">
 					<input type="text" name="searchKeyword" placeholder="이름검색" size="25"
-					value="<%=key!=null&&type!=null&&type.equals("userName")?key:""%>">
+					value="<%=key!=null&&type!=null&&type.equals("user_name")?key:""%>">
 					<button type="submit">검색</button>
 				</form>
 			</div>

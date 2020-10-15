@@ -127,5 +127,11 @@ public class MemberService {
 		close(conn);
 		return memberList;
 	}
+	public ArrayList<Member> searchMemberList(String type, String key) {
+		Connection conn=getConnection();
+		ArrayList<Member> memberList=dao.searchMemberList(conn, type, key);
+		close(conn);
+		return memberList;
+	}
 	
 }

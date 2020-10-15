@@ -1,5 +1,6 @@
 package com.toyspace.member.model.dao;
 
+
 import static com.toyspace.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -8,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.toyspace.admin.model.vo.Admin;
@@ -342,6 +344,29 @@ public class MemberDao {
 				}
 				
 			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return memberList;
+		}
+//관리자용-멤버 이름/아이디 조회하기
+		public ArrayList<Member> searchMemberList(Connection conn, String type, String key) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Member m= null;
+			ArrayList <Member> memberList=new ArrayList();
+			try {
+				String sql=prop.getProperty("searchMemberList").replaceAll("@type", type);
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+key+"%");
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					m=memberConvention(rs);
+					memberList.add(m);
+				}
+			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
 				close(rs);
