@@ -218,7 +218,8 @@ th{
                 <!-- 여기위 클래스로 text center css 줌 @@@@@@@@@@@@@@@@@@-->
                 <div class="area-btn">
                     <button onclick="" value="" style="width: 200px; height:30px;" ><strong>수정</strong></button>
-                  
+                    <br>
+                  	<button id="logout-btn" style="width: 200px; height:30px;"><strong>로그아웃</strong></button>
                 </div>
                 
              <div class="g-signin2 hide" data-onsuccess="onSignIn"></div>  

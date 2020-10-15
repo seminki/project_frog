@@ -114,7 +114,8 @@ public class GoogleSignInServlet extends HttpServlet {
 			
 			Member emailM=ms.checkMemberThroughSNSEmail(email);
 			if(emailM!=null) {
-				session.setAttribute("email-found-new-member", m);
+				session.setAttribute("email-found-new-member", emailM);
+				
 				session.setAttribute("SNS-for-email-found-new-member", sns);
 				gsonFlag=3;
 				gson.toJson(gsonFlag,response.getWriter());
