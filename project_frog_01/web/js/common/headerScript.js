@@ -158,5 +158,10 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     $("#cart-amount").html(data);
   }
 
-
-
+let socket;
+//1. Websocket객체를 만들어서 소켓 서버와 연결을 함
+socket = new WebSocket("ws://mightymosses.hopto.org:9090<%=request.getContextPath()%>/chatting");
+//실행될 함수
+socket.onmessage = e=>{
+	
+}

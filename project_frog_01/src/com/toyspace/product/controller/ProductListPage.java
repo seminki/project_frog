@@ -39,7 +39,7 @@ public class ProductListPage extends HttpServlet {
 		String[] categoryNumbers=request.getParameterValues("category");
 		
 		int cPage=0;
-		int numPerPage=6;
+		int numPerPage=8;
 		int pageBarSize=5;
 		ArrayList<Product> productsList=null;;
 		int totalData=0;

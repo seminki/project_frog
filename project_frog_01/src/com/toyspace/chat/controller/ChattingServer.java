@@ -26,16 +26,15 @@ public class ChattingServer {
 	public void onOpen(Session session, EndpointConfig config) {
 		//클라이언트 요청이 오면 실행되는 함수
 		//클라이언트에서 new WebSocket()를 실행하면 실행되는 메소드
-		System.out.println("WebSocket 서버에서 실행됨!");
-		System.out.println(session.getId());
+		
 		
 		//접속 성공했다는 메시지를 클라이언트에게 전송하기
 		//전송방법
 		//session.getBasicRemote() : 데이터를 전송할 클라이언트 스트림을 가져옴
 		//session.getBasicRemote().sendText() : 문자열을 전송하는 메소드
 		//예외처리를 해줘야 함
-		Message m =new Message("admin","채팅서버 입장 감사!");
-		System.out.println(m);
+		Message m =new Message("admin","도움이 필요하신가요?");
+		
 		try {
 			session.getBasicRemote().sendObject(m);
 		} catch (Exception e) {
@@ -48,7 +47,7 @@ public class ChattingServer {
 	public void message(Session session, Message msg) { //디코더 등록이 되어있을 때
 		//session은 보낸 사람의 session객체임
 		//msg는 클라이언트가 send한 매개변수가 msg 매개변수도 들어옴
-		System.out.println(msg);
+		
 		msg.setSender("["+msg.getSender()+"]");
 		//받은 메세지 전송하기
 		try {

@@ -286,10 +286,21 @@ else{
 					<span>실시간 채팅 문의</span>  <i class="fas fa-minus-square chatting-x"></i>
 				</div>
 				<div class="chatting-content">
-					채팅 표시 창!
+					<%if(signedInMember==null){ %>
+						<div class="chatting-null">
+						<img class ="chatting-null-image" alt="" src="<%=contextPath%>/image/common/blacklogo.png">
+						<br>
+						<h3 class="null-h3">로그인 하여 <br>실시간 채팅지원을 받으세요</h3>
+						</div>
+					<%} %>
+					
 				</div>
 				<div class="chatting-send">
+					<%if(signedInMember==null){ %>
+					<input type="text" id="chatting-input" readonly>
+					<%} else {%>
 					<input type="text" id="chatting-input">
+					<%} %>
 					<button id="chatting-send-button">전송</button>
 				</div>
 			</div>
