@@ -7,7 +7,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <title>TOY SPACE - Where All Toys' Dream Comes True</title>
 <style>
-.top{
+section .top{
     background-color:gray;
     display:flex;
     justify-content: center;
@@ -17,16 +17,16 @@
     font-weight: 900;
     color:black;
 }
-img{
+section img{
     width:60px;
     height: 60px;
 }
-.text{
+section .text{
     margin-left:10%;
     margin-right:10%;
     margin-bottom: 10%;
 }
-h1{
+section h1{
     font-size: 3em;
     font-weight: 900;
 }
