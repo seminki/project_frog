@@ -79,4 +79,14 @@ public class OrderHistoryService {
 		close(conn);
 		return orderHistories;
 	}
+	
+	public OrderHistory loadOrderHistory(int orderNo) {
+		Connection conn = getConnection();
+		OrderHistory oh = dao.loadOrderHistory(conn, orderNo);
+		TreeMap<Integer, Integer> productList = dao.loadProductValues(conn, orderNo);
+		oh.setProductList(productList);
+		close(conn);
+		return oh;
+	}
+
 }

@@ -220,4 +220,52 @@ public class OrderHistoryDao {
 		}
 		return orderHistories;
 	}
+	
+	public OrderHistory loadOrderHistory(Connection conn, int orderNo) {
+		OrderHistory oh = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadOrderHistoryWithOrderNo"));
+			pstmt.setInt(1, orderNo);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				oh = orderHistoryConvention(rs);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return oh;
+	}
+	public TreeMap<Integer, Integer> loadProductValues(Connection conn, int orderNo){
+		
+		TreeMap<Integer, Integer> productList = new TreeMap<Integer, Integer>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadProductValues"));
+			pstmt.setInt(1, orderNo);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				productList.put(rs.getInt("ORDERED_PRODUCT"), rs.getInt("ORDERED_AMOUNT"));
+	
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return productList;
+		
+	}
+	
 }
