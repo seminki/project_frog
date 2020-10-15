@@ -56,7 +56,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <p>ToySpace는 처음이신가요?<a href="<%=request.getContextPath() %>/signup.do"> 지금 가입하기</a></p>
             </div>
             <div class="simple-login">
-                <div class="sp-login" style="margin:50px ;">
+                <div class="sp-login" id="sp-login" style="margin:50px ;">
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     <div id="naverIdLogin"></div>
                     <div class="kakao-container">
@@ -89,7 +89,17 @@ href="<%=request.getContextPath() %>/css/login/style.css">
    		
    		width: 30em;
    	}
-
+	
+	#sp-login{
+	position:relative;
+	display: flex;
+	width:100%;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction:column;
+	left:-4em;
+	}
+	
    </style>
    
    <%@ include file="/views/common/footer.jsp" %>
