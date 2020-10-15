@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.toyspace.product.model.vo.Product, java.util.TreeMap"%>
+<%
+TreeMap<Integer, Product> productInCart =null;
+int totalAmount=0;
 
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +24,8 @@
       
       <!-- 카트에 들어간게 있을때와 없을때 -->
       <%if(cartValues!=null&& cartValues.size()!=0){ 
-      	TreeMap<Integer, Product> productInCart = (TreeMap<Integer, Product>)request.getAttribute("productInCart");
-      	int totalAmount = 0;
+      	productInCart = (TreeMap<Integer, Product>)request.getAttribute("productInCart");
+      	totalAmount = 0;
       	for(int productId : productInCart.keySet()){
       		totalAmount+=productInCart.get(productId).getProductPrice() * cartValues.get(productId);
       	}
@@ -45,7 +49,7 @@
         <div class="summary-bottom medium-title">
           <span>총 금액</span>
          	<div>
-          <span id="summary-amount"><%=totalAmount %></span>
+          <span id="summary-amount"><%=(int)totalAmount %></span>
           <span> 원</span>
           </div>
         </div>
@@ -64,6 +68,7 @@
           <%for(int productId : productInCart.keySet()) { 
         	  Product p =productInCart.get(productId);
           %>
+         
           <tr>
             <td>
               <div class="product-table-img-cont">
@@ -84,19 +89,19 @@
           </tr>
           <tr>
             <td class="trash-container">
-                <button class="white-icon">
+                <button class="white-icon" onclick="removeItem(event, '<%=productId%>');">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
             <td class="qty-btn-cont">
               <div class="plus2">
                 <div class="plus3">
-                    <button class="minus">
+                    <button class="minus" onclick="deductQty(event, '<%=productId%>');">
                         <i class="fas fa-minus"></i>
                     </button>
-                    <input type="number" class="int" id="" min="0" value="<%=cartValues.get(productId)%>">
+                    <input type="number" class="int" id="qty-<%=productId%>" min="0" value="<%=cartValues.get(productId)%>">
                     
-                    <button class="plus">
+                    <button class="plus" onclick="addQty(event, '<%=productId%>');">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
@@ -104,7 +109,7 @@
             </td>
             <td>
               <div class="money">
-                <span class="sub-amount"><%=p.getProductPrice()*cartValues.get(productId) %></span>
+                <span class="sub-amount" name = "<%=p.getProductPrice()%>" id="sub-amount-<%=productId%>"><%=(int)(p.getProductPrice()*cartValues.get(productId)) %></span>
                 <span> 원</span>
             </div>
             </td>
@@ -112,6 +117,7 @@
           <tr>
             <td colspan="3"><hr></td>
           </tr>
+    
           <%} %>
 <!-- 여기까지! -->
         </table>
@@ -124,7 +130,8 @@
 	<%}else{ %>
 		<div class="summary-container">
         <div class="summary-top medium-title">
-          엇..... 아무것도 없는데요? 장난감들이 여러분을 기다리고 있는데 ㅠ
+          엇..... 아무것도 없는데요? 
+          장난감들이 여러분을 기다리고 있는데 ㅠ
         </div>
         
       </div>
@@ -140,8 +147,88 @@
 		location.href = "<%=contextPath%>/order/moveToPayment";
 	})
 	
+	function deductQty(e, productId){
+    let qty = $("#qty-"+productId).val();
+    if(qty!=0){
+      $("#qty-"+productId).val(qty-1);
+      $.ajax({
+        url: "<%=contextPath%>/cart/addToCart",
+        type:"POST",
+        data:{
+          "productId":productId,
+          "value" : -1,
+        },
+        success: (data)=>{
+          successRoutine(data);
+          cartSuccessRoutine(data, productId, $("#qty-"+productId).val());
+          
+        },
+        fail : error =>{
+          console.log(error);
+        }
+      })
+    }
+  }
 	
-
+	function addQty(e, productId){
+		let qty = $("#qty-"+productId).val();
+		$("#qty-"+productId).val(Number(qty)+1);
+	      $.ajax({
+	        url: "<%=contextPath%>/cart/addToCart",
+	        type:"POST",
+	        data:{
+	          "productId":productId,
+	          "value" : 1,
+	        },
+	        success: (data)=>{
+	          successRoutine(data);
+	          cartSuccessRoutine(data, productId, $("#qty-"+productId).val());
+	          
+	        },
+	        fail : error =>{
+	          console.log(error);
+	        }
+	      })
+	}
+  function cartSuccessRoutine(data, productId, amount){
+    $("#summary-qty").html(data);
+    $("#sub-amount-"+productId).html(Number($("#qty-"+productId).val()) * Number($("#sub-amount-"+productId).attr("name")));
+    let totalAmount = 0;
+    $(".sub-amount").each((i,v)=>{
+    	totalAmount+=Number($(v).html());
+    })
+    $("#summary-amount").html(totalAmount);
+  }
+  
+  function removeItem(e, productId){
+	  $.ajax({
+		  url: "<%=contextPath%>/cart/removeItem",
+		  type: "POST",
+		  data: {
+			  "productId" : productId
+		  },
+		  success: (data) =>{
+			  successRoutine(data);
+			  $("#summary-qty").html(data);
+			   const targetCont = $(e.target).parent().parent().parent();
+			    targetCont.prev().remove();
+			    targetCont.next().remove();
+			    targetCont.remove();
+			  
+			  let totalAmount = 0;
+			    $(".sub-amount").each((i,v)=>{
+			    	totalAmount+=Number($(v).html());
+			    })
+			    $("#summary-amount").html(totalAmount);
+		  },
+		  fail : error =>{
+			  console.log(error);
+		  }
+		  
+	  })
+  }
+  
+  
 </script>
 </body>
 </html>

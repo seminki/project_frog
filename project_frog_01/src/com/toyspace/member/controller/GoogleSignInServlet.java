@@ -3,6 +3,7 @@ package com.toyspace.member.controller;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +21,7 @@ import com.google.gson.Gson;
 import com.toyspace.member.model.service.MemberService;
 import com.toyspace.member.model.vo.Member;
 import com.toyspace.member.model.vo.SNSLogin;
+import com.toyspace.order.cart.model.service.CartService;
 
 /**
  * Servlet implementation class GoogleSignInServlet
@@ -86,6 +88,10 @@ public class GoogleSignInServlet extends HttpServlet {
 //			있으면 멤버 불러 세션에 담아줌 (어차피 로그인 상태는 이 세션에 따라다니니까!)
 			if(m!=null) {
 				session.setAttribute("signedInMember", m);
+				
+//				장바구니 불러오기
+				new CartService().loadSavedCart(session, m.getMemberKey());
+				
 				gsonFlag=1;
 				gson.toJson(gsonFlag,response.getWriter());
 				return;
@@ -126,6 +132,9 @@ public class GoogleSignInServlet extends HttpServlet {
 			Member signInMember = ms.signUpThroughSNS(newM, sns);
 			
 			session.setAttribute("signedInMember", signInMember);
+			
+//			장바구니 불러오기
+			new CartService().loadSavedCart(session, signInMember.getMemberKey());
 			
 			gsonFlag=2;
 			gson.toJson(gsonFlag,response.getWriter());

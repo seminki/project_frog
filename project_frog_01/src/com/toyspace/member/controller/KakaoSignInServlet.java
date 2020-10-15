@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.toyspace.member.model.service.MemberService;
 import com.toyspace.member.model.vo.Member;
 import com.toyspace.member.model.vo.SNSLogin;
+import com.toyspace.order.cart.model.service.CartService;
 
 /**
  * Servlet implementation class KakaoSignInServlet
@@ -63,6 +64,10 @@ public class KakaoSignInServlet extends HttpServlet {
 		
 		if(m!=null) {
 			session.setAttribute("signedInMember", m);
+			
+//			장바구니 불러오기
+			new CartService().loadSavedCart(session, m.getMemberKey());
+			
 			gsonFlag=1;
 			gson.toJson(gsonFlag,response.getWriter());
 			return;
@@ -94,6 +99,9 @@ public class KakaoSignInServlet extends HttpServlet {
 		Member signInMember = ms.signUpThroughSNS(newM, sns);
 		
 		session.setAttribute("signedInMember", signInMember);
+		
+//		장바구니 불러오기
+		new CartService().loadSavedCart(session, signInMember.getMemberKey());
 		
 		gsonFlag=2;
 		gson.toJson(gsonFlag,response.getWriter());

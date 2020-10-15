@@ -140,12 +140,9 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     			},
     			type: 'POST',
     			success : (data) =>{
+    				successRoutine(data);
+
     				
-    				animateCSS('#cart','rubberBand');
-    				$("#cart-amount").html(data);
-    				
-    				
-    				$("#cart-amount").parent().parent().removeClass("animate__rubberBand").addClass("animate__rubberBand")
 		if($(".quantity-field").val()!=null){    				
 		$(".quantity-field")[0].value=0;
 		}
@@ -153,6 +150,13 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     			fail: (error) =>{
     				console.log(error);
     			}
-    		})
+    		})	
   }
+
+  function successRoutine(data){
+    animateCSS('#cart','rubberBand');
+    $("#cart-amount").html(data);
+  }
+
+
 

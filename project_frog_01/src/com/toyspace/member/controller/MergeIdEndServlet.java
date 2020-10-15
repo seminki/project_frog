@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.toyspace.member.model.service.MemberService;
 import com.toyspace.member.model.vo.Member;
 import com.toyspace.member.model.vo.SNSLogin;
+import com.toyspace.order.cart.model.service.CartService;
 
 /**
  * Servlet implementation class MergeIdEndServlet
@@ -60,6 +61,10 @@ public class MergeIdEndServlet extends HttpServlet {
 		loc=request.getContextPath();
 		
 		session.setAttribute("signedInMember", m);
+		
+//		장바구니 불러오기
+		new CartService().loadSavedCart(session, m.getMemberKey());
+		
 		session.removeAttribute("email-found-new-member");
 		session.removeAttribute("SNS-for-email-found-new-member");
 		request.getRequestDispatcher("/msg?msg="+msg+"&loc="+loc).forward(request, response);

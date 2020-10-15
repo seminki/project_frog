@@ -3,6 +3,7 @@ package com.toyspace.order.cart.model.dao;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.TreeMap;
 
@@ -66,6 +67,29 @@ public class CartDao {
 		}
 		
 		return result.length==cartValues.size();
+	}
+	
+	public TreeMap<Integer, Integer> loadSavedCart(Connection conn, int memberKey){
+		TreeMap<Integer, Integer> savedCart = new TreeMap<Integer, Integer>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("loadSavedCart"));
+			pstmt.setInt(1, memberKey);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				savedCart.put(rs.getInt("PRODUCT_ID"), rs.getInt("AMOUNT"));
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return savedCart;
 	}
 }
 	

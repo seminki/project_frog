@@ -22,9 +22,11 @@
             <div class="text-shop">
               <p>
                 	우리들의 친구 미키마우스! 미워할 수 없는 마녀 말레피센트까지<br>
-               		 장난감들이 당신을 기다리고 있어요! 30% 할인 기간 동안 입양하시면, 배송비는 무료입니다!
+               		 장난감들이 당신을 기다리고 있어요! 지금 입양하시면, 배송비는 무료입니다!<br>
+               		 The Happiest Place on Earth는 문을 닫았지만<br>
+               		 당신은 여전히 디즈니와 함께할 수 있어요!
               </p>
-              <a class="shop1-btn" href="">Shop Collection</a>
+              <a class="shop1-btn" href="<%=contextPath %>/categodylist.do?category=%EB%94%94%EC%A6%88%EB%8B%88">Shop Collection</a>
             </div>
           </div>
         </div>

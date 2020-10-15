@@ -138,13 +138,14 @@ section .money{
 .bottom-checkout-container{
   position: fixed;
   bottom: 0;
-  width: 96%;
-  padding: 2%;
-  height: 2em;
+  width: 95%;
+  padding: 2.5%;
+  height: 0.5em;
   max-height: 50px;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 1);
   display: flex;
   justify-content: center;
+  align-items: center;
   z-index: 900;
 }
 .product-table-img-cont>img{

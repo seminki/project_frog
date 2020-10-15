@@ -28,7 +28,7 @@
     <section class="container">
         <div class="left">
             <div class="logo">
-            <img src="<%=request.getContextPath()%>/image/login/blacklogo-small.png" alt="">
+            <img src="<%=request.getContextPath()%>/image/login/blacklogo-small.png" alt="" style="object-fit:contain;">
                 <p>정보 > 배송 > 지불</p>
             </div>
             <div class="bottom">
@@ -115,7 +115,7 @@
 		IMP.request_pay({ // param
 		    pg: "html5_inicis",
 		    pay_method: "card",
-		    merchant_uid: <%=m.getMemberKey()%>+new Date().getTime(),
+		    merchant_uid: <% if(m!=null){%><%=m.getMemberKey()%><%} else {%>1<%}%>+new Date().getTime(),
 		    name: "노르웨이 회전 의자 외 3",
 		    amount: 1000,
 		    buyer_email: "gildong@gmail.com",
@@ -139,7 +139,7 @@
 		        	data:{
 		        		"imp_uid" : rsp.imp_uid,
 		        		"merchant_uid" : rsp.merchant_uid,
-		        		"member_key" : <%=m.getMemberKey()%>
+		        		"member_key" : <% if(m!=null){%><%=m.getMemberKey()%><%}%>
 		        	}
 		        }).done(function (data) {
 		        	/* 서버 결제 api성공시 로직! */

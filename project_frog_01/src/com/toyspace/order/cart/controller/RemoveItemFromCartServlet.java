@@ -1,7 +1,6 @@
 package com.toyspace.order.cart.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class AddToCartServlet
+ * Servlet implementation class RemoveItemFromCartServlet
  */
-@WebServlet("/cart/addToCart")
-public class AddToCartServlet extends HttpServlet {
+@WebServlet("/cart/removeItem")
+public class RemoveItemFromCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddToCartServlet() {
+    public RemoveItemFromCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +33,16 @@ public class AddToCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int productId = Integer.parseInt(request.getParameter("productId"));
-		int value = Integer.parseInt(request.getParameter("value"));
 		HttpSession session = request.getSession();
 		
 		TreeMap<Integer, Integer> cartValues = (TreeMap<Integer, Integer>)session.getAttribute("cart");
-		
-		if(cartValues!=null&&cartValues.containsKey(productId)) cartValues.put(productId, cartValues.get(productId)+value);
-		else if(cartValues!=null&&!cartValues.containsKey(productId)) cartValues.put(productId, value);
-		else{
-			cartValues= new TreeMap<Integer, Integer>();
-			cartValues.put(productId, value);
-			
+		if(cartValues!=null) {
+			cartValues.remove(productId);
 		}
 		
-		int sum =0;
-		ArrayList<Integer> removingKey = new ArrayList<Integer>();
+		int sum=0;
 		for(int v :cartValues.keySet()) {
 			sum+=cartValues.get(v);
-			if(cartValues.get(v)==0) {
-				removingKey.add(v);
-			}
-		}
-		for(int key : removingKey) {
-			cartValues.remove(key);
 		}
 		
 		session.setAttribute("cart", cartValues);
