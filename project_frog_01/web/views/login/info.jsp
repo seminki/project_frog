@@ -1,11 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="com.toyspace.member.model.dao.*"%>
+    <% String clientId = (String)request.getAttribute("client_id"); %>
+    <%
+    Member m = (Member)session.getAttribute("signedInMember");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TOY SPACE - Where All Toys' Dream Comes True</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<%@ include file="/views/common/favicon.jsp" %>
+<!-- 구글 로그인 api 로드 -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="<%=clientId%>">
+<!-- 네이버 로그인 api 로드 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<!-- 카카오 로그인 api 로드 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <style>
 .text_center{
@@ -74,7 +88,9 @@ th{
     margin: 10px;
     margin-top: 50px;
 }
-
+.hide{
+	display:none;
+}
 </style>
 <body>
 <%@ include file="/views/common/header.jsp" %>
@@ -94,26 +110,27 @@ th{
     <div class="but1">
         <div class="btn3"></div>
         <div class="list-container">
-            <h2 class="text_center">개인 정보 수정</h2>
+            <h2 class="text_center">회원 정보</h2>
             <!-- 여기위 클래스로 text center css 줌 @@@@@@@@@@@@@@@@@@-->
+            <form action="/memberInfoChange.do?pw=<%=m.getPassword()%>?nick=<%=m.getUserNickname() %>?memberkey=<%=m.getMemberKey() %>" method="post">
             <table class="info"> 
                 <tr>
                     <th>아이디</th> <!--회원아이디 불러오기 -->
                     <td>
-                        <input type="text" name="userId" id="userId" value="" readonly>
+                        <input type="text" name="userId" id="userId" value="<%=m.getUserId()%>" readonly>
                     </td>
                 </tr>
                 <tr>
                     <th>이름</th> <!--회원이름 불러오기-->
                     <td>
-                        <input type="text" name="userName" id="userName" value="" autocomplete="off" required>
+                        <input type="text" name="userName" id="userName" value="<%=m.getUserName()%>" autocomplete="off" required>
                     </td>
                 </tr>
-                <tr>
+                 <tr>
                     <th>생년월일</th>
                     <td>
-                        <input type="text" style="width: 50px;" name="inyear" class="inBorder" maxlength=4 style="font-size: 10px;">년
-                        <select class="inBorder">
+                        <input type="text" name="year" class="inBorder" maxlength=4 style="font-size: 10px;width: 50px; " >년
+                        <select class="inBorder" name="month">
                             <option value="1">1
                             <option value="2">2
                             <option value="3">3
@@ -127,7 +144,7 @@ th{
                             <option value="11">11
                             <option value="12">12                            
                         </select> 월
-                        <select class="inBorder">
+                        <select class="inBorder"name="day">
                             <option value="1">1
                             <option value="2">2
                             <option value="3">3
@@ -165,10 +182,10 @@ th{
                 <tr>
                     <th>나이</th>
                     <td>
-                        <input type="text" name="age" id="age">
-                    </td>
+                        <input type="text" name="age" id="age" value="">
+					</td>
                 </tr>
-                <tr>
+                 <tr>
                     <th>성별</th>
                     <td>
                         <div class="boy-girl">                   
@@ -182,7 +199,7 @@ th{
                 <tr>
                     <th>이메일</th>
                     <td>
-                        <input type="email" name="email" id="email" value="">
+                        <input type="email" name="email" id="email" value="<%=m.getUserEmail()%>">
                     </td>
                 </tr>
                 <tr>
@@ -192,24 +209,38 @@ th{
                     </td>
                 </tr>
                 <tr>
-                    <th>주소</th>
-                    <td>
-                        <input type="text" name="address" id="address" value="">
-                    </td>
-                </tr>
+               
         </div>
     </div>
         </table>
+        </form>
             <div class="container-btn text_center">
                 <!-- 여기위 클래스로 text center css 줌 @@@@@@@@@@@@@@@@@@-->
                 <div class="area-btn">
-                    <button onclick="" value="">수정</button>
-                    <button onclick="" value="">뒤로</button>
+                    <button onclick="" value="" style="width: 200px; height:30px;" ><strong>수정</strong></button>
+                  
                 </div>
                 
-                
+             <div class="g-signin2 hide" data-onsuccess="onSignIn"></div>  
             </div>
         </section>
 <%@ include file="/views/common/footer.jsp" %>
+
+<script>
+	let googleFlag;
+	function onSignIn(googleUser) {
+		googleFlag = googleUser.isSignedIn();
+		let id_token = googleUser.getAuthResponse().id_token;
+	}
+	
+	$("#logout-btn").click((e)=>{
+		if(googleFlag){
+			gapi.auth2.getAuthInstance().signOut();
+		}
+			location.href = '<%=contextPath%>/member/logout';
+	})
+
+
+</script>
 </body>
 </html>

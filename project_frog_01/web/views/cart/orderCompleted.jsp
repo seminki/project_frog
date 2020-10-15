@@ -9,6 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	결제 완료 됨!
 </body>
 </html>

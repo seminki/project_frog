@@ -10,6 +10,7 @@
 	--font-gray: rgb(85, 85, 85);
 }
 
+
 .header-container {
 	height: var(--header-menu-height);
 	width: 100%;
@@ -94,6 +95,7 @@
 }
 .uler {
 	display: none;
+	z-index: 1500;
 }
 .header-menu-container:hover {
 	background-color: var(--menu-white);
@@ -408,11 +410,28 @@
 	margin-top: 6px;
 }
 
+.user-pic-wide{
+	width: 40px;
+	height : 40px;
+	border-radius: 40px;
+	border: var(--font-gray) 3px solid;
+	margin-top:0.5em;
+}
 
+.user-pic-narrow{
+	width: 60px;
+	height : 60px;
+	border-radius: 60px;
+	border: var(--menu-black) 3px solid;
+	margin-top:0.8em;
+}
 
 
 
 @media screen and (max-width: 955px) {
+	.user-pic-wide{
+		display:none;
+	}
 	.header-middle-menu {
 		display: none;
 	}

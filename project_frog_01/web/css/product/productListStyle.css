@@ -1,14 +1,20 @@
 @charset "UTF-8";
 
-ul li {
+.filter_box{
+	position: fixed;
+	top:20%;
+}
+
+
+section ul li {
 	list-style: none;
 }
 
-.width33 {
+section.width33 {
 	width: 33%;
 }
 
-.products-list-item-a {
+section.products-list-item-a {
 	font-size: .9375rem;
 	text-decoration: none;
 	display: flex;
@@ -16,7 +22,7 @@ ul li {
 	height: 100%;
 }
 
-.products-list-item {
+section .products-list-item {
 	font-size: .9375rem;
 	box-shadow: 3px 6px 9px 0 rgba(0, 0, 0, .1);
 	margin-right: 12px;
@@ -25,18 +31,20 @@ ul li {
 	margin-bottom: 10px;
 	background-color: white;
 	text-align: center;
-	max-width: 25%;
+	max-width: 320px;
 }
 
-.shopify-image {
+section .shopify-image {
 	cursor: pointer;
 	width: 100%;
+	max-width:300px;
+	max-height:300px;
 	background-size: contain;
 	background-image:
 		url("https://cdn.shopify.com/s/files/1/1052/2158/products/2791-Wall-E-POPGlam-WEB_d9d2ed14-dc3c-4816-b091-7fa704b716b6_400x2000.png?v=1601411410");
 }
 
-.addtocart {
+section .addtocart {
 	text-transform: uppercase;
 	font-size: 1rem;
 	font-family: "Open Sans Condensed", sans-serif;

@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%String contextPath = request.getContextPath(); %>
+    pageEncoding="UTF-8" import="com.toyspace.member.model.vo.Member, java.util.TreeMap"%>
+<%String contextPath = request.getContextPath(); 
+Member signedInMember=(Member)(session.getAttribute("signedInMember"));
+/* 이 트리맵의 키는 상품키, 밸류는 갯수를 의미한다. */
+TreeMap<Integer, Integer> cartValues = (TreeMap<Integer, Integer>)session.getAttribute("cart");
+int cartQty = 0;
+if(cartValues==null) {
+	cartValues = new TreeMap<Integer,Integer>();
+}
+else{
+	for(int productId : cartValues.keySet()){
+		cartQty+=cartValues.get(productId);
+	}
+}
+%>
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script
 			src="https://kit.fontawesome.com/8f9d453cdc.js"
@@ -39,7 +52,7 @@
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="<%=contextPath%>/productlist.do?category=1&searchKeyword=">DISNEY</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -51,7 +64,7 @@
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="<%=contextPath%>/productlist.do?category=2&searchKeyword=">STARWARS</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -63,7 +76,7 @@
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="<%=contextPath%>/productlist.do?category=3&searchKeyword=">왕좌의 게임</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -75,7 +88,7 @@
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="<%=contextPath%>/productlist.do?category=4&searchKeyword=">포켓몬</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -87,7 +100,7 @@
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="<%=contextPath%>/productlist.do?category=5&searchKeyword=">MARVEL</a>
 								</div>
 							</li>
 							<li class="header-product-list">
@@ -99,7 +112,7 @@
 											alt=""
 										/>
 									</div>
-									<a href="">Heroes</a>
+									<a href="<%=contextPath%>/productlist.do">전체 상품</a>
 								</div>
 							</li>
 						</ul>
@@ -122,8 +135,23 @@
 							</a>
 						</li>
 						<li class="user-li">
+							<% if(signedInMember==null){ %>
 							<a href="<%=contextPath%>/login.do">
+							<%} else { %>
+							<a href="<%=contextPath%>/member/myPage">
+							<%} %>
+							<% if(signedInMember==null){ %>
+							<a href="<%=contextPath%>/login.do">
+							<%} else { %>
+							<a href="<%=contextPath%>/member/myPage">
+							<%} %>
+					<%if(signedInMember!=null&&signedInMember.getUserProfilePicPath()!=null){ %>
+					<img alt="" class="user-pic-wide" src="<%=contextPath+"/upload/member/"+signedInMember.getUserProfilePicPath()%>">
+					<%}else if(signedInMember!=null&&signedInMember.getUserProfilePicUrl()!=null){ %>
+					<img alt="" class="user-pic-wide" src="<%=signedInMember.getUserProfilePicUrl()%>">
+					<%} else{ %>
 								<i class="fas fa-user-astronaut user"></i>
+								<%} %></a>
 							</a>
 						</li>
 						<li>
@@ -131,10 +159,10 @@
 								<i class="fas fa-search small-search"></i>
 							</a>
 						</li>
-						<li>
+						<li id="cart" class="animate__animated">
 							<a href="<%=contextPath%>/cart.do">
 								<i class="fas fa-shopping-cart"></i>
-								<div id="cart-amount">0</div>
+								<div id="cart-amount"><%=cartQty%></div>
 							</a>
 						</li>
 						<li>
@@ -148,12 +176,32 @@
 			<div class="gray-scale"></div>
 			<div class="search-bar-input">
 				<i class="fas fa-search search-input-icon"></i>
-				<input type="text" id="search-input" />
+				<form action="<%=contextPath%>/productlist.do" method="get" name="formname">
+				<input type="text" id="search-input" name="searchKeyword" onkeypress="JavaScript:press(this.form)" />
+				</form>
 				<a href="#"><i class="fas fa-times search-x"></i></a>
 			</div>
+			<script>
+			function press(f){
+				if(f.keyCode==13){
+					formname.submit();
+				}
+			}
+			</script>
 			<div class="side-bar">
 				<div class="side-bar-top-cont side-bar-margin">
-					<a href="#"><i class="fa fa-user-circle user2"></i></a>
+					<% if(signedInMember==null){ %>
+							<a href="<%=contextPath%>/login.do">
+							<%} else { %>
+							<a href="<%=contextPath%>/member/myPage">
+							<%} %>
+					<%if(signedInMember!=null&&signedInMember.getUserProfilePicPath()!=null){ %>
+					<img alt="" class="user-pic-narrow" src="<%=contextPath+"/upload/member/"+signedInMember.getUserProfilePicPath()%>">
+					<%}else if(signedInMember!=null&&signedInMember.getUserProfilePicUrl()!=null){ %>
+					<img alt="" class="user-pic-narrow" src="<%=signedInMember.getUserProfilePicUrl()%>">
+					<%} else{ %>
+					<i class="fa fa-user-circle user2"></i>
+					<%} %></a>
 					<a href="#"><i class="fas fa-times side-x"></i></a>
 				</div>
 						<style type="text/css">
@@ -162,61 +210,66 @@
 		a-color:hover { color: black; text-decoration: underline;}
 		</style>
 		<!-- a태그  눌렀을때 마우스 올렸을때  평상시 색상 블랙 으로 변경  -->
+		
+		
+		
+		
+		
 				<div class="side-bar-product side-bar-margin" >
 				<a  class="a-color" href="<%=contextPath%>/productlist.do" >PRODUCTS</a>
 				</div>
 				<div class="side-bar-product-cont side-bar-margin">
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do?category=1&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>DISENY</span>
             </a>
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do?category=2&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>STARWARS</span>
             </a>
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do?category=3&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>왕좌의 게임</span>
             </a>
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do?category=4&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>포켓몬</span>
             </a>
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do?category=5&searchKeyword=">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>마블</span>
             </a>
             
           </div>
           <div class="side-bar-product-category">
-            <a href="#">
+            <a href="<%=contextPath%>/productlist.do">
               <div class="side-bar-img-cont">
                 <img src="<%=contextPath%>/image/product/Nav-BatmanDC2-e4d01c44fb9235de2b33f34c1c669141.png" alt="" class="side-bar-img">
               </div>
-              <span>Heroes</span>
+              <span>전체</span>
             </a>
             
           </div>
@@ -242,7 +295,4 @@
 			</div>
 		</header>
 	<script src="<%=contextPath%>/js/common/headerScript.js"></script>
-<script>
-
-</script>
 

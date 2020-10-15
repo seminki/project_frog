@@ -63,12 +63,12 @@ public class TagDao {
 		return tagsList;
 	}
 //태그삭제
-	public int deleteTag(Connection conn, String tagName) {
+	public int deleteTag(Connection conn, int tagNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("deleteTag"));
-			pstmt.setString(1, tagName);
+			pstmt.setInt(1, tagNo);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -112,6 +112,29 @@ public class TagDao {
 			close(pstmt);
 		}
 		return result;
+	}
+//상품의 태그 가져오기 
+	public TreeSet<Tags> itemTags(Connection conn, String productId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		TreeSet<Tags> tagsList= new TreeSet<Tags>();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("itemTags"));
+			pstmt.setString(1, productId);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				Tags t = new Tags();
+				t.setTagNo(rs.getInt("tag_no"));
+				t.setTagName(rs.getString("tag_name"));
+				tagsList.add(t);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return tagsList;
 	}
 
 }

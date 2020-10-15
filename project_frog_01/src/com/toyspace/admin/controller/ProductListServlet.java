@@ -2,6 +2,7 @@ package com.toyspace.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +34,7 @@ public class ProductListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ArrayList<Product> productsList= new ProductService().loadAllproducts();
+		Collections.sort(productsList);
 		request.setAttribute("productsList", productsList);
 		request.getRequestDispatcher("/views/admin/productList.jsp").forward(request, response);
 	}

@@ -1,8 +1,14 @@
 package com.toyspace.member.model.service;
 
-import java.sql.Connection;
+import static com.toyspace.common.JDBCTemplate.close;
+import static com.toyspace.common.JDBCTemplate.commit;
+import static com.toyspace.common.JDBCTemplate.getConnection;
+import static com.toyspace.common.JDBCTemplate.rollback;
 
-import static com.toyspace.common.JDBCTemplate.*;
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import com.toyspace.admin.model.vo.Admin;
 import com.toyspace.member.model.dao.MemberDao;
 import com.toyspace.member.model.vo.Member;
 import com.toyspace.member.model.vo.SNSLogin;
@@ -86,11 +92,54 @@ public class MemberService {
 		sns.setMemberKey(m.getMemberKey());
 		
 		boolean result = dao.insertSNSInfo(conn, sns);
-		if(!result) rollback(conn);
-		else commit(conn);
+		insertLoginLog(conn, m, sns.getLoginSourceNo());
 		
+		
+		if(!result) rollback(conn);
+		else commit(conn); 
+			
 		close(conn);
 		
 		return result;
 	}
+	
+	public int insertMember(Member m) {
+	      Connection conn = getConnection();
+	      int memberKey = dao.memberKeySequenceNextValue(conn);
+	      m.setMemberKey(memberKey);
+	      int result= dao.insertMember(conn, m);
+	      if(result>0) commit(conn);
+	      else rollback(conn);
+	      close(conn);
+	      return result;
+	   }
+	public int memberInfoChange(Member m) {
+		Connection conn = getConnection();
+		int result= dao.memberInfoChange(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public Member loadMembers(String userId, String userPw) {
+		Connection conn =  getConnection();
+		Member member= dao.loadMembers(conn, userId, userPw);
+		close(conn);
+		return member;
+	}
+	
+//관리자페이지 멤버리스트 
+	public ArrayList<Member> loadAllMemberList() {
+		Connection conn=getConnection();
+		ArrayList<Member> memberList=dao.loadAllMemberList(conn);
+		close(conn);
+		return memberList;
+	}
+	public ArrayList<Member> searchMemberList(String type, String key) {
+		Connection conn=getConnection();
+		ArrayList<Member> memberList=dao.searchMemberList(conn, type, key);
+		close(conn);
+		return memberList;
+	}
+	
 }

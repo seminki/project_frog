@@ -5,7 +5,9 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 	Product p=(Product)request.getAttribute("product");
 
 	TreeSet<Tags> tagsList= (TreeSet<Tags>)request.getAttribute("tagsList");
-	TreeSet<Category> categoryList= (TreeSet<Category>)request.getAttribute("categoryList");
+	TreeSet<Tags> itemTags= (TreeSet<Tags>)request.getAttribute("itemTags");
+	
+	
 %>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <style>
@@ -69,13 +71,13 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
     <section class="enroll-container">
       <h2>상품수정</h2>
       <div class="search-container">☆☆☆☆☆</div>
-      <form action="" enctype="multipart/form-data" method="post">
+      <form action="<%=request.getContextPath() %>/admin/editProductEnd" method="post">
         <br />
         <table>
           <tr>
             <th>상품ID</th>
             <td>
-              <input type="text" placeholder="" name="item_id" value=<%=p.getProductId() %> readonly /><br />
+              <input type="text" placeholder="" name="productId" value="<%=p.getProductId()%>" readonly /><br />
             </td>
           </tr>
           <tr>
@@ -93,12 +95,12 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품 카테고리</th>
             <td>
-              <select name="category" id="category">
-              	<option>디즈니</option>
-              	<option>스타워즈</option>
-              	<option>왕좌의게임</option>
-              	<option>포켓몬스터</option>
-              	<option>마블</option>
+              <select name="category" class="category">
+              	<option value="1">디즈니</option>
+              	<option value="2">스타워즈</option>
+              	<option value="3">왕좌의게임</option>
+              	<option value="4">포켓몬스터</option>
+              	<option value="5">마블</option>
               	
               </select>
             </td>
@@ -120,12 +122,13 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
             <th>상품 개수</th>
             <td><input type="number" name="item_qt" value=<%=p.getProductStock() %> required /><br /></td>
           </tr>
-          <tr>
+<%--           <tr>
             <th></th>
             <td>
               <div class="img-preview-container">
-                <img alt="" src="" class="img-preview" />
-                <img alt="" src="" class="img-preview" />
+              <%for(int i=0;i<p.getProductImageFilePaths().size();i++){ %>
+                <img alt="" src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(i) %>" class="img-preview" /> 
+                <%} %>
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
                 <img alt="" src="" class="img-preview" />
@@ -138,7 +141,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
               <input
                 type="file"
                 name="upload-file1"
-                required
+               
                 class="img-file-input"
               /><br />
             </td>
@@ -173,6 +176,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
               </div>
             </td>
           </tr>
+          --%>
           <tr>
             <th>상품 태그 목록</th>
             <td>
@@ -196,12 +200,20 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           <tr>
             <th>상품 태그 번호</th>
             <td>
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
-              <input type="text" name="item_tag" required size="5" />
+              <% 
+              	int i =0;
+              if(itemTags!=null&&itemTags.size()!=0){ 
+            	  for(Tags t : itemTags){ %>
+              <input type="text" name="item_tag" required size="5" value="<%=t.getTagNo() %>" />
+            <%
+            	i++;
+            	  } } 
+           	for(;i<4;i++){ %>
+           		<input type="text" name="item_tag" required size="5"/>
+           	<%}
+            %>
             </td>
-          </tr>
+          </tr> 
           <tr>
             <th>상품 설명</th>
             <td>
@@ -244,8 +256,64 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
           </tr>
         </table>
         <input type="submit" value="수정" />
-        <input type="reset" value="취소" onclick="fn_goBack();" />
+        <input type="reset" value="취소" onclick="self.close();" />
       </form>
     </section>
+ <script>
+
+$(".category option:selected").val();
+ 
+ 
+ function inputAdd(e) {
+		const fileInputCont = $(e.target).parent().parent();
+		let fileInputCode = $(".input-hidden-for-add>div").clone();
+		if (fileInputCont.children().length < 4) {
+			// 파일 순서를 찾기 위한 이벤트 설정 - 프리뷰용
+			$(fileInputCode.children()[0])
+				.unbind()
+				.change((e) => {
+					fileIndexInsert(e, fileInputCont.children().length);
+				});
+			$($(fileInputCode).children()[0]).removeAttr("name")
+			.attr("name","upload-sub-file"+(fileInputCont.children().length+2));
+			console.log($($(fileInputCode).children()[0]));
+			fileInputCont.append(fileInputCode);
+		} else {
+			alert("등록할 수 있는 파일 수는 5개까지 입니다!");
+		}
+	}
+	function removeInput(e) {
+		const removedInput = $(e.target).parent();
+		/* 인풋의 내용을 강제 변경시켜 프리뷰의 체인지 이벤트 강제하기 */
+		$(removedInput).children()[0].value="";
+		$($(removedInput).children()[0]).trigger("change");
+		removedInput.remove();
+	}
+	$(".img-file-input").each((i, v) => {
+		$(v).change((e) => {
+			fileIndexInsert(e, i);
+		});
+	});
+	function fileIndexInsert(e, i) {
+		let file = e.target.files[0];
+		if (file == null) {
+			$($(".img-preview")[i]).attr(
+				"src",
+				"<%=request.getContextPath() %>/image/common/blacklogo.png"
+			);
+			return;
+		}
+		if (!file.type.match("image.*")) {
+			alert("이미지만 등록 가능합니다!");
+			e.target.value = "";
+			return;
+		}
+		let reader = new FileReader();
+		reader.onload = function (e) {
+			$($(".img-preview")[i]).attr("src", e.target.result);
+		};
+		reader.readAsDataURL(file);
+	}
+ </script>
 </body>
 </html>

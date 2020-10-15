@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*,com.toyspace.product.comment.model.vo.*,java.util.List"%>
+
+<%
+Product p=(Product)request.getAttribute("product");
+
+/* List<Comment> list=(List<Comment>)request.getAttribute("comment"); */
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Document</title>
+<%@ include file="/views/common/favicon.jsp" %>
+<title>TOY SPACE - Where All Toys' Dream Comes True</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/product/productDetailStyle.css" />
     
     </head>
@@ -16,14 +25,15 @@
     <div class="slideshow-container">
       <div class="mySlides fade">
         <div class="numbertext">1 / 2</div>
-        <img src="<%=request.getContextPath()%>/image/product/Disney_Cinderella.png" style="width: 100%" />
+        <img src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(0) %>" style="width: 100%" />
       </div>
 
       <div class="mySlides fade">
         <div class="numbertext">2 / 2</div>
-        <img src="<%=request.getContextPath()%>/image/product/Disney_Cinderella2.png" style="width: 100%" />
+        <% if(p.getProductImageFilePaths().get(1)!=null){ %>
+        <img src="<%=request.getContextPath()%>/upload/product/<%=p.getProductImageFilePaths().get(1) %>" style="width: 100%" />
+        <%} %>
       </div>
-
       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
       <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
@@ -35,18 +45,15 @@
 
         <div class="all-container">
         <div class="detail-header">
-          <div class="detail-header-brand">POP!</div>
-          <h2 class="detail-header-title">Disney-Cinderella</h2>
+          <div class="detail-header-brand"><%=p.getCategoryName() %></div>
+          <h2 class="detail-header-title"><%=p.getProductName() %></h2>
           <div class="detail-header-price">
-            <p class="price"><span>13,900</span> 원</p>
+            <p class="price"><span><%=p.getProductPrice() %></span> 원</p>
           </div>
           <div class="detail-header-info">
-            <h3 class="item-content-title">유리구두를 신은 신데렐라</h3>
+            <h3 class="item-content-title"></h3>
             <div class="item-content-description">
-              아쉬워 벌써 12시 <br />
-              어떡해 벌써 12시네 <br />
-              보내주기 싫은걸 <br />
-              알고 있어 how you feel it <br />
+         	<%=p.getProductDescription() %>
             </div>
           </div>
           <div class="detail-header-btn">
@@ -65,7 +72,8 @@
           type="number"
           step="1"
           max=""
-          value="1"
+          min="0"
+          value="0"
           name="quantity"
           class="quantity-field"
         />
@@ -76,7 +84,8 @@
           data-field="quantity"
           onclick="incrementValue(event);"
         />
-        <button class="add-cart">장바구니 담기</button>
+        <input type="button" class="add-cart" value="장바구니 담기" onclick="addToCart('<%=p.getProductId()%>','<%=contextPath%>');">
+        
         </form>
         <!-- 찜 -->
         </div>
@@ -87,18 +96,17 @@
         <div class="item-detail">
           <h2>상품정보</h3>
           <ul>
-            <li class="item-detais-info">상품번호:A1001</li>
-            <li class="item-detais-info">상품명:신데렐라</li>
-            <li class="item-detais-info">상품 카테고리:디즈니</li>
-            <li class="item-detais-info">사용연령: 3세 이상</li>
-            <li class="item-detais-info">제조자:(주)토이스페이스</li>
-            <li class="item-detais-info">제조국:한국</li>
+            <li class="item-detais-info">상품번호:<%=p.getProductId() %></li>
+            <li class="item-detais-info">상품명:<%=p.getProductName() %></li>
+            <li class="item-detais-info">상품 카테고리:<%=p.getCategoryName() %></li>
+            <li class="item-detais-info">사용연령:<%=p.getRecommendedAge() %>이상</li>
+            <li class="item-detais-info">제조자:<%=p.getManufacturer() %></li>
+            <li class="item-detais-info">제조국:<%=p.getManufacturedCountry() %></li>
             <li class="item-detais-info">사이즈: 약 10.8cm</li>
             <li class="item-detais-info">취급 시 주의사항
                 <ol type="1">
-                    <li>제품 용도 이외에는 사용하지 마십시오.</li>
-                    <li>불에 직접 닿거나 가까이하지 마십시오.</li>
-                    <li>입에 넣고 물거나 빨지 않도록 주의하십시오.</li>
+                    <li><%=p.getCaution() %></li>
+                    
                 </ol>
             </li>
         </ul>
@@ -108,14 +116,36 @@
         <div class="review-container">
             <div class="review-title"><h2>리뷰</h2></div>
             <div class="review-content">
-             <div class="comment-box">
-                <form action="">
-                <textarea name="" id="" cols="120" rows="4" style="resize:none"></textarea>
-             </div>   
-            <button class="review-btn">리뷰 남기기</button>
-            </form>
+             	<div class="comment-box">
+                	<form action="<%=request.getContextPath() %>/comment/commentWrite" method="get">
+                		
+						<input type="hidden" name="memberKey" value="<%=signedInMember!=null?signedInMember.getMemberKey():"" %>">
+                		<input type="hidden" name="productId" value="<%=p.getProductId() %>"> 
+                	<textarea name="commentContent" id="" cols="120" rows="4" style="resize:none"></textarea>
+            	 </div>   
+            <button type=submit class="review-btn" onclick="fn_access();">리뷰 남기기</button>
+           		 </form>
             </div>
         </div>
+        <hr>
+             <table class="tbl-comment">
+ <%--   	<%for(Comment c: list) {	%>
+   	
+		   			<tr class="level1">
+		   				<td>
+		   					<sub class="comment-writer"><%=c.getProductCommentNo() %></sub>
+		   					<sub class="comment-date"><%=c.getCommentDate() %></sub>
+		   					<br>
+							<%=c.getCommentContent() %>
+		   				</td>
+		   				<td>
+		   					<button class="btn-reply" value="">답글</button>
+		   				</td>
+		   			</tr>
+	<%} %> --%>
+   		</table> 
+	
+	
         <hr>
         <div class="recommend-container">
             <div class="rec-container">
@@ -187,7 +217,19 @@
               </div>
         </div>
     </div>
+    
+
+</section>
         <script>
+        //리뷰
+        function fn_access(){
+        	if(<%=signedInMember==null%>){
+        		alert("로그인 후 이용가능");
+        		return false;
+        	} else return true;
+        }
+       
+        
             // 이미지 슬라이드
           let slideIndex = 1;
           showSlides(slideIndex);
@@ -255,9 +297,11 @@
           function zzim(){
               $('.fa-heart').toggleClass('color');
           }
-        </script>
+    
 
-</section>
+    
+    </script>
+
 <%@ include file="/views/common/footer.jsp"%>
 </body>
 </html>

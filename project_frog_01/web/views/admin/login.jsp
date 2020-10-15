@@ -4,12 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" type="text/css" 
 href="<%=request.getContextPath() %>/css/admin-login/style.css">
+<title>TOY SPACE 관리자 페이지</title>
+<%@ include file="/views/common/favicon.jsp"%>
 </head>
 <body>
+<script> 
+	<%if(session.getAttribute("loggedInAdmin")!=null){%>
+		
+		location.href = '<%=request.getContextPath() %>/msg?loc=<%=request.getContextPath()%>/admin/mainPage&msg=이미 관리자로 로그인 되어 있습니다.'
+	<% } %>
+</script>
  <section>
         <div class=ad-login>
             <img src="<%=request.getContextPath() %>/image/admin/white-logo.png">

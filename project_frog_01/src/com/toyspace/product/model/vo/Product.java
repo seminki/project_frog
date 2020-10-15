@@ -2,7 +2,7 @@ package com.toyspace.product.model.vo;
 
 import java.util.List;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	
 	private int productId;
 	private int categoryNo;
@@ -23,6 +23,13 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	@Override
+	public int compareTo(Product o) {
+		// TODO Auto-generated method stub
+		return this.productId-o.productId;
+	}
+
 
 	public Product(int productId, int categoryNo, String categoryName, String productName, double productPrice,
 			int productStock, String productDescription, String manufacturer, String manufacturedCountry,
@@ -31,6 +38,13 @@ public class Product {
 		this.productId = productId;
 		this.categoryNo = categoryNo;
 		this.categoryName = categoryName;
+		switch(categoryNo) {
+		case 1: this.categoryName = "디즈니"; break; 
+		case 2: this.categoryName = "스타워즈"; break; 
+		case 3: this.categoryName = "왕좌의 게임"; break; 
+		case 4: this.categoryName = "포켓몬스터"; break; 
+		case 5: this.categoryName = "마블"; break; 
+		}
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productStock = productStock;
@@ -41,6 +55,7 @@ public class Product {
 		this.caution = caution;
 		this.productImageFilePaths = productImageFilePaths;
 		this.likes = likes;
+		
 	}
 
 
@@ -61,6 +76,13 @@ public class Product {
 
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
+		switch(categoryNo) {
+		case 1: this.categoryName = "디즈니"; break; 
+		case 2: this.categoryName = "스타워즈"; break; 
+		case 3: this.categoryName = "왕좌의 게임"; break; 
+		case 4: this.categoryName = "포켓몬스터"; break; 
+		case 5: this.categoryName = "마블"; break; 
+		}
 	}
 
 

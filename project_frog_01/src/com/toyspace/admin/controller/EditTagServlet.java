@@ -34,9 +34,6 @@ public class EditTagServlet extends HttpServlet {
 		t.setTagName(request.getParameter("tagName"));
 		t.setTagNo(Integer.parseInt(request.getParameter("tagNo")));
 		
-		System.out.println(request.getParameter("tagName"));
-		System.out.println(request.getParameter("tagNo"));
-		
 		int result=new TagService().editTag(t);
 		
 		String msg;

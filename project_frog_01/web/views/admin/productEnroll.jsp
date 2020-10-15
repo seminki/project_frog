@@ -164,7 +164,7 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 				</td>
 				<td class="input-hidden-for-add">
 					<div>
-						<input type="file" name="upload-file" class="img-file-input" />
+						<input type="file" name="upload-file"/>
 						<input
 							type="button"
 							class="file-add-button"
@@ -260,32 +260,41 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 		if (fileInputCont.children().length < 4) {
 			// 파일 순서를 찾기 위한 이벤트 설정 - 프리뷰용
 			$(fileInputCode.children()[0])
-				.unbind()
-				.change((e) => {
-					fileIndexInsert(e, fileInputCont.children().length);
-				});
+				.unbind();
 			$($(fileInputCode).children()[0]).removeAttr("name")
-			.attr("name","upload-sub-file"+(fileInputCont.children().length+2));
-			console.log($($(fileInputCode).children()[0]));
+			.attr("name","upload-file"+(fileInputCont.children().length+2))
+			.addClass("img-file-input");
+			
 			fileInputCont.append(fileInputCode);
+			
 		} else {
 			alert("등록할 수 있는 파일 수는 5개까지 입니다!");
 		}
+		$(".img-file-input").each(function (i, v) {
+			$(v).change(function (e) {
+				
+				fileIndexInsert(e, i);
+			});
+		}); 
 	}
-
+	$(".img-file-input").each(function (i, v) {
+		$(v).change(function (e) {
+			
+			fileIndexInsert(e, i);
+		});
+	}); 
+	
 	function removeInput(e) {
 		const removedInput = $(e.target).parent();
 		/* 인풋의 내용을 강제 변경시켜 프리뷰의 체인지 이벤트 강제하기 */
 		$(removedInput).children()[0].value="";
 		$($(removedInput).children()[0]).trigger("change");
 		removedInput.remove();
-	}
-	$(".img-file-input").each((i, v) => {
-		$(v).change((e) => {
-			fileIndexInsert(e, i);
-		});
-	});
+	} 
+
+	
 	function fileIndexInsert(e, i) {
+	
 		let file = e.target.files[0];
 		if (file == null) {
 			$($(".img-preview")[i]).attr(
@@ -300,6 +309,8 @@ pageEncoding="UTF-8" import="com.toyspace.product.model.vo.*, java.util.TreeSet"
 			return;
 		}
 		let reader = new FileReader();
+		
+		
 		reader.onload = function (e) {
 			$($(".img-preview")[i]).attr("src", e.target.result);
 		};
