@@ -118,9 +118,9 @@ public class ProductService {
 	}
 	
 	
-	public ArrayList<Product> loadAllProductsWithMainPic() {
+	public ArrayList<Product> loadAllProductsWithMainPic(int cPage, int numPerPage) {
 		Connection conn=getConnection();
-		ArrayList<Product> productsList=dao.loadAllProductsWithMainPic(conn);
+		ArrayList<Product> productsList=dao.loadAllProductsWithMainPic(conn,cPage,numPerPage);
 		close(conn);
 		return productsList;
 	}
@@ -157,4 +157,11 @@ public class ProductService {
 		return productsList;
 
 	}
+	public int selectProductCount() {
+		Connection conn=getConnection();
+		int count=dao.selectProductCount(conn);
+		close(conn);
+		return count;
+	}
+	
 }
