@@ -8,14 +8,36 @@
     
     %>
      
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="kr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/cart/payment.css">
-    <title>TOY SPACE - Where All Toys' Dream Comes True</title> 
+    <title>TOY SPACE - Where All Toys' Dream Comes True</title>
+    <script language="javascript">
+// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+
+function goPopup(){
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("<%=request.getContextPath()%>/views/address/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
+    
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+/** API 서비스 제공항목 확대 (2017.02) **/
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+	document.form.roadAddrPart1.value = roadAddrPart1;
+	document.form.roadAddrPart2.value = roadAddrPart2;
+	document.form.addrDetail.value = addrDetail;
+	document.form.zipNo.value = zipNo;
+}
+</script> 
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
@@ -56,22 +78,27 @@
                         <label><input type="checkbox">&nbspKeep me up to date on news and exclusive offers</label>
                     </div>
                 <div class="Shipping">
+                <form name="form" id="form" method="post">
                     <p>배송지 주소</p>
                     <div class="name">
                         <input type="text" placeholder="이름">
                         <input type="text" placeholder="성">
                     </div>
-                    <div class="mid">
-                        <input type="text" placeholder="회사(선택 사항)"><br>
-                        <input type="text" placeholder="주소"><br>
-                        <input type="text" placeholder="아파트, 스위트 등(선택 사항)"><br>
-                        <input type="text" placeholder="시티">
-                    </div>
                     <div class="btm">
-                        <input type="text" placeholder="국가/지역">
-                        <input type="text" placeholder="상태">
-                        <input type="text" placeholder="우편 번호">
+                        <!-- <input type="text" placeholder="국가/지역"> -->
+                        <!-- <input type="text" placeholder="상태"> -->
+                        <input type="text" placeholder="회사(선택 사항)">
+                        <input type="hidden" id="confmKey" name="confmKey" value=""  >
+                        <input type="text" id="zipNo" name="zipNo" readonly placeholder="우편 번호">
+                    	<input type="button"  value="주소검색" onclick="goPopup();">
                     </div>
+                    <div class="mid">
+                        <input type="text" id="roadAddrPart1"  placeholder="주소">
+                        <input type="text" id="addrDetail"  placeholder="상세주소">
+						<input type="text" id="roadAddrPart2"placeholder="상세주소2">
+                        <!-- <input type="text" placeholder="시티"> -->
+                    </div>
+                 </form>
                     <button id="checkout-btn" onclick="requestPay();">계속 배송</button>
                 </div>
             </div>
