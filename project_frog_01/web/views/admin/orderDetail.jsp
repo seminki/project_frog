@@ -9,11 +9,23 @@ TreeMap<Integer, Product> productInfo = (TreeMap<Integer, Product>)request.getAt
 
  <%@ include file="/views/common/admin_header.jsp"%>
 
-<style>
-	.memberKeyRow{
-		cursor:pointer;
-	}
-</style>
+    <style>
+        .memberKeyRow{
+            cursor:pointer;
+        }
+        /* 추가한 부분 */
+        table{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table th{
+            text-align:left;
+        }
+        table td{
+            border: 1px black solid;
+        }
+    </style>
 <section>
 
 <table>
