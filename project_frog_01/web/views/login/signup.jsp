@@ -145,19 +145,6 @@ section{
            </div> 
         </form>
     </section>
-    <script type="text/javascript">
-    		$(function(){
-    			$("#userId").blur(function(){
-    				$.ajax(){
-    					url:"checkIdDuplicate",
-    					type:"post",
-    					data:{"id":$("#userId").val()},
-    					success : function(result){}
-    					
-    				};
-    			});
-    		});
-    </script>
     <script>
     	//비밀번호 유효성검사
             $("#userPassword").on("input",function(){

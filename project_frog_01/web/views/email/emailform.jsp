@@ -8,7 +8,7 @@
 public class MyAuthentication extends Authenticator { //아이디 패스워드 인증받기 함수
   PasswordAuthentication pa;
   public MyAuthentication(){
-    pa=new PasswordAuthentication("GoogleId@gmail.com","GooglePassword");//실행시킬려면 본인 아이디 비밀번호 적어야함
+    pa=new PasswordAuthentication("01088049128a@gmail.com","rest1541!@");//실행시킬려면 본인 아이디 비밀번호 적어야함
   }
   @Override
   protected PasswordAuthentication getPasswordAuthentication() {
@@ -29,8 +29,8 @@ public class MyAuthentication extends Authenticator { //아이디 패스워드 �
 
 
  //보내는 사람의 정보
- String fromName = "보내는사람";
- String fromEmail = "구글계정@gmail.com";
+ String fromName = "관리자";
+ String fromEmail = "01088049128a@gmail.com";
  
  try {
   Properties props = new Properties();
@@ -56,8 +56,8 @@ props.put("mail.smtp.socketFactory.fallback", "false");
 
   Message msg = new MimeMessage(sess);
   msg.setFrom(addr);         
-  msg.setSubject(MimeUtility.encodeText("이메일제목", "utf-8","B"));//이메일 제목
-  msg.setContent("이메일내용", "text/html;charset=utf-8");//이메일 내용
+  msg.setSubject(MimeUtility.encodeText("비밀번호 변경", "utf-8","B"));//이메일 제목
+  msg.setContent("<a href ='http://mightymosses.hopto.org:9090/project_frog_01/emailform.do'>변경하러가기</a>", "text/html;charset=utf-8");//이메일 내용
   //a태그로 홈으로 갈려
   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
  
