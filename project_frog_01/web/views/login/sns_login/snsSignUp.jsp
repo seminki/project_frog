@@ -12,9 +12,10 @@
 </head>
 <style>
 section{
-    
+    margin-top: 20em;
+    margin-bottom : 20em;
 }
-.container{
+section .container{
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -22,19 +23,19 @@ section{
     width: 100vw;
     height: 100vh;
 }
-.sign-up-text{
+section .sign-up-text{
     text-align: center;
     font-size: 3em;
 }
-#TOYSPACE{
+section #TOYSPACE{
     color:blue;
 }
-.button-location{
+section .button-location{
     display: flex;
     justify-content: space-around;
     width: 30%;
 }
-button{
+section button{
     margin-top: 5%;
     width:13em;
     height: 3em;
