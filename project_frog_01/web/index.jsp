@@ -71,7 +71,7 @@
         </header>
         <div class="main3-pic-text">
           <div class="item1">
-            <a class="item-container" href="">
+            <a class="item- container" href="">
               <img src="pics/harry.JPG" alt="" />
               <div class="item-info">
                 <div class="item-title">

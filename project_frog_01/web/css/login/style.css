@@ -29,19 +29,20 @@ section .in-area{width: 450px; position: relative;}
 section .in-area input{
     text-align: center;
     width: 100%;
-    padding: 20px 10px 10px;
+    padding: 15px 10px 10px;
     margin: 15px;
     border-radius: 10px;
     background-color: transparent;
     font-size: 15px;
     outline: none;
 }
-section{
+section .btn-area{
     margin-top: 20px;
     text-align: center;
 }
 section .btn-area button{
-    width: 60%;
+	margin:10px;
+    width: 30%;
     height: 40px;
     border-radius: 50px;
     background-color: white;
@@ -68,95 +69,6 @@ section .last-area{
     color: blue;
     text-decoration: none;
 }
-    /* 회원가입창 */
-.logo-area1,.logo-area2{
-    text-align: center;
-    margin: 10px;
-}
-.si-area h1{text-align: center; margin: 15px;}
-.si-area input{
-    text-align: center;
-    width: 100%;
-    padding: 10px 10px 10px;
-    margin: 15px;
-    font-size: 15px;
-    border-radius: 5px;
-}
-.btn-area{ 
-    margin: 20px;
-    text-align: center;
-
-}
-.btn-area{
-    width: 20%;
-    height: 40px;
-    border-radius: 50px;
-    background-color: white;
-    outline: 0;
-} 
-.btn-area1{
-	 margin: 20px;
-    text-align: center;
-}
-.btn-area1 button{
-	 width: 20%;
-    height: 40px;
-    border-radius: 50px;
-    background-color: white;
-    border-style: dotted;
-    outline: 0;
-}
-
-.news{
-    margin: 20px;
-    -webkit-nbsp-mode: space;
-}
-
-.last-area1{  
-    margin: 30px;
-    text-align: center;
-    text-decoration: none;
-    
-    
-}
-.last-area1 a{
-    text-decoration: none;
-    color: blue;
-}
-
-/* 비밀번호찾기 */
-section h2{
-   text-align: center;
-   padding: 10px;
-}
-.input-area input{
-    text-align: left;
-    width: 100%;
-    padding: 5px 6px 7px;
-    margin-top: 70px;
-    font-size: 15px;
-    border-radius: 5px;
-}
-.pw-area>input{
-    text-align: left;
-    width: 100%;
-    padding: 5px 6px 7px;
-    margin-top: 50px;
-    font-size: 15px;
-    border-radius: 5px;
-}
-.btn-area2{
-	margin: 30px;
-}
-.btn-area2 button{
-    
-     width: 40%;
-    height: 40px;
-    border-radius: 50px;
-    background-color: white;
-    border-style: dotted;
-    outline: 0;
-}
 .login-form{
 	display: flex;
 	flex-direction: column;
@@ -176,11 +88,58 @@ section h2{
 	justify-content: space-around;
 	
 }
-/* 비밀번호변경 */
+
+/* search-pw */
+section h2{
+   text-align: center;
+   padding: 10px;
+}
+.input-area input{
+    text-align: left;
+    width: 100%;
+    padding: 5px 6px 7px;
+    margin-top: 70px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.btn-area2{
+	margin: 20px;
+    text-align: center;
+}
+.btn-area2 button{
+    
+     width: 40%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: white;
+    border-style: dotted;
+    outline: 0;
+}
+.last-area1{
+	text-align: center;
+	margin:20px;
+}
+.last-area1 a{
+	color:blue;
+	text-decoration: none;
+}
+
+/* email */
+
+.pw-area>input{
+    text-align: left;
+    width: 100%;
+    padding: 5px 6px 7px;
+    margin-top: 50px;
+    font-size: 15px;
+    border-radius: 5px;
+}
 .btn-area3{
 	margin: 30px;
 }
 .btn-area3 button{
+	margin-left:80px;
 	width: 40%;
     height: 40px;
     border-radius: 50px;

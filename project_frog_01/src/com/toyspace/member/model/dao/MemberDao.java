@@ -1,6 +1,7 @@
 package com.toyspace.member.model.dao;
 
 
+
 import static com.toyspace.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -8,8 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Properties;
 
 import com.toyspace.admin.model.vo.Admin;
@@ -355,6 +358,28 @@ public class MemberDao {
 		
 		return member;
 	}
+
+	public String selectMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String member = null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectMemberId"));
+			pstmt.setNString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				member=rs.getNString(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return member;
+	}
+	
+
+
 		
 	//멤버 리스트
 		public ArrayList<Member> loadAllMemberList(Connection conn) {
@@ -407,5 +432,5 @@ public class MemberDao {
 	
 	
 	
-	
+
 }
