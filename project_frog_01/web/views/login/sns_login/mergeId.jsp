@@ -49,7 +49,7 @@ button{
 </script>
 <section>
     <div class="container">
-        <img src="connection.png" alt="">
+        <img src="<%=request.getContextPath()%>/image/about/connection.png">
         <div class="connection-text">
             <h1>이메일이 존재합니다. <br>
                 연동하시겠습니까?</h1>
