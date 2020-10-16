@@ -35,7 +35,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <img src="<%=request.getContextPath()%>/image/login/pikachu.png" alt="fun" id="fun">
             </div>
                 <h1>LOG IN</h1>
-            <form action="<%=request.getContextPath()%>/memberloginout.do" method="post">
+            <form action="<%=request.getContextPath()%>/memberloginout.do" method="post" class="form-test">
             <div class="in-area">
                 <input type="text" name="id" id="id" autocomplete="off" placeholder="아이디를 입력해주세요."  required>
                 <label for="id"></label>
@@ -47,7 +47,8 @@ href="<%=request.getContextPath() %>/css/login/style.css">
             <div class="caption">
                 <a href="<%=request.getContextPath() %>/searchpw.do">비밀번호를 잊으셨나요?</a>
             </div>
-            <div class="btn-area">
+            <div class="btn-area" id="btn-id">
+            
                 <button onclick=>로그인</button> 
              </div>
            </form>
@@ -55,7 +56,7 @@ href="<%=request.getContextPath() %>/css/login/style.css">
                 <p>ToySpace는 처음이신가요?<a href="<%=request.getContextPath() %>/signup.do"> 지금 가입하기</a></p>
             </div>
             <div class="simple-login">
-                <div class="sp-login" style="margin:50px ;">
+                <div class="sp-login" id="sp-login" style="margin:50px ;">
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     <div id="naverIdLogin"></div>
                     <div class="kakao-container">
@@ -64,6 +65,43 @@ href="<%=request.getContextPath() %>/css/login/style.css">
             </div>
            
    </section>
+   <style>
+   	.sp-login{
+   	
+   	display:flex;
+   	justify-content: space-around;
+   	align-items: center;
+   	
+   	}
+ 	#naverIdLogin>a>img{
+ 		height: 36px;
+   		object-fit: contain;
+   		margin-top:6px;
+ 	}
+   	
+   	#kakao-login-btn{
+   		height: 36px;
+   		object-fit: contain;
+   		margin-top:5px;
+   	}
+   	
+   	#btn-id{
+   		
+   		width: 30em;
+   	}
+	
+	#sp-login{
+	position:relative;
+	display: flex;
+	width:100%;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction:column;
+	left:-4em;
+	}
+	
+   </style>
+   
    <%@ include file="/views/common/footer.jsp" %>
    
   	

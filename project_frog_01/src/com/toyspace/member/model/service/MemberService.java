@@ -7,6 +7,7 @@ import static com.toyspace.common.JDBCTemplate.getConnection;
 import static com.toyspace.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.toyspace.admin.model.vo.Admin;
 import com.toyspace.member.model.dao.MemberDao;
@@ -113,6 +114,14 @@ public class MemberService {
 	      close(conn);
 	      return result;
 	   }
+	public int memberInfoChange(Member m) {
+		Connection conn = getConnection();
+		int result= dao.memberInfoChange(conn, m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 	public Member loadMembers(String userId, String userPw) {
 		Connection conn =  getConnection();
 		Member member= dao.loadMembers(conn, userId, userPw);
@@ -120,11 +129,33 @@ public class MemberService {
 		return member;
 	}
 	
+
 	public String selectMemberId(String userid) {
 		Connection conn=getConnection();
 		String member=dao.selectMemberId(conn,userid);
 		close(conn);
 		return member;
+	}
+//관리자페이지 멤버리스트 
+	public ArrayList<Member> loadAllMemberList() {
+		Connection conn=getConnection();
+		ArrayList<Member> memberList=dao.loadAllMemberList(conn);
+		close(conn);
+		return memberList;
+	}
+	public ArrayList<Member> searchMemberList(String type, String key) {
+		Connection conn=getConnection();
+		ArrayList<Member> memberList=dao.searchMemberList(conn, type, key);
+		close(conn);
+		return memberList;
+	}
+	
+	public Member loadMemberDetail(int memberKey) {
+		Connection conn =getConnection();
+		Member m = dao.loadMemberByMemberKey(conn, memberKey);
+		close(conn);
+		return m;
+
 	}
 	
 	

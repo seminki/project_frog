@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="com.toyspace.member.model.dao.*"%>
     <% String clientId = (String)request.getAttribute("client_id"); %>
+    <%
+    Member m = (Member)session.getAttribute("signedInMember");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,26 +110,27 @@ th{
     <div class="but1">
         <div class="btn3"></div>
         <div class="list-container">
-            <h2 class="text_center">개인 정보 수정</h2>
+            <h2 class="text_center">회원 정보</h2>
             <!-- 여기위 클래스로 text center css 줌 @@@@@@@@@@@@@@@@@@-->
+            <form action="/memberInfoChange.do?pw=<%=m.getPassword()%>?nick=<%=m.getUserNickname() %>?memberkey=<%=m.getMemberKey() %>" method="post">
             <table class="info"> 
                 <tr>
                     <th>아이디</th> <!--회원아이디 불러오기 -->
                     <td>
-                        <input type="text" name="userId" id="userId" value="" readonly>
+                        <input type="text" name="userId" id="userId" value="<%=m.getUserId()%>" readonly>
                     </td>
                 </tr>
                 <tr>
                     <th>이름</th> <!--회원이름 불러오기-->
                     <td>
-                        <input type="text" name="userName" id="userName" value="" autocomplete="off" required>
+                        <input type="text" name="userName" id="userName" value="<%=m.getUserName()%>" autocomplete="off" required>
                     </td>
                 </tr>
-                <tr>
+                 <tr>
                     <th>생년월일</th>
                     <td>
-                        <input type="text" style="width: 50px;" name="inyear" class="inBorder" maxlength=4 style="font-size: 10px;">년
-                        <select class="inBorder">
+                        <input type="text" name="year" class="inBorder" maxlength=4 style="font-size: 10px;width: 50px; " >년
+                        <select class="inBorder" name="month">
                             <option value="1">1
                             <option value="2">2
                             <option value="3">3
@@ -139,7 +144,7 @@ th{
                             <option value="11">11
                             <option value="12">12                            
                         </select> 월
-                        <select class="inBorder">
+                        <select class="inBorder"name="day">
                             <option value="1">1
                             <option value="2">2
                             <option value="3">3
@@ -177,10 +182,10 @@ th{
                 <tr>
                     <th>나이</th>
                     <td>
-                        <input type="text" name="age" id="age">
-                    </td>
+                        <input type="text" name="age" id="age" value="">
+					</td>
                 </tr>
-                <tr>
+                 <tr>
                     <th>성별</th>
                     <td>
                         <div class="boy-girl">                   
@@ -194,7 +199,7 @@ th{
                 <tr>
                     <th>이메일</th>
                     <td>
-                        <input type="email" name="email" id="email" value="">
+                        <input type="email" name="email" id="email" value="<%=m.getUserEmail()%>">
                     </td>
                 </tr>
                 <tr>
@@ -204,25 +209,21 @@ th{
                     </td>
                 </tr>
                 <tr>
-                    <th>주소</th>
-                    <td>
-                        <input type="text" name="address" id="address" value="">
-                    </td>
-                </tr>
+               
         </div>
     </div>
         </table>
+        </form>
             <div class="container-btn text_center">
                 <!-- 여기위 클래스로 text center css 줌 @@@@@@@@@@@@@@@@@@-->
                 <div class="area-btn">
-                    <button onclick="" value="">수정</button>
-                    <button onclick="" value="">뒤로</button>
+                    <button onclick="" value="" style="width: 200px; height:30px;" ><strong>수정</strong></button>
+                    <br>
+                  	<button id="logout-btn" style="width: 200px; height:30px;"><strong>로그아웃</strong></button>
                 </div>
                 
              <div class="g-signin2 hide" data-onsuccess="onSignIn"></div>  
             </div>
-            
-            <button id="logout-btn">로그아웃</button>
         </section>
 <%@ include file="/views/common/footer.jsp" %>
 

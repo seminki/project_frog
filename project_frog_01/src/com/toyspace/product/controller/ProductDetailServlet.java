@@ -1,6 +1,7 @@
 package com.toyspace.product.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.toyspace.product.comment.model.service.CommentService;
+import com.toyspace.product.comment.model.vo.Comment;
 import com.toyspace.product.model.service.ProductService;
 import com.toyspace.product.model.vo.Product;
 
@@ -35,10 +38,17 @@ public class ProductDetailServlet extends HttpServlet {
 		
 		Product p=new ProductService().productInfo(productId);
 		
+		//제품에 연결되어 있는 댓글 가져오기
+		List<Comment> commentList=new CommentService().loadProductComment(productId);
 		request.setAttribute("product",p);
+		request.setAttribute("commentList", commentList);
+		
 		request.getRequestDispatcher("/views/product/productDetail.jsp").forward(request, response);
-	}
+	
 
+	
+	
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

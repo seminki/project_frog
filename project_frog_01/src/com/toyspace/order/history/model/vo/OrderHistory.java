@@ -3,7 +3,7 @@ package com.toyspace.order.history.model.vo;
 import java.util.Date;
 import java.util.TreeMap;
 
-public class OrderHistory {
+public class OrderHistory implements Comparable<OrderHistory>{
 
 	private int orderNo;
 	private int importUid;
@@ -21,15 +21,16 @@ public class OrderHistory {
 	private String receiverAddr;
 	private String receiverComment;
 	private TreeMap<Integer, Integer> productList;
+	private int totalAmount;
 
 	public OrderHistory() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public OrderHistory(int orderNo, int importUid, int memberKey, Date orderedDate, String paymentMethod,
-			int orderStatusNo, String statusDetail, String applyNum, String merchantUid, String buyerTel,
+			int orderStatusNo, String applyNum, String merchantUid, String buyerTel,
 			String receiverName, String receiverTel, String receiverPostcode, String receiverAddr,
-			String receiverComment, TreeMap<Integer, Integer> productList) {
+			String receiverComment, TreeMap<Integer, Integer> productList,int totalAmount) {
 		super();
 		this.orderNo = orderNo;
 		this.importUid = importUid;
@@ -37,7 +38,6 @@ public class OrderHistory {
 		this.orderedDate = orderedDate;
 		this.paymentMethod = paymentMethod;
 		this.orderStatusNo = orderStatusNo;
-		this.statusDetail = statusDetail;
 		this.applyNum = applyNum;
 		this.merchantUid = merchantUid;
 		this.buyerTel = buyerTel;
@@ -47,6 +47,20 @@ public class OrderHistory {
 		this.receiverAddr = receiverAddr;
 		this.receiverComment = receiverComment;
 		this.productList = productList;
+		this.totalAmount= totalAmount;
+		
+		switch(orderStatusNo) {
+		case 3: statusDetail="결제 실패"; break;
+		case 2: statusDetail = "결제 성공"; break;
+		case 1: statusDetail = "결제 준비 중"; break;
+		}
+	}
+	
+	
+	@Override
+	public int compareTo(OrderHistory o) {
+		// TODO Auto-generated method stub
+		return this.orderNo-o.orderNo;
 	}
 
 	public int getOrderNo() {
@@ -81,6 +95,14 @@ public class OrderHistory {
 		this.orderedDate = orderedDate;
 	}
 
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
 	public String getPaymentMethod() {
 		return paymentMethod;
 	}
@@ -95,6 +117,11 @@ public class OrderHistory {
 
 	public void setOrderStatusNo(int orderStatusNo) {
 		this.orderStatusNo = orderStatusNo;
+		switch(orderStatusNo) {
+		case 3: statusDetail="결제 실패"; break;
+		case 2: statusDetail = "결제 성공"; break;
+		case 1: statusDetail = "결제 준비 중"; break;
+		}
 	}
 
 	public String getStatusDetail() {

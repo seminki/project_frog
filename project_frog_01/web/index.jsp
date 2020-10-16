@@ -64,8 +64,8 @@
         </div>
       </div>
       <!-- section main3 -->
-
-      <div class="main3-container">
+<!-- 
+    <div class="main3-container">
         <header>
           <h2 class="new-item">NEW NEW NEW HARRY POTTER!</h2>
         </header>
@@ -131,7 +131,7 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
 	
 	<%@ include file="views/common/footer.jsp" %>

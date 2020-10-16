@@ -75,7 +75,7 @@ pageEncoding="UTF-8" %>
       <table class="tbl-item">
         <thead>
           <tr>
-            <th><input type="checkbox" class="chkAll" onclick="chkAll();"name="chkAll" /> 전체선택</th>
+            <th>✔</th>
             <th>상품ID</th>
             <th>카테고리</th>
             <th>상품명</th>
@@ -110,13 +110,7 @@ pageEncoding="UTF-8" %>
     </section>
 
     <script>
-    function chkAll() {
-        if ($(".chkAll").is(':checked')) {
-            $("input[type=checkbox]").prop("checked", true);
-        } else {
-            $("input[type=checkbox]").prop("checked", false);
-        }
-    }
+   
     function confirmRemoving(){
     	
     	return confirm("정말로 상품을 삭제하시겠습니까?");

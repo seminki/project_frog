@@ -27,7 +27,7 @@ public class OrderCompletedServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect(request.getContextPath()+"/order/complete");
+		response.sendRedirect(request.getContextPath()+"/views/cart/orderCompleted.jsp");
 	}
 
 	/**

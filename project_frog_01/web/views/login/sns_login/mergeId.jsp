@@ -18,6 +18,26 @@
 <%@ include file="/views/common/favicon.jsp" %>
 <title>TOY SPACE - Where All Toys' Dream Comes True</title>
 </head>
+<style>
+.container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.connection-text{
+    font-size: 1em;
+}
+.id{
+    font-weight: 800;
+}
+button{
+    background-color: white;
+    border: 2px solid black;
+}
+</style>
 <body>
 <%@ include file="/views/common/header.jsp" %>
 <script>
@@ -28,16 +48,19 @@
 
 </script>
 <section>
-이미 그 이메일로 된거 있는데?
-니 아이디는 이러하니까
-그거 비밀번호 쳐봐
-맞으면 연동시켜줄게
-<form action="<%=contextPath%>/member/mergeIdEnd" method="post">
-<div>니 아이디 : <%=replacedId%></div>
-<input type="password" name="password">
-<button type="submit">할거임</button>
-<button type="reset">귀차나 안해 - 회원가입 취소</button>
-</form>
+    <div class="container">
+        <img src="<%=request.getContextPath()%>/image/about/connection.png">
+        <div class="connection-text">
+            <h1>이메일이 존재합니다. <br>
+                연동하시겠습니까?</h1>
+        </div>
+        <form action="<%=contextPath%>/member/mergeIdEnd" method="post">
+        <div class="id">아이디 : <%=replacedId%></div>
+        <input type="password" name="password">
+        <button type="submit">연동</button>
+        <button type="reset">회원가입 취소</button>
+        </form>
+    </div>
 </section>
 
 <%@ include file="/views/common/footer.jsp" %>

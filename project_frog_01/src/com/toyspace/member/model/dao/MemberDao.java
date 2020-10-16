@@ -9,6 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.Properties;
 
 import com.toyspace.admin.model.vo.Admin;
@@ -292,6 +296,34 @@ public class MemberDao {
 	      
 	      return result;
 	   }
+	public int memberInfoChange(Connection conn,Member m) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("memberInfoChange"));         
+			pstmt.setInt(1,m.getMemberKey());
+			pstmt.setString(2,m.getUserEmail());
+			pstmt.setString(3,m.getPassword());      
+			pstmt.setString(4,m.getUserGender());               
+			pstmt.setString(5,m.getUserName());
+			pstmt.setString(6,m.getUserNickname());    
+			
+			pstmt.setInt(7,m.getUserAge());    
+			pstmt.setString(8,m.getUserBirthday());    
+			pstmt.setString(9,m.getUserPhone());    
+			pstmt.setString(10,m.getUserId());
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("dao 레벨에서 멤버 업데이트 실패!");
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	public Member loadMembers(Connection conn, String memberId, String memberPw) {
 		Member member = null;
@@ -326,6 +358,7 @@ public class MemberDao {
 		
 		return member;
 	}
+
 	public String selectMemberId(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -344,6 +377,60 @@ public class MemberDao {
 			close(pstmt);
 		}return member;
 	}
+	
+
+
+		
+	//멤버 리스트
+		public ArrayList<Member> loadAllMemberList(Connection conn) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Member m=null;
+			ArrayList<Member> memberList=new ArrayList<Member>();
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("loadAllMember"));
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					m=memberConvention(rs);
+					
+					memberList.add(m);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return memberList;
+		}
+//관리자용-멤버 이름/아이디 조회하기
+		public ArrayList<Member> searchMemberList(Connection conn, String type, String key) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Member m= null;
+			ArrayList <Member> memberList=new ArrayList();
+			try {
+				String sql=prop.getProperty("searchMemberList").replaceAll("@type", type);
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+key+"%");
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					m=memberConvention(rs);
+					memberList.add(m);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return memberList;
+		}
+	
+	
+	
+	
 	
 
 }
