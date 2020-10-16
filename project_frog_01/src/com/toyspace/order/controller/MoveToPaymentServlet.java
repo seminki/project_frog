@@ -39,6 +39,13 @@ public class MoveToPaymentServlet extends HttpServlet {
 //		프로덕트 서비스로 아임포트에 결제 과정 전 처리 -> 디비/결제 담기에 결제 준비중으로 담기
 		HttpSession session = request.getSession();
 		Member m = (Member)session.getAttribute("signedInMember");
+		String path = "";
+		if(m==null) {
+			
+			path="/msg?loc="+request.getContextPath()+"/login.do&msg=로그인을 먼저 해주세요.";
+			request.getRequestDispatcher(path).forward(request, response);
+			return;
+		}
 		TreeMap<Integer, Integer> cartValues = (TreeMap<Integer, Integer>)session.getAttribute("cart");
 		TreeMap<Integer, Product> productInfo = new ProductService().loadSelectedProductsWithMainPic(cartValues);
 		int totalAmount=0;
@@ -49,7 +56,6 @@ public class MoveToPaymentServlet extends HttpServlet {
 		
 		String merchant_uid = new OrderHistoryService().createPaymentLog(m.getMemberKey(), cartValues, totalAmount);
 		
-		String path = "";
 		
 		if(merchant_uid==null) {
 			path="/msg?loc="+request.getContextPath()+"/cart.do&msg=결제 정보 생성에 실패했습니다.";
